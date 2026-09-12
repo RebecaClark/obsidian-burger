@@ -1110,36 +1110,68 @@
     </div>
   </section>
 
-  <!-- SECTION 4: CARDÁPIO OFICIAL & DELIVERY -->
-  <section id="menu" class="py-24 px-6 lg:px-16 bg-obsidian-900 border-t border-b border-amber-gold/15 relative">
+  <!-- SECTION 4: CARDÁPIO OFICIAL & PEDIDO DIRETO NA LOJA (ANTI-TAXA IFOOD) -->
+  <section id="menu" class="py-24 px-4 sm:px-6 lg:px-16 bg-obsidian-900 border-t border-b border-amber-gold/15 relative">
     <div class="max-w-7xl mx-auto">
       
       <!-- Section Header -->
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-10 gap-6">
         <div>
           <div class="inline-flex items-center gap-2 font-mono text-xs tracking-[0.3em] text-amber-gold uppercase mb-2">
             <i data-lucide="utensils" class="w-3.5 h-3.5"></i>
-            Nossa Casa • Magnetic Burger Showcase
+            Nossa Casa • Pedido Direto da Loja Sem Taxas
           </div>
           <h2 class="font-cinzel text-3xl sm:text-5xl font-bold text-white tracking-tight">
-            CARDÁPIO <span class="text-amber-gold">MAGNÉTICO</span>
+            CARDÁPIO <span class="text-amber-gold">DIRETO</span>
           </h2>
-          <p class="font-serif italic text-neutral-400 text-sm sm:text-base mt-2">
-            "Sinta a atração de cada receita artesanal. Deslize para explorar e toque em qualquer criação para ver a ficha técnica e pedir online."
+          <p class="font-serif italic text-neutral-300 text-sm sm:text-base mt-2 max-w-2xl">
+            "Compre direto da nossa hamburgueria com até 23% de desconto comparado ao iFood. Entrega própria e ágil pelo nosso motoboy, máquina de cartão ou Pix direto na loja."
           </p>
         </div>
 
-        <!-- Action Pills: iFood & Original Flyer -->
+        <!-- Action Pills: iFood Info & Original Flyer -->
         <div class="flex flex-wrap items-center gap-3 font-mono text-xs">
           <button onclick="openFlyerModal()" class="px-4 py-2.5 rounded-full border border-amber-gold/40 hover:border-amber-gold text-amber-gold hover:bg-amber-gold/10 transition-all flex items-center gap-2">
             <i data-lucide="file-text" class="w-4 h-4"></i>
             Ver Folheto Original
           </button>
           
-          <a href="https://www.ifood.com.br" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold tracking-wider uppercase transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(220,38,38,0.4)]">
-            <i data-lucide="shopping-bag" class="w-4 h-4"></i>
-            Pedir no iFood
-          </a>
+          <button onclick="openIfoodRetention(null)" class="px-5 py-2.5 rounded-full bg-red-600/90 hover:bg-red-600 border border-red-500/50 text-white font-bold tracking-wider uppercase transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(220,38,38,0.35)]">
+            <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+            Comparativo de Taxa iFood
+          </button>
+        </div>
+      </div>
+
+      <!-- ANTI-IFOOD SAVINGS PROMO BANNER -->
+      <div class="mb-10 bg-gradient-to-r from-obsidian-950 via-amber-gold/10 to-obsidian-950 border border-amber-gold/30 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden glow-amber">
+        <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-amber-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-gold to-amber-burn text-obsidian-950 flex items-center justify-center font-cinzel font-black text-2xl flex-shrink-0 shadow-lg">
+              %
+            </div>
+            <div>
+              <div class="flex items-center gap-2 flex-wrap mb-1">
+                <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-mono font-bold uppercase tracking-wider">
+                  Desconto Direto da Cozinha
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-amber-gold/20 text-amber-gold border border-amber-gold/30 text-[10px] font-mono font-bold uppercase tracking-wider">
+                  Economize até 23%
+                </span>
+              </div>
+              <h3 class="font-cinzel text-lg sm:text-xl font-bold text-white">Por que pagar 23% mais caro no iFood?</h3>
+              <p class="text-xs sm:text-sm text-neutral-300 mt-1 max-w-xl font-sans">
+                Em plataformas terceirizadas, o restaurante precisa repassar até 23% em taxas e comissões. Aqui na nossa loja você paga o valor justo, recebe direto com nosso motoboy e ajuda o comércio local!
+              </p>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
+            <a href="#menu" class="w-full sm:w-auto text-center px-6 py-3 rounded-xl bg-amber-gold hover:bg-amber-glow text-obsidian-950 font-mono text-xs font-bold uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(212,154,66,0.35)]">
+              Explorar Cardápio ↓
+            </a>
+          </div>
         </div>
       </div>
 
@@ -1158,34 +1190,34 @@
 
         <div class="flex items-center gap-3">
           <div class="w-9 h-9 rounded-full bg-amber-gold/20 text-amber-gold flex items-center justify-center flex-shrink-0">
-            <i data-lucide="flame" class="w-4 h-4"></i>
-          </div>
-          <div>
-            <span class="text-neutral-500 block text-[10px] uppercase">Carne Selecionada</span>
-            <span class="text-white font-semibold">100% Artesanal</span>
-            <span class="text-neutral-400 block text-[10px]">Tradicionais 150g & Smash 60g</span>
-          </div>
-        </div>
-
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-full bg-amber-gold/20 text-amber-gold flex items-center justify-center flex-shrink-0">
             <i data-lucide="bike" class="w-4 h-4"></i>
           </div>
           <div>
-            <span class="text-neutral-500 block text-[10px] uppercase">Delivery Ágil</span>
-            <span class="text-white font-semibold">Entrega Rápida & Segura</span>
-            <span class="text-neutral-400 block text-[10px]">Embalagem térmica selada</span>
+            <span class="text-neutral-500 block text-[10px] uppercase">Motoboy Próprio</span>
+            <span class="text-white font-semibold">Entrega Expressa Direta</span>
+            <span class="text-emerald-400 block text-[10px]">Taxa fixa reduzida • R$ 5,00</span>
           </div>
         </div>
 
         <div class="flex items-center gap-3">
           <div class="w-9 h-9 rounded-full bg-amber-gold/20 text-amber-gold flex items-center justify-center flex-shrink-0">
-            <i data-lucide="heart" class="w-4 h-4"></i>
+            <i data-lucide="credit-card" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <span class="text-neutral-500 block text-[10px] uppercase">Pagamento na Entrega</span>
+            <span class="text-white font-semibold">Maquininha no Motoboy</span>
+            <span class="text-neutral-400 block text-[10px]">Débito, Crédito, VR ou Pix</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-amber-gold/20 text-amber-gold flex items-center justify-center flex-shrink-0">
+            <i data-lucide="flame" class="w-4 h-4"></i>
           </div>
           <div>
             <span class="text-neutral-500 block text-[10px] uppercase">Padrão da Casa</span>
-            <span class="text-amber-gold font-semibold">Feito com Carinho</span>
-            <span class="text-neutral-400 block text-[10px]">Molhos & temperos especiais</span>
+            <span class="text-amber-gold font-semibold">100% Artesanal na Brasa</span>
+            <span class="text-neutral-400 block text-[10px]">Lanche sai quente e perfeito</span>
           </div>
         </div>
       </div>
@@ -1193,7 +1225,7 @@
       <!-- Category Filter Tabs & Navigation Controls -->
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6 text-xs font-mono">
         <!-- Categories -->
-        <div class="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 tracking-wider flex-1 no-scrollbar">
+        <div class="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 tracking-wider flex-1 no-scrollbar" id="categoryFilterContainer">
           <button onclick="filterMenu('all', this)" class="menu-tab-btn active px-4 py-2 rounded-full border border-amber-gold bg-amber-gold text-obsidian-950 font-bold transition-all whitespace-nowrap shadow-[0_0_15px_rgba(212,154,66,0.3)]">
             Todos os Itens (20)
           </button>
@@ -1217,19 +1249,19 @@
           </button>
         </div>
 
-        <!-- Controls: Magnetic Indicator, Arrows, View Mode -->
+        <!-- Controls: Horizontal Scroll Arrows & View Mode -->
         <div class="flex items-center gap-3 self-end lg:self-auto flex-shrink-0">
           <div class="hidden sm:flex items-center gap-1.5 text-amber-gold text-[11px] font-mono px-3 py-1 rounded-full bg-amber-gold/10 border border-amber-gold/20">
-            <span class="inline-block w-2 h-2 rounded-full bg-amber-gold animate-pulse"></span>
-            Magnetismo Ativo
+            <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            Rolagem Horizontal Ativa
           </div>
 
           <div class="flex items-center gap-1.5" id="carouselNavArrows">
-            <button onclick="scrollMagneticTrack(-320)" class="w-8 h-8 rounded-full border border-white/10 hover:border-amber-gold text-neutral-400 hover:text-amber-gold bg-obsidian-950/80 flex items-center justify-center transition-colors" title="Deslizar para esquerda">
-              <i data-lucide="chevron-left" class="w-4 h-4"></i>
+            <button onclick="scrollMagneticTrack(-360)" class="w-9 h-9 rounded-full border border-white/15 hover:border-amber-gold text-neutral-300 hover:text-amber-gold bg-obsidian-950/90 flex items-center justify-center transition-colors shadow-md" title="Deslizar para esquerda">
+              <i data-lucide="chevron-left" class="w-5 h-5"></i>
             </button>
-            <button onclick="scrollMagneticTrack(320)" class="w-8 h-8 rounded-full border border-white/10 hover:border-amber-gold text-neutral-400 hover:text-amber-gold bg-obsidian-950/80 flex items-center justify-center transition-colors" title="Deslizar para direita">
-              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            <button onclick="scrollMagneticTrack(360)" class="w-9 h-9 rounded-full border border-white/15 hover:border-amber-gold text-neutral-300 hover:text-amber-gold bg-obsidian-950/90 flex items-center justify-center transition-colors shadow-md" title="Deslizar para direita">
+              <i data-lucide="chevron-right" class="w-5 h-5"></i>
             </button>
           </div>
 
@@ -1240,40 +1272,37 @@
         </div>
       </div>
 
-      <!-- MAIN FEATURE: THE ORIGINKIT MAGNETIC CAROUSEL STAGE -->
-      <div id="magneticStageWrapper" class="relative w-full rounded-3xl p-4 sm:p-8 bg-gradient-to-b from-obsidian-950 via-obsidian-900/90 to-obsidian-950 border border-amber-gold/25 glow-amber shadow-2xl">
+      <!-- MAIN FEATURE: THE HORIZONTAL MENU CAROUSEL STAGE -->
+      <div id="magneticStageWrapper" class="relative w-full rounded-3xl p-3 sm:p-6 bg-gradient-to-b from-obsidian-950 via-obsidian-900/90 to-obsidian-950 border border-amber-gold/25 glow-amber shadow-2xl">
         
         <!-- Ambient stage gold glow -->
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(212,154,66,0.07)_0%,_transparent_75%)] pointer-events-none"></div>
 
-        <!-- Backdrop overlay when a card is opened (closes on click) -->
-        <div id="magneticBackdrop" onclick="closeMagneticCard()" class="absolute inset-0 z-20 bg-black/70 backdrop-blur-xs opacity-0 pointer-events-none transition-opacity duration-300 rounded-3xl"></div>
-
-        <!-- Magnetic Viewport (Horizontally scrollable and mouse-reactive) -->
-        <div id="magneticViewport" class="w-full overflow-x-auto overflow-y-visible no-scrollbar py-8 flex items-center min-h-[460px] sm:min-h-[500px] relative select-none cursor-grab active:cursor-grabbing">
+        <!-- Horizontal Viewport (Horizontally scrollable and drag/touch reactive) -->
+        <div id="magneticViewport" class="w-full overflow-x-auto no-scrollbar py-6 flex items-stretch min-h-[520px] relative select-none cursor-grab active:cursor-grabbing scroll-smooth">
           
-          <!-- Magnetic Track (Flex row containing magnetic cards) -->
-          <div id="magneticTrack" class="flex items-center justify-center gap-4 relative transition-all mx-auto" style="min-width: max-content;">
-            <!-- Rendered dynamically by JavaScript -->
+          <!-- Horizontal Track (Flex row containing all cards side by side) -->
+          <div id="magneticTrack" class="flex items-stretch gap-6 px-2 sm:px-4 relative transition-all" style="min-width: max-content;">
+            <!-- Rendered dynamically by JavaScript with horizontal dual-button cards -->
           </div>
 
         </div>
 
-        <!-- Magnetic Info & Interaction Guidance Bar -->
+        <!-- Horizontal Navigation Guidance Bar -->
         <div class="flex flex-col sm:flex-row items-center justify-between pt-4 border-t border-white/5 text-[11px] font-mono text-neutral-400 gap-2">
           <div class="flex items-center gap-2 text-amber-gold">
-            <i data-lucide="mouse-pointer" class="w-3.5 h-3.5"></i>
-            <span>Mova o mouse sobre os cards para atrair e expandir com física suave</span>
+            <i data-lucide="move-horizontal" class="w-3.5 h-3.5"></i>
+            <span>Deslize horizontalmente para ver todos os lanches e selecione Loja ou iFood</span>
           </div>
           <div class="flex items-center gap-4 text-neutral-500">
             <span class="flex items-center gap-1.5">
               <i data-lucide="hand" class="w-3.5 h-3.5"></i>
-              Arraste para rolar
+              Arraste ou use o scroll
             </span>
             <span>•</span>
             <span class="flex items-center gap-1.5">
-              <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
-              Clique no burger para ver receita completa
+              <i data-lucide="sliders" class="w-3.5 h-3.5"></i>
+              Clique em Pedir na Loja para personalizar
             </span>
           </div>
         </div>
@@ -1742,6 +1771,419 @@
     </div>
   </div>
 
+  <!-- MODAL: IFOOD RETENTION & COMPARISON -->
+  <div id="ifoodRetentionModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4 transition-all">
+    <div class="glass-card bg-obsidian-950/95 border border-red-500/40 rounded-3xl w-full max-w-md p-6 shadow-2xl relative overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      <div class="absolute -top-12 -right-12 w-36 h-36 bg-red-600/10 rounded-full blur-2xl pointer-events-none"></div>
+      
+      <div class="w-14 h-14 rounded-2xl bg-red-600/20 text-red-400 border border-red-500/30 flex items-center justify-center mx-auto mb-3.5 shadow-lg">
+        <i data-lucide="alert-triangle" class="w-7 h-7"></i>
+      </div>
+      
+      <h3 class="font-cinzel text-2xl text-center text-white font-bold tracking-tight">
+        VOCÊ ESTÁ INDO PARA O <span class="text-red-500">IFOOD</span>
+      </h3>
+      <p class="text-xs text-neutral-300 text-center mt-1.5 font-sans leading-relaxed" id="ifoodModalDesc">
+        No iFood este mesmo lanche custa até 23% mais caro para cobrir as taxas abusivas de intermediação da plataforma.
+      </p>
+
+      <!-- Price comparison box -->
+      <div class="my-5 bg-obsidian-900/90 border border-white/10 rounded-2xl p-4 space-y-2.5 font-mono">
+        <div class="flex justify-between items-center text-xs">
+          <span class="text-neutral-400 flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]"></span>
+            Preço Direto na Loja:
+          </span>
+          <span class="font-bold text-amber-gold text-base" id="ifoodModalStorePrice">R$ 22,90</span>
+        </div>
+        <div class="flex justify-between items-center text-xs border-t border-white/5 pt-2">
+          <span class="text-neutral-400 flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
+            No Aplicativo iFood:
+          </span>
+          <span class="font-bold text-neutral-400 line-through text-base" id="ifoodModalIfoodPrice">R$ 29,90</span>
+        </div>
+        <div class="bg-emerald-500/15 border border-emerald-500/30 rounded-xl p-2.5 text-center text-xs text-emerald-300 font-bold" id="ifoodModalSaveText">
+          Você economiza R$ 7,00 comprando direto aqui!
+        </div>
+      </div>
+
+      <!-- Direct Store Advantages -->
+      <div class="mb-5 space-y-1.5 text-xs text-neutral-300 font-sans">
+        <div class="flex items-center gap-2 text-emerald-400">
+          <i data-lucide="check-circle" class="w-4 h-4 flex-shrink-0"></i>
+          <span>Entrega rápida com nosso motoboy próprio</span>
+        </div>
+        <div class="flex items-center gap-2 text-emerald-400">
+          <i data-lucide="check-circle" class="w-4 h-4 flex-shrink-0"></i>
+          <span>Pague no Pix ou na maquininha levada pelo motoboy</span>
+        </div>
+        <div class="flex items-center gap-2 text-emerald-400">
+          <i data-lucide="check-circle" class="w-4 h-4 flex-shrink-0"></i>
+          <span>Lanche sai mais quente e com atendimento prioritário</span>
+        </div>
+      </div>
+
+      <div class="space-y-2.5">
+        <button onclick="chooseStoreInstead()" class="w-full bg-gradient-to-r from-amber-gold to-amber-dark hover:from-amber-glow hover:to-amber-gold text-obsidian-950 font-bold py-3.5 rounded-xl text-xs font-mono tracking-wider uppercase transition flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(212,154,66,0.35)]">
+          <i data-lucide="sparkles" class="w-4 h-4"></i> Aproveitar Desconto da Loja
+        </button>
+        <a id="ifoodProceedLink" href="https://www.ifood.com.br" target="_blank" rel="noopener noreferrer" onclick="closeIfoodModal()" class="w-full block text-center bg-obsidian-900 hover:bg-neutral-800 text-neutral-400 hover:text-neutral-200 text-[11px] font-mono py-2.5 rounded-xl border border-white/10 transition">
+          Continuar para o iFood e pagar mais caro →
+        </a>
+      </div>
+      <button onclick="closeIfoodModal()" class="w-full text-center text-xs text-neutral-500 hover:text-neutral-300 mt-3 font-mono">
+        Fechar e Voltar ao Cardápio
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL: PRODUCT CUSTOMIZATION (PONTO DA CARNE & ADICIONAIS) -->
+  <div id="productCustomizeModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-end sm:items-center justify-center p-0 sm:p-4 transition-all">
+    <div class="glass-card bg-obsidian-950 border-t sm:border border-amber-gold/30 rounded-t-3xl sm:rounded-3xl w-full max-w-lg max-h-[90vh] flex flex-col shadow-2xl overflow-hidden animate-in slide-in-from-bottom duration-200">
+      
+      <!-- Modal Header with Image -->
+      <div class="relative h-48 sm:h-56 w-full bg-obsidian-900 shrink-0 overflow-hidden">
+        <img id="productModalImg" src="" alt="Produto" class="w-full h-full object-contain p-4"/>
+        <button onclick="closeProductModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-obsidian-950/80 border border-white/20 text-white flex items-center justify-center hover:border-amber-gold hover:text-amber-gold transition">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+        <div class="absolute bottom-3 left-4">
+          <span id="productModalTag" class="px-2.5 py-0.5 rounded-full bg-amber-gold/20 text-amber-gold border border-amber-gold/40 text-[10px] font-mono font-bold uppercase tracking-wider"></span>
+        </div>
+      </div>
+
+      <!-- Modal Body (Scrollable) -->
+      <div class="p-5 sm:p-6 overflow-y-auto space-y-5 flex-1">
+        <div>
+          <div class="flex items-start justify-between gap-3">
+            <h3 id="productModalName" class="font-cinzel text-xl sm:text-2xl font-bold text-white leading-tight"></h3>
+            <div class="text-right flex-shrink-0">
+              <span id="productModalBasePrice" class="font-cinzel text-xl font-bold text-amber-gold block"></span>
+              <span id="productModalIfoodPrice" class="font-mono text-[11px] text-neutral-500 line-through block"></span>
+            </div>
+          </div>
+          <p id="productModalDesc" class="text-xs text-neutral-300 font-sans mt-2 leading-relaxed"></p>
+        </div>
+
+        <!-- Meat Doneness (for burgers) -->
+        <div id="meatDonenessSection" class="border-t border-white/10 pt-4">
+          <label class="block text-xs font-mono text-amber-gold uppercase tracking-wider font-bold mb-2">
+            1. Ponto da Carne (Obrigatório)
+          </label>
+          <div class="space-y-2 text-xs font-mono">
+            <label class="flex items-center justify-between p-3 rounded-xl bg-obsidian-900 border border-white/10 cursor-pointer hover:border-amber-gold/50 transition">
+              <div class="flex items-center gap-2.5">
+                <input type="radio" name="meatDoneness" value="Ao Ponto (Suculento - Padrão da Casa)" checked class="accent-amber-500">
+                <span class="text-white font-medium">Ao Ponto (Suculento - Padrão da Casa)</span>
+              </div>
+              <span class="text-[10px] text-amber-gold uppercase">Recomendado</span>
+            </label>
+            <label class="flex items-center justify-between p-3 rounded-xl bg-obsidian-900 border border-white/10 cursor-pointer hover:border-amber-gold/50 transition">
+              <div class="flex items-center gap-2.5">
+                <input type="radio" name="meatDoneness" value="Bem Passado (Mais tostado, sem ponto rosado)" class="accent-amber-500">
+                <span class="text-neutral-300">Bem Passado (Mais tostado)</span>
+              </div>
+            </label>
+            <label class="flex items-center justify-between p-3 rounded-xl bg-obsidian-900 border border-white/10 cursor-pointer hover:border-amber-gold/50 transition">
+              <div class="flex items-center gap-2.5">
+                <input type="radio" name="meatDoneness" value="Ao Ponto para Mal (Super macio e vermelho no centro)" class="accent-amber-500">
+                <span class="text-neutral-300">Ao Ponto para Mal</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Extras Section -->
+        <div id="extrasSection" class="border-t border-white/10 pt-4">
+          <label class="block text-xs font-mono text-amber-gold uppercase tracking-wider font-bold mb-2">
+            2. Adicionais Especiais (Opcional)
+          </label>
+          <div class="space-y-2 text-xs font-mono">
+            <label class="flex items-center justify-between p-3 rounded-xl bg-obsidian-900 border border-white/10 cursor-pointer hover:border-amber-gold/50 transition">
+              <div class="flex items-center gap-2.5">
+                <input type="checkbox" class="addon-check accent-amber-500" value="Bacon Crocante" data-price="5.00" onchange="updateProductModalPrice()">
+                <span class="text-white">+ Bacon Crocante Artesanal em Fatias</span>
+              </div>
+              <span class="text-amber-gold font-bold">+ R$ 5,00</span>
+            </label>
+            <label class="flex items-center justify-between p-3 rounded-xl bg-obsidian-900 border border-white/10 cursor-pointer hover:border-amber-gold/50 transition">
+              <div class="flex items-center gap-2.5">
+                <input type="checkbox" class="addon-check accent-amber-500" value="Queijo Duplo" data-price="4.00" onchange="updateProductModalPrice()">
+                <span class="text-white">+ Queijo Prato Derretido Duplo</span>
+              </div>
+              <span class="text-amber-gold font-bold">+ R$ 4,00</span>
+            </label>
+            <label class="flex items-center justify-between p-3 rounded-xl bg-obsidian-900 border border-white/10 cursor-pointer hover:border-amber-gold/50 transition">
+              <div class="flex items-center gap-2.5">
+                <input type="checkbox" class="addon-check accent-amber-500" value="Cheddar Cremoso" data-price="4.50" onchange="updateProductModalPrice()">
+                <span class="text-white">+ Cobertura de Cheddar Cremoso Especial</span>
+              </div>
+              <span class="text-amber-gold font-bold">+ R$ 4,50</span>
+            </label>
+            <label class="flex items-center justify-between p-3 rounded-xl bg-obsidian-900 border border-white/10 cursor-pointer hover:border-amber-gold/50 transition">
+              <div class="flex items-center gap-2.5">
+                <input type="checkbox" class="addon-check accent-amber-500" value="Cebola Caramelizada" data-price="3.00" onchange="updateProductModalPrice()">
+                <span class="text-white">+ Cebola Caramelizada Lentamente</span>
+              </div>
+              <span class="text-amber-gold font-bold">+ R$ 3,00</span>
+            </label>
+            <label class="flex items-center justify-between p-3 rounded-xl bg-obsidian-900 border border-white/10 cursor-pointer hover:border-amber-gold/50 transition">
+              <div class="flex items-center gap-2.5">
+                <input type="checkbox" class="addon-check accent-amber-500" value="Pote Maionese Extra" data-price="3.50" onchange="updateProductModalPrice()">
+                <span class="text-white">+ Pote Extra de Maionese da Casa (50ml)</span>
+              </div>
+              <span class="text-amber-gold font-bold">+ R$ 3,50</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Special Notes -->
+        <div class="border-t border-white/10 pt-4">
+          <label class="block text-xs font-mono text-amber-gold uppercase tracking-wider font-bold mb-2">
+            3. Observações do Lanche
+          </label>
+          <textarea id="productModalNotes" rows="2" placeholder="Ex: Tirar cebola, maionese à parte, lanche bem tostado..." class="w-full bg-obsidian-900 border border-white/10 rounded-xl p-3 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-amber-gold transition resize-none"></textarea>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-4 sm:p-5 border-t border-white/10 bg-obsidian-950 flex items-center justify-between gap-4">
+        <!-- Quantity counter -->
+        <div class="flex items-center border border-white/15 rounded-xl bg-obsidian-900 overflow-hidden">
+          <button onclick="changeModalQty(-1)" class="w-10 h-10 flex items-center justify-center text-white hover:bg-white/10 transition font-bold text-lg">-</button>
+          <span id="productModalQty" class="w-10 text-center font-mono font-bold text-amber-gold text-sm">1</span>
+          <button onclick="changeModalQty(1)" class="w-10 h-10 flex items-center justify-center text-white hover:bg-white/10 transition font-bold text-lg">+</button>
+        </div>
+
+        <!-- Add Button with dynamic price -->
+        <button onclick="addToCartFromModal()" class="flex-1 py-3 px-5 rounded-xl bg-gradient-to-r from-amber-gold to-amber-dark text-obsidian-950 font-mono text-xs font-bold uppercase tracking-wider hover:shadow-[0_0_20px_rgba(212,154,66,0.4)] transition flex items-center justify-between">
+          <span>Adicionar ao Pedido</span>
+          <span id="productModalTotalPrice" class="text-sm font-black">R$ 0,00</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL: CART & CHECKOUT DRAWER -->
+  <div id="checkoutModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-end sm:items-center justify-center p-0 sm:p-4 transition-all">
+    <div class="glass-card bg-obsidian-950 border-t sm:border border-amber-gold/30 rounded-t-3xl sm:rounded-3xl w-full max-w-lg max-h-[92vh] flex flex-col shadow-2xl overflow-hidden animate-in slide-in-from-bottom duration-200">
+      
+      <!-- Drawer Header -->
+      <div class="px-5 py-4 border-b border-white/10 bg-obsidian-900/90 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-amber-gold/20 text-amber-gold flex items-center justify-center">
+            <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 class="font-cinzel text-lg font-bold text-white">Meu Pedido • Loja Direta</h3>
+            <span class="text-[10px] font-mono text-emerald-400">Preço com desconto sem comissão iFood</span>
+          </div>
+        </div>
+        <button onclick="closeCheckoutModal()" class="p-2 text-neutral-400 hover:text-white transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Drawer Body (Scrollable) -->
+      <div class="p-5 overflow-y-auto space-y-6 flex-1 text-xs font-mono">
+        
+        <!-- Cart Items List -->
+        <div>
+          <h4 class="text-xs uppercase tracking-wider text-amber-gold font-bold mb-3 flex items-center justify-between">
+            <span>Itens Escolhidos</span>
+            <span id="cartDrawerCount" class="text-neutral-400 font-normal">0 itens</span>
+          </h4>
+          <div id="cartItemsContainer" class="space-y-3">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Fulfillment Option -->
+        <div class="border-t border-white/10 pt-4">
+          <h4 class="text-xs uppercase tracking-wider text-amber-gold font-bold mb-3">
+            Como deseja receber seu pedido?
+          </h4>
+          <div class="grid grid-cols-2 gap-3">
+            <button id="btnFulfillmentDelivery" onclick="setFulfillment('delivery')" class="p-3.5 rounded-2xl border-2 border-amber-gold bg-amber-gold/15 text-white flex flex-col items-center text-center gap-1.5 transition">
+              <i data-lucide="bike" class="w-5 h-5 text-amber-gold"></i>
+              <span class="font-bold text-xs">Entrega via Motoboy</span>
+              <span class="text-[10px] text-emerald-400 font-bold">Taxa R$ 5,00</span>
+            </button>
+            <button id="btnFulfillmentTakeaway" onclick="setFulfillment('takeaway')" class="p-3.5 rounded-2xl border border-white/15 bg-obsidian-900 text-neutral-300 hover:text-white flex flex-col items-center text-center gap-1.5 transition">
+              <i data-lucide="store" class="w-5 h-5 text-neutral-400"></i>
+              <span class="font-bold text-xs">Retirar no Balcão</span>
+              <span class="text-[10px] text-neutral-400">R. Milton Inocêncio, 61</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Delivery Address Details -->
+        <div id="deliveryAddressSection" class="border-t border-white/10 pt-4 space-y-3">
+          <h4 class="text-xs uppercase tracking-wider text-amber-gold font-bold">
+            Endereço de Entrega (Taboão da Serra e Região)
+          </h4>
+          <div class="grid grid-cols-3 gap-2">
+            <input id="addrStreet" type="text" placeholder="Rua / Avenida *" class="col-span-2 bg-obsidian-900 border border-white/10 rounded-xl p-3 text-white placeholder-neutral-500 focus:outline-none focus:border-amber-gold"/>
+            <input id="addrNumber" type="text" placeholder="Nº *" class="bg-obsidian-900 border border-white/10 rounded-xl p-3 text-white placeholder-neutral-500 focus:outline-none focus:border-amber-gold"/>
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <input id="addrNeighborhood" type="text" placeholder="Bairro (ex: Pq. Pinheiros) *" class="bg-obsidian-900 border border-white/10 rounded-xl p-3 text-white placeholder-neutral-500 focus:outline-none focus:border-amber-gold"/>
+            <input id="addrComplement" type="text" placeholder="Apto / Bloco / Ponto de ref." class="bg-obsidian-900 border border-white/10 rounded-xl p-3 text-white placeholder-neutral-500 focus:outline-none focus:border-amber-gold"/>
+          </div>
+        </div>
+
+        <!-- Customer Identification -->
+        <div class="border-t border-white/10 pt-4 space-y-3">
+          <h4 class="text-xs uppercase tracking-wider text-amber-gold font-bold">
+            Seus Dados de Contato
+          </h4>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <input id="customerName" type="text" placeholder="Seu Nome Completo *" class="bg-obsidian-900 border border-white/10 rounded-xl p-3 text-white placeholder-neutral-500 focus:outline-none focus:border-amber-gold"/>
+            <input id="customerPhone" type="tel" placeholder="Seu WhatsApp com DDD *" class="bg-obsidian-900 border border-white/10 rounded-xl p-3 text-white placeholder-neutral-500 focus:outline-none focus:border-amber-gold"/>
+          </div>
+        </div>
+
+        <!-- Payment Method -->
+        <div class="border-t border-white/10 pt-4">
+          <h4 class="text-xs uppercase tracking-wider text-amber-gold font-bold mb-3">
+            Forma de Pagamento
+          </h4>
+          <div class="space-y-2">
+            <!-- PIX -->
+            <label class="flex items-center justify-between p-3.5 rounded-xl bg-obsidian-900 border border-white/10 cursor-pointer hover:border-amber-gold/50 transition">
+              <div class="flex items-center gap-2.5">
+                <input type="radio" name="checkoutPayment" value="pix" checked onchange="setPaymentMethod('pix')" class="accent-amber-500">
+                <span class="text-white font-bold flex items-center gap-1.5">
+                  <span class="text-cyan-400">❖</span> PIX Online (Instantâneo)
+                </span>
+              </div>
+              <span class="text-[10px] text-emerald-400 font-bold uppercase">Mais Rápido</span>
+            </label>
+
+            <!-- Card on Delivery -->
+            <label class="flex items-center justify-between p-3.5 rounded-xl bg-obsidian-900 border border-white/10 cursor-pointer hover:border-amber-gold/50 transition">
+              <div class="flex items-center gap-2.5">
+                <input type="radio" name="checkoutPayment" value="card" onchange="setPaymentMethod('card')" class="accent-amber-500">
+                <span class="text-white font-bold flex items-center gap-1.5">
+                  <i data-lucide="credit-card" class="w-4 h-4 text-amber-gold"></i> Cartão na Entrega (Maquininha no Motoboy)
+                </span>
+              </div>
+              <span class="text-[10px] text-neutral-400">Débito / Crédito / VR</span>
+            </label>
+
+            <!-- Cash -->
+            <label class="flex items-center justify-between p-3.5 rounded-xl bg-obsidian-900 border border-white/10 cursor-pointer hover:border-amber-gold/50 transition">
+              <div class="flex items-center gap-2.5">
+                <input type="radio" name="checkoutPayment" value="cash" onchange="setPaymentMethod('cash')" class="accent-amber-500">
+                <span class="text-white font-bold flex items-center gap-1.5">
+                  <i data-lucide="banknote" class="w-4 h-4 text-emerald-400"></i> Dinheiro na Entrega
+                </span>
+              </div>
+            </label>
+          </div>
+
+          <!-- Dynamic Payment Sub-options -->
+          <!-- PIX Box -->
+          <div id="pixBox" class="mt-3 p-4 rounded-xl bg-cyan-950/20 border border-cyan-500/30 text-xs">
+            <p class="text-cyan-300 font-bold mb-1">Chave PIX da Loja:</p>
+            <div class="flex items-center justify-between bg-black/40 p-2.5 rounded-lg border border-cyan-500/20">
+              <span class="font-mono text-white text-[11px] select-all" id="pixKeyDisplay">pedidos@obsidianburger.com.br</span>
+              <button onclick="copyPixKey()" class="px-2.5 py-1 rounded bg-cyan-500 text-obsidian-950 font-bold text-[10px] uppercase hover:bg-cyan-400 transition">
+                Copiar Chave
+              </button>
+            </div>
+            <p class="text-[10px] text-neutral-400 mt-2">Você poderá anexar o comprovante na conversa do WhatsApp que abrirá a seguir.</p>
+          </div>
+
+          <!-- Card Box -->
+          <div id="cardBox" class="mt-3 p-4 rounded-xl bg-amber-gold/10 border border-amber-gold/30 text-xs hidden">
+            <p class="text-amber-gold font-bold mb-2">Selecione a bandeira / modalidade:</p>
+            <div class="grid grid-cols-3 gap-2 text-center text-[10px]">
+              <label class="p-2 rounded-lg bg-obsidian-900 border border-white/10 cursor-pointer hover:border-amber-gold">
+                <input type="radio" name="cardType" value="Cartão de Débito" checked class="accent-amber-500 block mx-auto mb-1">
+                Débito
+              </label>
+              <label class="p-2 rounded-lg bg-obsidian-900 border border-white/10 cursor-pointer hover:border-amber-gold">
+                <input type="radio" name="cardType" value="Cartão de Crédito" class="accent-amber-500 block mx-auto mb-1">
+                Crédito
+              </label>
+              <label class="p-2 rounded-lg bg-obsidian-900 border border-white/10 cursor-pointer hover:border-amber-gold">
+                <input type="radio" name="cardType" value="Vale Refeição (VR/Alelo/Sodexo)" class="accent-amber-500 block mx-auto mb-1">
+                VR / Alelo
+              </label>
+            </div>
+            <p class="text-[10px] text-neutral-400 mt-2">O motoboy levará a maquininha sem contato (NFC/aproximação) higienizada.</p>
+          </div>
+
+          <!-- Cash Box -->
+          <div id="cashBox" class="mt-3 p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/30 text-xs hidden">
+            <label class="block text-emerald-300 font-bold mb-1">Precisa de troco para quanto?</label>
+            <input id="cashChangeFor" type="text" placeholder="Ex: Troco para R$ 50,00 ou Não preciso de troco" class="w-full bg-obsidian-900 border border-white/10 rounded-xl p-3 text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500"/>
+          </div>
+        </div>
+
+        <!-- Bill Summary & Savings -->
+        <div class="border-t border-white/10 pt-4 space-y-2">
+          <div class="flex justify-between text-neutral-400 text-xs">
+            <span>Subtotal dos Produtos:</span>
+            <span id="billSubtotal" class="text-white font-bold">R$ 0,00</span>
+          </div>
+          <div class="flex justify-between text-neutral-400 text-xs">
+            <span>Taxa de Entrega:</span>
+            <span id="billDelivery" class="text-white font-bold">R$ 5,00</span>
+          </div>
+          <div class="flex justify-between text-base font-bold text-white border-t border-white/10 pt-2">
+            <span>Total a Pagar na Loja:</span>
+            <span id="billTotal" class="text-amber-gold font-cinzel text-xl">R$ 0,00</span>
+          </div>
+
+          <!-- Total Saved badge vs iFood -->
+          <div class="bg-gradient-to-r from-emerald-950/60 via-emerald-900/40 to-emerald-950/60 border border-emerald-500/30 rounded-xl p-3 text-center text-xs">
+            <span class="text-emerald-400 font-bold block" id="billSavedTotal">
+              Parabéns! Você economizou R$ 0,00 em taxas do iFood!
+            </span>
+            <span class="text-[10px] text-neutral-400">Seu pedido vai direto para a cozinha da Nossa Casa Hamburgueria</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Drawer Footer Action -->
+      <div class="p-4 sm:p-5 border-t border-white/10 bg-obsidian-900">
+        <button onclick="finishOrderWhatsApp()" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-mono text-xs font-bold uppercase tracking-wider shadow-[0_0_25px_rgba(16,185,129,0.4)] transition flex items-center justify-center gap-2">
+          <i data-lucide="send" class="w-4 h-4"></i>
+          <span>Enviar Pedido para o WhatsApp da Cozinha 🚀</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FLOATING CART INDICATOR BAR (POPS UP WHEN CART HAS ITEMS) -->
+  <div id="floatingCartBar" class="fixed left-1/2 -translate-x-1/2 z-40 w-[94%] max-w-lg hidden transition-all duration-300" style="bottom: max(5.5rem, env(safe-area-inset-bottom, 5.5rem));">
+    <div onclick="openCheckoutModal()" class="cursor-pointer bg-gradient-to-r from-amber-gold to-amber-burn text-obsidian-950 rounded-2xl p-3 sm:p-3.5 shadow-[0_15px_40px_rgba(0,0,0,0.8),0_0_30px_rgba(212,154,66,0.35)] border border-amber-gold/40 flex items-center justify-between hover:scale-[1.02] transition-transform">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-obsidian-950 text-amber-gold flex items-center justify-center font-bold text-base relative flex-shrink-0">
+          <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+          <span id="floatingCartBadgeCount" class="absolute -top-1.5 -right-1.5 bg-red-600 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold border-2 border-obsidian-950">0</span>
+        </div>
+        <div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-xs sm:text-sm font-bold leading-tight uppercase font-mono">Ver Meu Pedido</span>
+            <span class="text-[10px] bg-obsidian-950/20 px-2 py-0.5 rounded-full font-bold text-obsidian-950 border border-obsidian-950/20" id="floatingCartSavedBadge">Economia: R$ 0,00</span>
+          </div>
+          <p class="text-[10px] sm:text-xs text-obsidian-900/80 leading-tight font-sans">Toque para escolher entrega e pagamento</p>
+        </div>
+      </div>
+      <div class="text-right flex-shrink-0 pl-2">
+        <span class="text-[10px] uppercase font-mono block opacity-80 font-bold">Total</span>
+        <span class="text-base sm:text-lg font-black font-cinzel tracking-tight" id="floatingCartTotal">R$ 0,00</span>
+      </div>
+    </div>
+  </div>
+
   <!-- FLOATING LUXURY CONCIERGE DOCK (AULA 3 / "REGRA DO JARVIS") -->
   <aside id="floatingConciergeDock" class="fixed left-1/2 -translate-x-1/2 z-40 w-[94%] sm:w-auto max-w-xl transition-all duration-500 transform hover:scale-[1.02]" style="bottom: max(1rem, env(safe-area-inset-bottom, 1rem));">
     <div class="glass-dark border border-amber-gold/40 rounded-full px-3.5 sm:px-6 py-2.5 sm:py-3 shadow-[0_15px_40px_rgba(0,0,0,0.85),0_0_30px_rgba(212,154,66,0.25)] flex items-center justify-between gap-2.5 sm:gap-6 backdrop-blur-2xl">
@@ -1765,18 +2207,23 @@
       <div class="hidden sm:block h-6 w-px bg-white/10"></div>
 
       <!-- Quick Actions -->
-      <div class="flex items-center gap-1.5 sm:gap-2">
+        <!-- Cart Quick Access Button -->
+        <button id="dockCartBtn" onclick="openCheckoutModal()" class="px-3 sm:px-4 py-2 rounded-full bg-amber-gold hover:bg-amber-glow text-obsidian-950 font-mono text-[10px] sm:text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-[0_0_15px_rgba(212,154,66,0.4)] transition-all flex-shrink-0">
+          <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i>
+          <span>Carrinho (<span id="dockCartCount">0</span>)</span>
+        </button>
+
         <!-- WhatsApp Concierge Button -->
-        <a href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20um%20pedido%20VIP%20na%20Obsidian%20Burger!" target="_blank" rel="noopener noreferrer" class="px-3 sm:px-4 py-2 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white font-mono text-[10px] sm:text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.35)] transition-all flex-shrink-0">
+        <a href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20um%20pedido%20VIP%20na%20Obsidian%20Burger!" target="_blank" rel="noopener noreferrer" class="hidden sm:flex px-3 sm:px-4 py-2 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white font-mono text-[10px] sm:text-xs font-bold uppercase tracking-wider items-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.35)] transition-all flex-shrink-0">
           <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
           <span>WhatsApp<span class="hidden sm:inline"> VIP</span></span>
         </a>
 
-        <!-- iFood Button -->
-        <a href="https://www.ifood.com.br" target="_blank" rel="noopener noreferrer" class="px-3 sm:px-4 py-2 rounded-full bg-red-600 hover:bg-red-700 text-white font-mono text-[10px] sm:text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-[0_0_15px_rgba(220,38,38,0.35)] transition-all flex-shrink-0">
+        <!-- iFood Button (Retenção) -->
+        <button onclick="openIfoodRetention(null)" class="px-3 sm:px-4 py-2 rounded-full bg-red-600 hover:bg-red-700 text-white font-mono text-[10px] sm:text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-[0_0_15px_rgba(220,38,38,0.35)] transition-all flex-shrink-0">
           <i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i>
           <span>iFood</span>
-        </a>
+        </button>
 
         <!-- Quick Scroll to Menu -->
         <a href="#menu" class="hidden md:flex px-3 py-2 rounded-full border border-amber-gold/40 hover:border-amber-gold text-amber-gold text-[10px] font-mono uppercase tracking-wider items-center gap-1 transition-colors">
@@ -2710,7 +3157,7 @@
     }
 
     // =========================================================================
-    // CARDÁPIO OFICIAL NOSSA CASA (REABERTURA - 20 ITENS)
+    // CARDÁPIO OFICIAL NOSSA CASA • SISTEMA DE PEDIDO DIRETO (ANTI-TAXA IFOOD)
     // =========================================================================
     const MENU_DATA = [
       // 1. TRADICIONAIS (150g)
@@ -2720,10 +3167,15 @@
         category: 'tradicionais',
         tag: '150g • Tradicional',
         badgeClass: 'bg-amber-gold/20 text-amber-gold border-amber-gold/40',
+        priceNum: 22.90,
         price: 'R$ 22,90',
-        desc: 'Pão brioche especial levemente tostado na chapa, hambúrguer bovino artesanal de 150g no ponto perfeito, queijo prato derretido e nossa maionese especial.',
+        ifoodPriceNum: 29.90,
+        ifoodPrice: 'R$ 29,90',
+        savings: 'R$ 7,00',
+        desc: 'Pão brioche selado na chapa, hambúrguer bovino artesanal de 150g no ponto perfeito, queijo prato derretido e nossa maionese especial da casa.',
         image: 'assets/menu/x_burger.jpg',
-        popular: false
+        popular: false,
+        isBurger: true
       },
       {
         id: 'x_cheddar',
@@ -2731,10 +3183,15 @@
         category: 'tradicionais',
         tag: '150g • Tradicional',
         badgeClass: 'bg-amber-gold/20 text-amber-gold border-amber-gold/40',
+        priceNum: 24.90,
         price: 'R$ 24,90',
+        ifoodPriceNum: 31.90,
+        ifoodPrice: 'R$ 31,90',
+        savings: 'R$ 7,00',
         desc: 'Pão selado na manteiga, hambúrguer artesanal de 150g, generosa camada de cheddar cremoso fundente e cebola caramelizada lentamente no ponto.',
         image: 'assets/menu/x_cheddar.jpg',
-        popular: false
+        popular: false,
+        isBurger: true
       },
       {
         id: 'x_salada',
@@ -2742,10 +3199,15 @@
         category: 'tradicionais',
         tag: '150g • Tradicional',
         badgeClass: 'bg-amber-gold/20 text-amber-gold border-amber-gold/40',
+        priceNum: 26.90,
         price: 'R$ 26,90',
+        ifoodPriceNum: 34.90,
+        ifoodPrice: 'R$ 34,90',
+        savings: 'R$ 8,00',
         desc: 'Hambúrguer artesanal de 150g, queijo prato derretido na chapa, alface americana crocante, rodelas de tomate fresco selecionado e maionese da casa.',
         image: 'assets/menu/x_salada.jpg',
-        popular: false
+        popular: false,
+        isBurger: true
       },
       {
         id: 'x_bacon',
@@ -2753,10 +3215,15 @@
         category: 'tradicionais',
         tag: '150g • Mais Pedido',
         badgeClass: 'bg-amber-500/20 text-amber-300 border-amber-500/40',
+        priceNum: 29.90,
         price: 'R$ 29,90',
+        ifoodPriceNum: 38.90,
+        ifoodPrice: 'R$ 38,90',
+        savings: 'R$ 9,00',
         desc: 'Hambúrguer artesanal de 150g suculento, queijo prato tostado, fatias generosas de bacon crocante artesanalmente defumado e maionese da casa.',
         image: 'assets/menu/x_bacon.jpg',
-        popular: true
+        popular: true,
+        isBurger: true
       },
       {
         id: 'x_picanha_bacon',
@@ -2764,10 +3231,15 @@
         category: 'tradicionais',
         tag: '150g • Nobre',
         badgeClass: 'bg-red-500/20 text-red-300 border-red-500/40',
+        priceNum: 34.90,
         price: 'R$ 34,90',
+        ifoodPriceNum: 44.90,
+        ifoodPrice: 'R$ 44,90',
+        savings: 'R$ 10,00',
         desc: 'Blend nobre de Picanha bovina 150g temperada com flor de sal na brasa, queijo prato, fatias crocantes de bacon e maionese especial da casa.',
         image: 'assets/menu/x_picanha_bacon.jpg',
-        popular: true
+        popular: true,
+        isBurger: true
       },
 
       // 2. LINHA SMASH (60g)
@@ -2777,10 +3249,15 @@
         category: 'smash',
         tag: '60g • Linha Smash',
         badgeClass: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
+        priceNum: 24.90,
         price: 'R$ 24,90',
+        ifoodPriceNum: 31.90,
+        ifoodPrice: 'R$ 31,90',
+        savings: 'R$ 7,00',
         desc: 'Pão brioche prensado e tostado, smash burger 60g prensado na chapa ultra quente com crosta maillard caramelizada, queijo prato duplo derretido e molho especial.',
         image: 'assets/menu/smash_cheese.jpg',
-        popular: false
+        popular: false,
+        isBurger: true
       },
       {
         id: 'smash_cheddar',
@@ -2788,10 +3265,15 @@
         category: 'smash',
         tag: '60g • Linha Smash',
         badgeClass: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
+        priceNum: 26.90,
         price: 'R$ 26,90',
+        ifoodPriceNum: 34.90,
+        ifoodPrice: 'R$ 34,90',
+        savings: 'R$ 8,00',
         desc: 'Pão tostado na manteiga, smash burger 60g crocante e suculento, generosa cobertura de cheddar fundente cremoso e toque exclusivo de molho da casa.',
         image: 'assets/menu/smash_cheddar.jpg',
-        popular: false
+        popular: false,
+        isBurger: true
       },
 
       // 3. ESPECIAIS DA CASA
@@ -2801,10 +3283,15 @@
         category: 'especiais',
         tag: '150g • Especial Chef',
         badgeClass: 'bg-amber-glow/20 text-amber-200 border-amber-glow/50',
+        priceNum: 36.90,
         price: 'R$ 36,90',
+        ifoodPriceNum: 46.90,
+        ifoodPrice: 'R$ 46,90',
+        savings: 'R$ 10,00',
         desc: 'A estrela da casa: Hambúrguer de Picanha nobre 150g, banhado com farta cascata de cheddar cremoso derretido e salpicado com crocantes cubos de bacon.',
         image: 'assets/menu/picanha_cheddar_bacon.jpg',
-        popular: true
+        popular: true,
+        isBurger: true
       },
       {
         id: 'pernil_defumado',
@@ -2812,10 +3299,15 @@
         category: 'especiais',
         tag: '150g • Especial Chef',
         badgeClass: 'bg-amber-glow/20 text-amber-200 border-amber-glow/50',
+        priceNum: 34.90,
         price: 'R$ 34,90',
+        ifoodPriceNum: 44.90,
+        ifoodPrice: 'R$ 44,90',
+        savings: 'R$ 10,00',
         desc: 'Receita autoral Nossa Casa: Delicioso burger de pernil suíno artesanal 150g defumado lentamente, queijo derretido e molho barbecue rústico caramelizado.',
         image: 'assets/menu/pernil_defumado.jpg',
-        popular: false
+        popular: false,
+        isBurger: true
       },
 
       // 4. COMBOS ESPECIAIS (Burger + Fritas + Refri)
@@ -2825,10 +3317,15 @@
         category: 'combos',
         tag: 'COMBO COMPLETO',
         badgeClass: 'bg-blue-500/20 text-blue-300 border-blue-500/40',
+        priceNum: 29.90,
         price: 'R$ 29,90',
+        ifoodPriceNum: 38.90,
+        ifoodPrice: 'R$ 38,90',
+        savings: 'R$ 9,00',
         desc: 'X-Burger Artesanal 150g no pão brioche com queijo e maionese + Porção de Batata Frita individual crocante + Refrigerante gelado em lata 350ml.',
         image: 'assets/menu/combo_x_burger.jpg',
-        popular: false
+        popular: false,
+        isBurger: true
       },
       {
         id: 'combo_x_salada',
@@ -2836,10 +3333,15 @@
         category: 'combos',
         tag: 'COMBO COMPLETO',
         badgeClass: 'bg-blue-500/20 text-blue-300 border-blue-500/40',
+        priceNum: 34.90,
         price: 'R$ 34,90',
+        ifoodPriceNum: 44.90,
+        ifoodPrice: 'R$ 44,90',
+        savings: 'R$ 10,00',
         desc: 'X-Salada Clássico 150g com salada crocante fresca e maionese da casa + Batata Frita individual sequinha + Refrigerante em lata 350ml gelado.',
         image: 'assets/menu/combo_x_salada.jpg',
-        popular: false
+        popular: false,
+        isBurger: true
       },
       {
         id: 'combo_bacon',
@@ -2847,10 +3349,15 @@
         category: 'combos',
         tag: 'COMBO CAMPEÃO',
         badgeClass: 'bg-blue-500/20 text-blue-300 border-blue-500/40',
+        priceNum: 37.90,
         price: 'R$ 37,90',
+        ifoodPriceNum: 48.90,
+        ifoodPrice: 'R$ 48,90',
+        savings: 'R$ 11,00',
         desc: 'O combo mais pedido da hamburgueria! X-Bacon 150g com fatias crocantes de bacon e queijo + Batata Frita individual + Refrigerante lata 350ml.',
         image: 'assets/menu/combo_bacon.jpg',
-        popular: true
+        popular: true,
+        isBurger: true
       },
       {
         id: 'combo_picanha',
@@ -2858,10 +3365,15 @@
         category: 'combos',
         tag: 'COMBO PREMIUM',
         badgeClass: 'bg-blue-500/20 text-blue-300 border-blue-500/40',
+        priceNum: 42.90,
         price: 'R$ 42,90',
+        ifoodPriceNum: 54.90,
+        ifoodPrice: 'R$ 54,90',
+        savings: 'R$ 12,00',
         desc: 'A experiência máxima: Hambúrguer de Picanha Nobre artesanal 150g + Porção de Batata Frita dourada crocante + Refrigerante lata 350ml geladinho.',
         image: 'assets/menu/combo_picanha.jpg',
-        popular: true
+        popular: true,
+        isBurger: true
       },
 
       // 5. PORÇÕES & ACOMPANHAMENTOS
@@ -2871,10 +3383,15 @@
         category: 'porcoes',
         tag: 'PORÇÃO INDIVIDUAL',
         badgeClass: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/40',
+        priceNum: 14.90,
         price: 'R$ 14,90',
+        ifoodPriceNum: 19.90,
+        ifoodPrice: 'R$ 19,90',
+        savings: 'R$ 5,00',
         desc: 'Porção de batatas palito crocantes por fora e macias por dentro, douradas na temperatura perfeita e finalizadas com tempero especial da casa.',
         image: 'assets/menu/batata_frita.jpg',
-        popular: false
+        popular: false,
+        isBurger: false
       },
       {
         id: 'batata_cheddar_bacon',
@@ -2882,10 +3399,15 @@
         category: 'porcoes',
         tag: 'PORÇÃO ESPECIAL',
         badgeClass: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/40',
+        priceNum: 19.90,
         price: 'R$ 19,90',
+        ifoodPriceNum: 25.90,
+        ifoodPrice: 'R$ 25,90',
+        savings: 'R$ 6,00',
         desc: 'Batatas fritas super crocantes cobertas por generosa cascata de creme cheddar aveludado e chuva de bacon defumado crocante em cubos.',
         image: 'assets/menu/batata_cheddar_bacon.jpg',
-        popular: true
+        popular: true,
+        isBurger: false
       },
       {
         id: 'isca_frango',
@@ -2893,10 +3415,15 @@
         category: 'porcoes',
         tag: 'PORÇÃO CROCANTE',
         badgeClass: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/40',
+        priceNum: 18.90,
         price: 'R$ 18,90',
+        ifoodPriceNum: 24.90,
+        ifoodPrice: 'R$ 24,90',
+        savings: 'R$ 6,00',
         desc: 'Tiras suculentas de peito de frango selecionado temperadas com especiarias, empanadas em crosta ultra crocante e servidas com molho da casa.',
         image: 'assets/menu/isca_frango.jpg',
-        popular: false
+        popular: false,
+        isBurger: false
       },
       {
         id: 'mandioca_frita',
@@ -2904,23 +3431,33 @@
         category: 'porcoes',
         tag: 'PORÇÃO TRADICIONAL',
         badgeClass: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/40',
+        priceNum: 16.90,
         price: 'R$ 16,90',
+        ifoodPriceNum: 21.90,
+        ifoodPrice: 'R$ 21,90',
+        savings: 'R$ 5,00',
         desc: 'Mandioca nobre cozida e frita até formar uma casquinha dourada crocante com interior aveludado e macio. Um clássico irresistível.',
         image: 'assets/menu/mandioca_frita.jpg',
-        popular: false
+        popular: false,
+        isBurger: false
       },
 
       // 6. BEBIDAS & SOBREMESAS
       {
         id: 'bebidas',
-        name: 'Refrigerantes em Lata & Água',
+        name: 'Refrigerante em Lata 350ml',
         category: 'bebidas',
         tag: 'BEBIDAS GELADAS',
         badgeClass: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40',
-        price: 'A partir de R$ 4,00',
-        desc: 'Refrigerantes Lata 350ml (Coca-Cola, Guaraná Antarctica, Fanta, Sprite) por R$ 6,00 ou Água Mineral com ou sem gás 500ml por R$ 4,00.',
+        priceNum: 6.00,
+        price: 'R$ 6,00',
+        ifoodPriceNum: 8.50,
+        ifoodPrice: 'R$ 8,50',
+        savings: 'R$ 2,50',
+        desc: 'Refrigerantes Lata 350ml geladinhos (Coca-Cola, Guaraná Antarctica, Fanta Laranja ou Sprite). Especificar nas observações.',
         image: 'assets/menu/bebidas.jpg',
-        popular: false
+        popular: false,
+        isBurger: false
       },
       {
         id: 'milkshake',
@@ -2928,10 +3465,15 @@
         category: 'bebidas',
         tag: 'SOBREMESA CREMOSA',
         badgeClass: 'bg-pink-500/20 text-pink-300 border-pink-500/40',
+        priceNum: 16.90,
         price: 'R$ 16,90',
+        ifoodPriceNum: 21.90,
+        ifoodPrice: 'R$ 21,90',
+        savings: 'R$ 5,00',
         desc: 'Batido na hora com sorvete artesanal cremoso de alta densidade e calda especial. Disponível nos sabores Chocolate Belga, Morango Silvestre e Baunilha.',
         image: 'assets/menu/milkshake.jpg',
-        popular: true
+        popular: true,
+        isBurger: false
       },
       {
         id: 'brownie',
@@ -2939,360 +3481,149 @@
         category: 'bebidas',
         tag: 'SOBREMESA ESPECIAL',
         badgeClass: 'bg-pink-500/20 text-pink-300 border-pink-500/40',
+        priceNum: 16.90,
         price: 'R$ 16,90',
+        ifoodPriceNum: 21.90,
+        ifoodPrice: 'R$ 21,90',
+        savings: 'R$ 5,00',
         desc: 'Brownie farto de chocolate intenso meio amargo aquecido, servido com bola generosa de sorvete de creme artesanal e calda quente de chocolate.',
         image: 'assets/menu/brownie.jpg',
-        popular: true
+        popular: true,
+        isBurger: false
       }
     ];
 
-    // =========================================================================
-    // ORIGINKIT MAGNETIC CAROUSEL ENGINE & MENU LOGIC
-    // =========================================================================
-    function getMagneticConfig() {
-      const isMob = window.innerWidth < 768;
-      return {
-        collapsedWidth: isMob ? 190 : 250,
-        hoverWidth: isMob ? 250 : 330,
-        collapsedHeight: isMob ? 360 : 410,
-        hoverHeight: isMob ? 390 : 440,
-        openSize: isMob ? Math.min(window.innerWidth - 32, 460) : 620,
-        openHeight: isMob ? 500 : 530,
-        gap: isMob ? 12 : 20,
-        influence: isMob ? 190 : 280,
-        blur: 2.5,
-        dur: 0.35,
-        ease: 'cubic-bezier(0.44, 0, 0.56, 1)'
-      };
-    }
-
+    // GLOBAL STATE
     let currentCategory = 'all';
     let currentItems = [];
-    let targetFactors = [];
-    let curFactors = [];
-    let openIndex = null;
-    let isClosing = false;
-    let magneticLoopRef = null;
-    let magneticCloseTimer = null;
     let isGridView = false;
-    let hasDragged = false;
+    let CART = [];
+    let activeCustomItem = null;
+    let modalQuantity = 1;
+    let activeRetentionItem = null;
+    let fulfillmentType = 'delivery'; // 'delivery' or 'takeaway'
+    const DELIVERY_FEE = 5.00;
 
+    // RENDER MENU: HORIZONTAL & GRID LAYOUT
     function renderMenu(category = 'all') {
       currentCategory = category;
       currentItems = category === 'all' 
         ? MENU_DATA 
         : MENU_DATA.filter(item => item.category === category);
 
-      // 1. Render Magnetic Track
+      // 1. Render Horizontal Track
       const track = document.getElementById('magneticTrack');
       if (track) {
-        track.innerHTML = currentItems.map((item, index) => `
-          <div class="magnetic-card flex-none rounded-2xl overflow-hidden relative cursor-pointer select-none bg-obsidian-950 border border-white/10 hover:border-amber-gold/50 shadow-xl group transition-all" onclick="handleCardClick(${index}, event)">
-            
-            <!-- 1. Pure Burger Image Section: 100% CLEAN, ZERO TEXT OVER IMAGE, ZERO CLIPPING -->
-            <div class="card-img-container relative w-full h-48 sm:h-52 overflow-hidden bg-obsidian-950 flex items-center justify-center flex-shrink-0 p-2 sm:p-2.5">
-              <img src="${item.image}" alt="${item.name}" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" loading="lazy">
-              <div class="absolute inset-0 border-b border-white/10 group-hover:border-amber-gold/30 transition-colors pointer-events-none"></div>
-            </div>
-
-            <!-- 2. Clean Dedicated Information Box Below The Picture -->
-            <div class="card-collapsed-info p-4 flex flex-col justify-between flex-1 bg-obsidian-900/90 group-hover:bg-obsidian-900 transition-colors">
-              <div>
-                <!-- Grammage & Tag Pill -->
-                <div class="flex items-center justify-between mb-1.5">
-                  <span class="px-2 py-0.5 rounded-full bg-amber-gold/15 border border-amber-gold/30 text-[10px] font-mono text-amber-gold font-bold tracking-wider uppercase">
-                    ${item.tag}
-                  </span>
-                  ${item.popular ? `
-                    <span class="flex items-center gap-1 text-[10px] font-mono text-amber-gold font-bold uppercase">
-                      <i data-lucide="sparkles" class="w-3 h-3 text-amber-gold"></i> Destaque
-                    </span>
-                  ` : ''}
-                </div>
-
-                <!-- Product Name: Fully visible, clean typography -->
-                <h4 class="font-cinzel font-bold text-white text-sm sm:text-base tracking-wide leading-tight group-hover:text-amber-gold transition-colors line-clamp-1">
-                  ${item.name}
-                </h4>
-
-                <!-- Price in amber gold -->
-                <div class="text-amber-gold font-cinzel font-bold text-sm sm:text-base mt-1">
-                  ${item.price}
-                </div>
-
-                <!-- Ingredients description revealed on magnetic hover expansion -->
-                <div class="card-hover-details opacity-0 transition-opacity duration-150 pt-2 pointer-events-none">
-                  <p class="text-[11px] text-neutral-300 line-clamp-2 leading-relaxed font-sans">
-                    ${item.desc}
-                  </p>
-                </div>
-              </div>
-
-              <!-- Bottom Action Prompt -->
-              <div class="pt-2.5 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-amber-gold/90 group-hover:text-amber-gold">
-                <span class="uppercase font-semibold tracking-wider">Ver & Pedir</span>
-                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
-              </div>
-            </div>
-
-            <!-- Expanded Showcase (Revealed when is-open) -->
-            <div class="card-expanded-view absolute inset-0 z-30 bg-obsidian-950/95 p-5 sm:p-7 flex flex-col justify-between overflow-y-auto opacity-0 pointer-events-none transition-opacity duration-300">
-              <!-- Header -->
-              <div class="flex items-center justify-between pb-3 border-b border-white/10">
-                <div class="flex items-center gap-2">
-                  <span class="px-2.5 py-0.5 rounded-full bg-amber-gold/20 text-amber-gold border border-amber-gold/40 font-mono text-[10px] font-bold uppercase tracking-wider">
-                    ${item.tag}
-                  </span>
-                  ${item.popular ? `
-                    <span class="px-2.5 py-0.5 rounded-full bg-amber-gold text-obsidian-950 font-mono text-[10px] font-extrabold uppercase tracking-wider flex items-center gap-1">
-                      <i data-lucide="sparkles" class="w-3 h-3"></i> Mais Pedido
-                    </span>
-                  ` : ''}
-                </div>
-                <button onclick="event.stopPropagation(); closeMagneticCard();" class="p-1.5 rounded-full bg-white/10 hover:bg-amber-gold hover:text-obsidian-950 text-neutral-300 transition-colors" title="Fechar">
-                  <i data-lucide="x" class="w-4 h-4"></i>
-                </button>
-              </div>
-
-              <!-- Body: Grid -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 my-auto py-3 items-center">
-                <div class="relative aspect-[4/3] sm:aspect-[16/11] rounded-2xl overflow-hidden border border-amber-gold/40 shadow-2xl bg-obsidian-950 flex items-center justify-center p-3 sm:p-4 max-h-56 sm:max-h-64 mx-auto w-full">
-                  <img src="${item.image}" alt="${item.name}" class="w-full h-full object-contain filter drop-shadow-[0_10px_25px_rgba(0,0,0,0.9)]">
-                </div>
-                
-                <div class="flex flex-col justify-center space-y-2 text-left">
-                  <span class="text-[10px] font-mono tracking-[0.2em] text-amber-gold uppercase">Nossa Casa Hamburgueria</span>
-                  <h3 class="font-cinzel text-lg sm:text-xl font-bold text-white leading-tight">${item.name}</h3>
-                  <p class="text-xs text-neutral-300 leading-relaxed font-sans">${item.desc}</p>
-                  
-                  <div class="pt-1">
-                    <span class="block text-[10px] font-mono text-neutral-400 uppercase">Preço Especial</span>
-                    <span class="font-cinzel text-xl sm:text-2xl font-bold text-amber-gold tracking-tight">${item.price}</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Footer Actions -->
-              <div class="pt-3 border-t border-white/10 flex flex-wrap items-center gap-3">
-                <button onclick="event.stopPropagation(); orderViaWhatsApp('${item.name.replace(/'/g, "\\'")}', '${item.price}');" class="flex-1 min-w-[160px] px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-gold to-amber-dark text-obsidian-950 font-mono text-xs font-bold tracking-wider uppercase hover:shadow-[0_0_20px_rgba(212,154,66,0.4)] transition-all flex items-center justify-center gap-2">
-                  <i data-lucide="shopping-cart" class="w-4 h-4"></i>
-                  Pedir no WhatsApp
-                </button>
-                <a href="https://www.ifood.com.br" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();" class="px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-mono text-xs font-bold tracking-wider uppercase transition-colors flex items-center gap-1.5">
-                  <i data-lucide="shopping-bag" class="w-4 h-4"></i>
-                  iFood
-                </a>
-              </div>
-            </div>
-
-          </div>
-        `).join('');
+        track.innerHTML = currentItems.map(item => createCardHTML(item, false)).join('');
       }
 
       // 2. Render Grid View fallback
       const grid = document.getElementById('menuGrid');
       if (grid) {
-        grid.innerHTML = currentItems.map(item => `
-          <div class="glass-card rounded-2xl p-5 border border-white/10 hover:border-amber-gold/50 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1">
-            <div>
-              <div class="relative aspect-[4/3] sm:aspect-[16/11] rounded-xl overflow-hidden mb-4 bg-obsidian-950 border border-white/5 flex items-center justify-center p-2.5">
-                <img src="${item.image}" alt="${item.name}" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" loading="lazy">
-                
-                <div class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-full border text-[10px] font-mono font-bold tracking-wider uppercase backdrop-blur-md ${item.badgeClass}">
-                  ${item.tag}
-                </div>
+        grid.innerHTML = currentItems.map(item => createCardHTML(item, true)).join('');
+      }
 
-                ${item.popular ? `
-                  <div class="absolute top-2.5 right-2.5 px-2.5 py-1 rounded-full bg-amber-gold text-obsidian-950 text-[10px] font-mono font-extrabold tracking-wider uppercase shadow-md flex items-center gap-1">
-                    <i data-lucide="sparkles" class="w-3 h-3"></i>
-                    Destaque
-                  </div>
-                ` : ''}
-              </div>
+      if (window.lucide) lucide.createIcons();
+    }
 
-              <div class="flex items-start justify-between gap-2 mb-2">
-                <h3 class="font-cinzel font-bold text-white text-base group-hover:text-amber-gold transition-colors leading-snug">
-                  ${item.name}
-                </h3>
-              </div>
-
-              <p class="text-neutral-400 text-xs leading-relaxed mb-4 line-clamp-3">
-                ${item.desc}
-              </p>
+    // HTML TEMPLATE FOR EACH MENU CARD (HORIZONTAL / GRID)
+    function createCardHTML(item, isGrid = false) {
+      const cardWidthClass = isGrid ? 'w-full' : 'w-[310px] sm:w-[350px] flex-none snap-start';
+      return `
+        <div class="menu-item-card ${cardWidthClass} rounded-2xl overflow-hidden bg-obsidian-950 border border-white/10 hover:border-amber-gold/50 shadow-2xl transition-all duration-300 flex flex-col justify-between group">
+          
+          <!-- Burger Image Container with Badges -->
+          <div class="relative w-full h-48 sm:h-52 overflow-hidden bg-black/40 flex items-center justify-center p-3 flex-shrink-0 border-b border-white/10 group-hover:border-amber-gold/30 transition-colors">
+            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" loading="lazy">
+            
+            <!-- Top Badges -->
+            <div class="absolute top-2.5 left-2.5 flex flex-col gap-1 items-start">
+              <span class="px-2.5 py-0.5 rounded-full bg-amber-gold/20 text-amber-gold border border-amber-gold/40 text-[10px] font-mono font-bold uppercase tracking-wider backdrop-blur-md">
+                ${item.tag}
+              </span>
+              ${item.popular ? `
+                <span class="px-2 py-0.5 rounded-full bg-red-600/80 text-white text-[9px] font-mono font-bold uppercase tracking-wider backdrop-blur-md flex items-center gap-1 shadow-sm">
+                  <i data-lucide="flame" class="w-3 h-3 text-amber-300"></i> Mais Pedido
+                </span>
+              ` : ''}
             </div>
 
-            <div class="pt-4 border-t border-white/5 flex items-center justify-between gap-3">
-              <div>
-                <span class="block text-[10px] font-mono text-neutral-500 uppercase">Preço</span>
-                <span class="font-cinzel font-bold text-amber-gold text-lg">${item.price}</span>
-              </div>
-
-              <button onclick="orderViaWhatsApp('${item.name.replace(/'/g, "\\'")}', '${item.price}')" class="px-3.5 py-2 rounded-xl bg-amber-gold/15 hover:bg-amber-gold border border-amber-gold/40 text-amber-gold hover:text-obsidian-950 font-mono text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm">
-                <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i>
-                Pedir
-              </button>
+            <!-- Savings Badge over image -->
+            <div class="absolute bottom-2.5 right-2.5">
+              <span class="px-2 py-0.5 rounded-md bg-emerald-500 text-obsidian-950 text-[10px] font-mono font-extrabold tracking-tight uppercase shadow-lg">
+                Economize ${item.savings}
+              </span>
             </div>
           </div>
-        `).join('');
-      }
 
-      // Reset Magnetic State
-      openIndex = null;
-      isClosing = false;
-      targetFactors = currentItems.map(() => 0);
-      curFactors = currentItems.map(() => 0);
+          <!-- Card Content & Details -->
+          <div class="p-4 sm:p-5 flex flex-col justify-between flex-1 bg-obsidian-900/90">
+            <div>
+              <h4 class="font-cinzel font-bold text-white text-base sm:text-lg tracking-wide leading-tight group-hover:text-amber-gold transition-colors line-clamp-1">
+                ${item.name}
+              </h4>
+              <p class="text-xs text-neutral-300 font-sans mt-2 line-clamp-2 leading-relaxed min-h-[32px]">
+                ${item.desc}
+              </p>
 
-      const backdrop = document.getElementById('magneticBackdrop');
-      if (backdrop) backdrop.classList.add('pointer-events-none', 'opacity-0');
+              <!-- DUAL PRICING COMPARISON BOX -->
+              <div class="my-3.5 p-3 rounded-xl bg-obsidian-950 border border-white/10 space-y-1 font-mono">
+                <div class="flex items-center justify-between">
+                  <span class="text-[11px] text-neutral-400 flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Loja Direta:
+                  </span>
+                  <span class="font-cinzel text-lg font-bold text-amber-gold">
+                    ${item.price}
+                  </span>
+                </div>
+                <div class="flex items-center justify-between text-[11px] text-neutral-500 border-t border-white/5 pt-1">
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-red-500/80"></span> No iFood (+23%):
+                  </span>
+                  <span class="line-through text-neutral-400 font-semibold">
+                    ${item.ifoodPrice}
+                  </span>
+                </div>
+              </div>
+            </div>
 
-      applyMagneticSizes();
-      lucide.createIcons();
+            <!-- THE 2 ACTION BUTTONS: STORE VS IFOOD -->
+            <div class="space-y-2 pt-1">
+              <!-- Primary: Pedir na Loja -->
+              <button onclick="openProductModal('${item.id}')" class="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-gold to-amber-dark hover:from-amber-glow hover:to-amber-gold text-obsidian-950 font-mono text-xs font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(212,154,66,0.3)] hover:shadow-[0_0_20px_rgba(212,154,66,0.5)] transition flex items-center justify-center gap-2">
+                <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+                <span>Pedir na Loja • ${item.price}</span>
+              </button>
+
+              <!-- Secondary: iFood with Retention Warning Modal -->
+              <button onclick="openIfoodRetention('${item.id}')" class="w-full py-2 px-3 rounded-xl bg-red-950/30 hover:bg-red-900/40 border border-red-500/40 text-red-300 hover:text-white font-mono text-[11px] font-semibold tracking-wider transition flex items-center justify-center gap-1.5">
+                <i data-lucide="shopping-bag" class="w-3.5 h-3.5 text-red-400"></i>
+                <span>iFood • ${item.ifoodPrice}</span>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      `;
     }
 
-    function startMagneticLoop() {
-      if (magneticLoopRef) return;
-      const step = () => {
-        let moving = false;
-        for (let i = 0; i < curFactors.length; i++) {
-          const d = (targetFactors[i] ?? 0) - curFactors[i];
-          if (Math.abs(d) > 0.001) {
-            curFactors[i] += d * 0.2;
-            moving = true;
-          } else {
-            curFactors[i] = targetFactors[i] ?? 0;
-          }
-        }
-        applyMagneticSizes();
-        magneticLoopRef = moving ? requestAnimationFrame(step) : null;
-      };
-      magneticLoopRef = requestAnimationFrame(step);
-    }
-
-    function setTargetFromCursor(clientX) {
-      if (openIndex !== null) return;
-      const track = document.getElementById('magneticTrack');
-      if (!track) return;
-      const cards = track.querySelectorAll('.magnetic-card');
-      if (!cards.length) return;
-
-      const cfg = getMagneticConfig();
-      targetFactors = Array.from(cards).map(card => {
-        const rect = card.getBoundingClientRect();
-        const center = rect.left + rect.width / 2;
-        const dist = Math.abs(clientX - center);
-        const f = Math.max(0, 1 - dist / cfg.influence);
-        return f * f * (3 - 2 * f);
+    // CATEGORY FILTER
+    function filterMenu(category, btnElement) {
+      document.querySelectorAll('.menu-tab-btn').forEach(btn => {
+        btn.classList.remove('active', 'border-amber-gold', 'bg-amber-gold', 'text-obsidian-950', 'font-bold', 'shadow-[0_0_15px_rgba(212,154,66,0.3)]');
+        btn.classList.add('border-white/10', 'bg-obsidian-950/60', 'text-neutral-300');
       });
 
-      startMagneticLoop();
-    }
-
-    function applyMagneticSizes() {
-      const track = document.getElementById('magneticTrack');
-      if (!track) return;
-      const cards = track.querySelectorAll('.magnetic-card');
-      const cfg = getMagneticConfig();
-
-      const openEase = `width ${cfg.dur}s ${cfg.ease}, height ${cfg.dur}s ${cfg.ease}, filter ${cfg.dur}s ease, opacity ${cfg.dur}s ease`;
-      const barTransition = (openIndex !== null || isClosing) ? openEase : 'none';
-
-      cards.forEach((card, i) => {
-        card.style.transition = barTransition;
-
-        if (openIndex !== null) {
-          if (i === openIndex) {
-            card.style.width = `${cfg.openSize}px`;
-            card.style.height = `${cfg.openHeight}px`;
-            card.style.filter = 'none';
-            card.style.opacity = '1';
-            card.style.zIndex = '30';
-            card.classList.add('is-open');
-          } else {
-            card.style.width = `${cfg.collapsedWidth}px`;
-            card.style.height = `${cfg.collapsedHeight}px`;
-            card.style.filter = `blur(${cfg.blur}px)`;
-            card.style.opacity = '0.4';
-            card.style.zIndex = '2';
-            card.classList.remove('is-open');
-          }
-        } else {
-          card.classList.remove('is-open');
-          const f = curFactors[i] ?? 0;
-          const w = cfg.collapsedWidth + (cfg.hoverWidth - cfg.collapsedWidth) * f;
-          const h = cfg.collapsedHeight + (cfg.hoverHeight - cfg.collapsedHeight) * f;
-
-          card.style.width = `${w}px`;
-          card.style.height = `${h}px`;
-          card.style.filter = 'none';
-          card.style.opacity = '1';
-          card.style.zIndex = f > 0.15 ? '15' : '2';
-
-          const hoverDetails = card.querySelector('.card-hover-details');
-          if (hoverDetails) {
-            hoverDetails.style.opacity = Math.min(1, Math.max(0, (f - 0.25) / 0.5));
-          }
-        }
-      });
-    }
-
-    function handleCardClick(index, e) {
-      if (hasDragged) return;
-      if (openIndex !== null && openIndex !== index) {
-        openMagneticCard(index);
-        return;
-      }
-      openMagneticCard(index);
-    }
-
-    function openMagneticCard(index) {
-      if (openIndex === index) {
-        closeMagneticCard();
-        return;
-      }
-      openIndex = index;
-      applyMagneticSizes();
-
-      const backdrop = document.getElementById('magneticBackdrop');
-      if (backdrop) {
-        backdrop.classList.remove('pointer-events-none', 'opacity-0');
+      if (btnElement) {
+        btnElement.classList.add('active', 'border-amber-gold', 'bg-amber-gold', 'text-obsidian-950', 'font-bold', 'shadow-[0_0_15px_rgba(212,154,66,0.3)]');
+        btnElement.classList.remove('border-white/10', 'bg-obsidian-950/60', 'text-neutral-300');
       }
 
-      // Smoothly center the opened card in the viewport
-      const track = document.getElementById('magneticTrack');
-      const viewport = document.getElementById('magneticViewport');
-      const cards = track ? track.querySelectorAll('.magnetic-card') : [];
-      if (cards[index] && viewport) {
-        setTimeout(() => {
-          const cardRect = cards[index].getBoundingClientRect();
-          const vpRect = viewport.getBoundingClientRect();
-          const offset = (cardRect.left + cardRect.width / 2) - (vpRect.left + vpRect.width / 2);
-          viewport.scrollBy({ left: offset, behavior: 'smooth' });
-        }, 50);
-      }
+      renderMenu(category);
     }
 
-    function closeMagneticCard() {
-      if (openIndex === null) return;
-      openIndex = null;
-      isClosing = true;
-      targetFactors = currentItems.map(() => 0);
-      curFactors = currentItems.map(() => 0);
-
-      applyMagneticSizes();
-
-      const backdrop = document.getElementById('magneticBackdrop');
-      if (backdrop) {
-        backdrop.classList.add('pointer-events-none', 'opacity-0');
-      }
-
-      const cfg = getMagneticConfig();
-      clearTimeout(magneticCloseTimer);
-      magneticCloseTimer = setTimeout(() => {
-        isClosing = false;
-        applyMagneticSizes();
-      }, cfg.dur * 1000);
-    }
-
+    // HORIZONTAL NAVIGATION
     function scrollMagneticTrack(delta) {
       const viewport = document.getElementById('magneticViewport');
       if (viewport) {
@@ -3300,6 +3631,7 @@
       }
     }
 
+    // TOGGLE GRID VIEW VS HORIZONTAL VIEW
     function toggleMenuView() {
       isGridView = !isGridView;
       const stage = document.getElementById('magneticStageWrapper');
@@ -3317,30 +3649,398 @@
         grid.classList.add('hidden');
         btnText.textContent = 'Ver Grade';
         if (arrows) arrows.classList.remove('hidden');
-        applyMagneticSizes();
       }
     }
 
-    function filterMenu(category, btnElement) {
-      document.querySelectorAll('.menu-tab-btn').forEach(btn => {
-        btn.classList.remove('active', 'border-amber-gold', 'bg-amber-gold', 'text-obsidian-950', 'font-bold', 'shadow-[0_0_15px_rgba(212,154,66,0.3)]');
-        btn.classList.add('border-white/10', 'bg-obsidian-950/60', 'text-neutral-300');
+    // IFOOD RETENTION MODAL LOGIC
+    function openIfoodRetention(itemId) {
+      const item = itemId ? MENU_DATA.find(i => i.id === itemId) : MENU_DATA[0];
+      activeRetentionItem = item;
+
+      const storePriceEl = document.getElementById('ifoodModalStorePrice');
+      const ifoodPriceEl = document.getElementById('ifoodModalIfoodPrice');
+      const saveTextEl = document.getElementById('ifoodModalSaveText');
+      const descEl = document.getElementById('ifoodModalDesc');
+      const proceedLink = document.getElementById('ifoodProceedLink');
+
+      if (item) {
+        storePriceEl.textContent = item.price;
+        ifoodPriceEl.textContent = item.ifoodPrice;
+        saveTextEl.textContent = `Você economiza ${item.savings} comprando direto aqui na loja!`;
+        descEl.textContent = `No iFood o "${item.name}" tem taxa adicional de 23% para pagar a plataforma. Compre direto e receba com nosso motoboy!`;
+        proceedLink.href = `https://www.ifood.com.br/delivery/taboao-da-serra-sp/nossa-casa-burger`;
+      }
+
+      document.getElementById('ifoodRetentionModal').classList.remove('hidden');
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function closeIfoodModal() {
+      document.getElementById('ifoodRetentionModal').classList.add('hidden');
+    }
+
+    function chooseStoreInstead() {
+      closeIfoodModal();
+      if (activeRetentionItem) {
+        openProductModal(activeRetentionItem.id);
+      }
+    }
+
+    // PRODUCT CUSTOMIZATION MODAL LOGIC
+    function openProductModal(itemId) {
+      const item = MENU_DATA.find(i => i.id === itemId);
+      if (!item) return;
+
+      activeCustomItem = item;
+      modalQuantity = 1;
+
+      document.getElementById('productModalImg').src = item.image;
+      document.getElementById('productModalTag').textContent = item.tag;
+      document.getElementById('productModalName').textContent = item.name;
+      document.getElementById('productModalBasePrice').textContent = item.price;
+      document.getElementById('productModalIfoodPrice').textContent = `No iFood: ${item.ifoodPrice}`;
+      document.getElementById('productModalDesc').textContent = item.desc;
+      document.getElementById('productModalQty').textContent = '1';
+      document.getElementById('productModalNotes').value = '';
+
+      // Doneness section: only show for burgers
+      const donenessSection = document.getElementById('meatDonenessSection');
+      if (donenessSection) {
+        donenessSection.style.display = item.isBurger ? 'block' : 'none';
+        const defaultRadio = donenessSection.querySelector('input[name="meatDoneness"][value^="Ao Ponto"]');
+        if (defaultRadio) defaultRadio.checked = true;
+      }
+
+      // Reset checkboxes
+      document.querySelectorAll('.addon-check').forEach(cb => { cb.checked = false; });
+
+      updateProductModalPrice();
+      document.getElementById('productCustomizeModal').classList.remove('hidden');
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function closeProductModal() {
+      document.getElementById('productCustomizeModal').classList.add('hidden');
+      activeCustomItem = null;
+    }
+
+    function changeModalQty(delta) {
+      modalQuantity = Math.max(1, Math.min(20, modalQuantity + delta));
+      document.getElementById('productModalQty').textContent = modalQuantity;
+      updateProductModalPrice();
+    }
+
+    function updateProductModalPrice() {
+      if (!activeCustomItem) return;
+      let unitPrice = activeCustomItem.priceNum;
+
+      document.querySelectorAll('.addon-check:checked').forEach(cb => {
+        unitPrice += parseFloat(cb.getAttribute('data-price') || 0);
       });
 
-      if (btnElement) {
-        btnElement.classList.add('active', 'border-amber-gold', 'bg-amber-gold', 'text-obsidian-950', 'font-bold', 'shadow-[0_0_15px_rgba(212,154,66,0.3)]');
-        btnElement.classList.remove('border-white/10', 'bg-obsidian-950/60', 'text-neutral-300');
+      const total = unitPrice * modalQuantity;
+      const formatted = `R$ ${total.toFixed(2).replace('.', ',')}`;
+      document.getElementById('productModalTotalPrice').textContent = formatted;
+    }
+
+    function addToCartFromModal() {
+      if (!activeCustomItem) return;
+
+      // Doneness
+      let doneness = '';
+      if (activeCustomItem.isBurger) {
+        const checkedRadio = document.querySelector('input[name="meatDoneness"]:checked');
+        doneness = checkedRadio ? checkedRadio.value : 'Ao Ponto';
       }
 
-      renderMenu(category);
+      // Addons
+      const addons = [];
+      let addonsSum = 0;
+      document.querySelectorAll('.addon-check:checked').forEach(cb => {
+        const p = parseFloat(cb.getAttribute('data-price') || 0);
+        addons.push({ name: cb.value, price: p });
+        addonsSum += p;
+      });
+
+      const notes = document.getElementById('productModalNotes').value.trim();
+      const unitStorePrice = activeCustomItem.priceNum + addonsSum;
+      const unitIfoodPrice = activeCustomItem.ifoodPriceNum + addonsSum;
+
+      CART.push({
+        id: activeCustomItem.id,
+        name: activeCustomItem.name,
+        image: activeCustomItem.image,
+        unitPrice: unitStorePrice,
+        unitIfoodPrice: unitIfoodPrice,
+        doneness: doneness,
+        addons: addons,
+        notes: notes,
+        qty: modalQuantity,
+        total: unitStorePrice * modalQuantity,
+        totalIfood: unitIfoodPrice * modalQuantity
+      });
+
+      closeProductModal();
+      updateCartUI();
+
+      // Pulse feedback on dock
+      const dockCount = document.getElementById('dockCartCount');
+      if (dockCount) {
+        dockCount.parentElement.classList.add('scale-110');
+        setTimeout(() => dockCount.parentElement.classList.remove('scale-110'), 300);
+      }
     }
 
-    function orderViaWhatsApp(itemName, price) {
-      const message = `Olá, Nossa Casa Restaurante & Hamburgueria! Gostaria de pedir: *${itemName}* (${price}) do Cardápio de Reabertura. Meu endereço de entrega em Taboão da Serra é: `;
-      const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
-      window.open(url, '_blank');
+    // CART MANAGEMENT & UI UPDATES
+    function updateCartUI() {
+      const totalItems = CART.reduce((acc, item) => acc + item.qty, 0);
+      const subtotal = CART.reduce((acc, item) => acc + item.total, 0);
+      const subtotalIfood = CART.reduce((acc, item) => acc + item.totalIfood, 0);
+      const totalSavings = Math.max(0, subtotalIfood - subtotal);
+
+      // 1. Dock Cart Counter
+      const dockCount = document.getElementById('dockCartCount');
+      if (dockCount) dockCount.textContent = totalItems;
+
+      // 2. Floating Cart Bar
+      const floatingBar = document.getElementById('floatingCartBar');
+      const badgeCount = document.getElementById('floatingCartBadgeCount');
+      const cartTotal = document.getElementById('floatingCartTotal');
+      const savedBadge = document.getElementById('floatingCartSavedBadge');
+
+      if (floatingBar) {
+        if (totalItems > 0) {
+          floatingBar.classList.remove('hidden');
+          badgeCount.textContent = totalItems;
+          cartTotal.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+          savedBadge.textContent = `Economia: R$ ${totalSavings.toFixed(2).replace('.', ',')}`;
+        } else {
+          floatingBar.classList.add('hidden');
+        }
+      }
+
+      // 3. Checkout Drawer Items List
+      const container = document.getElementById('cartItemsContainer');
+      const drawerCount = document.getElementById('cartDrawerCount');
+      if (drawerCount) drawerCount.textContent = `${totalItems} item(s)`;
+
+      if (container) {
+        if (CART.length === 0) {
+          container.innerHTML = `
+            <div class="text-center py-8 text-neutral-500 space-y-2">
+              <i data-lucide="shopping-cart" class="w-8 h-8 mx-auto opacity-40"></i>
+              <p>Seu carrinho está vazio.</p>
+              <button onclick="closeCheckoutModal()" class="text-amber-gold hover:underline font-bold text-xs">
+                Escolher lanches no cardápio &rarr;
+              </button>
+            </div>
+          `;
+        } else {
+          container.innerHTML = CART.map((item, idx) => `
+            <div class="p-3.5 rounded-xl bg-obsidian-900 border border-white/10 flex items-center justify-between gap-3">
+              <img src="${item.image}" alt="${item.name}" class="w-14 h-14 rounded-lg object-contain bg-black/40 p-1 flex-shrink-0 border border-white/5">
+              <div class="flex-1 min-w-0">
+                <h5 class="text-white font-bold text-xs truncate">${item.name}</h5>
+                ${item.doneness ? `<span class="text-[10px] text-amber-gold block">${item.doneness}</span>` : ''}
+                ${item.addons.length ? `<span class="text-[10px] text-neutral-400 block truncate">+ ${item.addons.map(a => a.name).join(', ')}</span>` : ''}
+                ${item.notes ? `<span class="text-[10px] text-neutral-500 italic block truncate">Obs: ${item.notes}</span>` : ''}
+                <div class="flex items-center gap-2 mt-1">
+                  <span class="font-bold text-amber-gold text-xs">R$ ${item.total.toFixed(2).replace('.', ',')}</span>
+                  <span class="text-[10px] text-neutral-500 line-through">iFood: R$ ${item.totalIfood.toFixed(2).replace('.', ',')}</span>
+                </div>
+              </div>
+
+              <!-- Quantity Controls & Remove -->
+              <div class="flex items-center gap-1 bg-obsidian-950 border border-white/10 rounded-lg p-1">
+                <button onclick="changeCartItemQty(${idx}, -1)" class="w-6 h-6 flex items-center justify-center text-white hover:bg-white/10 rounded font-bold">-</button>
+                <span class="w-6 text-center font-bold text-amber-gold text-xs">${item.qty}</span>
+                <button onclick="changeCartItemQty(${idx}, 1)" class="w-6 h-6 flex items-center justify-center text-white hover:bg-white/10 rounded font-bold">+</button>
+              </div>
+
+              <button onclick="removeCartItem(${idx})" class="p-1 text-neutral-500 hover:text-red-400 transition" title="Remover item">
+                <i data-lucide="trash-2" class="w-4 h-4"></i>
+              </button>
+            </div>
+          `).join('');
+        }
+      }
+
+      // 4. Update Bill Summary
+      const delivery = fulfillmentType === 'delivery' ? DELIVERY_FEE : 0.00;
+      const finalTotal = subtotal + delivery;
+
+      const billSubtotal = document.getElementById('billSubtotal');
+      const billDelivery = document.getElementById('billDelivery');
+      const billTotal = document.getElementById('billTotal');
+      const billSavedTotal = document.getElementById('billSavedTotal');
+
+      if (billSubtotal) billSubtotal.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+      if (billDelivery) billDelivery.textContent = fulfillmentType === 'delivery' ? `R$ ${DELIVERY_FEE.toFixed(2).replace('.', ',')}` : 'Grátis (Retirada)';
+      if (billTotal) billTotal.textContent = `R$ ${finalTotal.toFixed(2).replace('.', ',')}`;
+      if (billSavedTotal) {
+        billSavedTotal.textContent = `Parabéns! Você economizou R$ ${totalSavings.toFixed(2).replace('.', ',')} em taxas do iFood!`;
+      }
+
+      if (window.lucide) lucide.createIcons();
     }
 
+    function changeCartItemQty(idx, delta) {
+      if (!CART[idx]) return;
+      CART[idx].qty += delta;
+      if (CART[idx].qty <= 0) {
+        CART.splice(idx, 1);
+      } else {
+        CART[idx].total = CART[idx].unitPrice * CART[idx].qty;
+        CART[idx].totalIfood = CART[idx].unitIfoodPrice * CART[idx].qty;
+      }
+      updateCartUI();
+    }
+
+    function removeCartItem(idx) {
+      CART.splice(idx, 1);
+      updateCartUI();
+    }
+
+    function openCheckoutModal() {
+      updateCartUI();
+      document.getElementById('checkoutModal').classList.remove('hidden');
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById('checkoutModal').classList.add('hidden');
+    }
+
+    // FULFILLMENT & PAYMENT SELECTION
+    function setFulfillment(type) {
+      fulfillmentType = type;
+      const btnDel = document.getElementById('btnFulfillmentDelivery');
+      const btnTake = document.getElementById('btnFulfillmentTakeaway');
+      const addrSection = document.getElementById('deliveryAddressSection');
+
+      if (type === 'delivery') {
+        btnDel.className = 'p-3.5 rounded-2xl border-2 border-amber-gold bg-amber-gold/15 text-white flex flex-col items-center text-center gap-1.5 transition';
+        btnTake.className = 'p-3.5 rounded-2xl border border-white/15 bg-obsidian-900 text-neutral-300 hover:text-white flex flex-col items-center text-center gap-1.5 transition';
+        if (addrSection) addrSection.classList.remove('hidden');
+      } else {
+        btnTake.className = 'p-3.5 rounded-2xl border-2 border-amber-gold bg-amber-gold/15 text-white flex flex-col items-center text-center gap-1.5 transition';
+        btnDel.className = 'p-3.5 rounded-2xl border border-white/15 bg-obsidian-900 text-neutral-300 hover:text-white flex flex-col items-center text-center gap-1.5 transition';
+        if (addrSection) addrSection.classList.add('hidden');
+      }
+
+      updateCartUI();
+    }
+
+    function setPaymentMethod(method) {
+      const pixBox = document.getElementById('pixBox');
+      const cardBox = document.getElementById('cardBox');
+      const cashBox = document.getElementById('cashBox');
+
+      if (pixBox) pixBox.classList.add('hidden');
+      if (cardBox) cardBox.classList.add('hidden');
+      if (cashBox) cashBox.classList.add('hidden');
+
+      if (method === 'pix' && pixBox) pixBox.classList.remove('hidden');
+      if (method === 'card' && cardBox) cardBox.classList.remove('hidden');
+      if (method === 'cash' && cashBox) cashBox.classList.remove('hidden');
+    }
+
+    function copyPixKey() {
+      const key = document.getElementById('pixKeyDisplay').textContent.trim();
+      navigator.clipboard.writeText(key).then(() => {
+        alert('Chave PIX copiada com sucesso!');
+      }).catch(() => {
+        prompt('Copie a chave PIX:', key);
+      });
+    }
+
+    // FINALIZE & DISPATCH ORDER TO WHATSAPP
+    function finishOrderWhatsApp() {
+      if (CART.length === 0) {
+        alert('Adicione pelo menos um item ao seu pedido.');
+        return;
+      }
+
+      const name = document.getElementById('customerName').value.trim();
+      const phone = document.getElementById('customerPhone').value.trim();
+
+      if (!name) {
+        alert('Por favor, informe seu Nome Completo.');
+        document.getElementById('customerName').focus();
+        return;
+      }
+
+      let addressText = '';
+      if (fulfillmentType === 'delivery') {
+        const street = document.getElementById('addrStreet').value.trim();
+        const number = document.getElementById('addrNumber').value.trim();
+        const neighborhood = document.getElementById('addrNeighborhood').value.trim();
+        const complement = document.getElementById('addrComplement').value.trim();
+
+        if (!street || !number || !neighborhood) {
+          alert('Por favor, preencha o Endereço de Entrega (Rua, Número e Bairro).');
+          document.getElementById('addrStreet').focus();
+          return;
+        }
+
+        addressText = `📍 *Endereço de Entrega (Motoboy):*\n${street}, Nº ${number} - ${neighborhood}${complement ? ` (${complement})` : ''}\nTaboão da Serra - SP`;
+      } else {
+        addressText = `🏬 *Retirada no Balcão:*\nRua Milton Inocêncio, 61 - Pq. Pinheiros, Taboão da Serra - SP`;
+      }
+
+      // Payment details
+      const paymentChoice = document.querySelector('input[name="checkoutPayment"]:checked')?.value || 'pix';
+      let paymentText = '';
+      if (paymentChoice === 'pix') {
+        paymentText = '💠 *Pagamento:* PIX Online (Vou enviar o comprovante a seguir)';
+      } else if (paymentChoice === 'card') {
+        const cardType = document.querySelector('input[name="cardType"]:checked')?.value || 'Cartão na Entrega';
+        paymentText = `💳 *Pagamento:* ${cardType} (Motoboy traz a maquininha)`;
+      } else {
+        const change = document.getElementById('cashChangeFor').value.trim();
+        paymentText = `💵 *Pagamento:* Dinheiro na Entrega ${change ? `(${change})` : ''}`;
+      }
+
+      // Calculate totals
+      const subtotal = CART.reduce((acc, item) => acc + item.total, 0);
+      const subtotalIfood = CART.reduce((acc, item) => acc + item.totalIfood, 0);
+      const deliveryFee = fulfillmentType === 'delivery' ? DELIVERY_FEE : 0.00;
+      const finalTotal = subtotal + deliveryFee;
+      const savings = Math.max(0, subtotalIfood - subtotal);
+
+      // Build Items String
+      let itemsListText = '';
+      CART.forEach((item, i) => {
+        itemsListText += `${i + 1}. *${item.qty}x ${item.name}* — R$ ${item.total.toFixed(2).replace('.', ',')}\n`;
+        if (item.doneness) itemsListText += `   • Ponto: ${item.doneness}\n`;
+        if (item.addons.length) itemsListText += `   • Adicionais: ${item.addons.map(a => a.name).join(', ')}\n`;
+        if (item.notes) itemsListText += `   • Obs: ${item.notes}\n`;
+      });
+
+      // Compose final message
+      const msg = `*NOVO PEDIDO • NOSSA CASA HAMBURGUERIA* 🍔\n` +
+        `━━━━━━━━━━━━━━━━━━━━\n` +
+        `👤 *Cliente:* ${name}\n` +
+        `📱 *WhatsApp:* ${phone || 'Não informado'}\n\n` +
+        `📋 *ITENS DO PEDIDO:*\n${itemsListText}\n` +
+        `━━━━━━━━━━━━━━━━━━━━\n` +
+        `Subtotal: R$ ${subtotal.toFixed(2).replace('.', ',')}\n` +
+        `Entrega: ${fulfillmentType === 'delivery' ? `R$ ${deliveryFee.toFixed(2).replace('.', ',')} (Motoboy Próprio)` : 'Grátis (Retirada)'}\n` +
+        `💰 *TOTAL A PAGAR: R$ ${finalTotal.toFixed(2).replace('.', ',')}*\n` +
+        `🎉 *Economia vs iFood: R$ ${savings.toFixed(2).replace('.', ',')}*\n\n` +
+        `${paymentText}\n\n` +
+        `${addressText}\n` +
+        `━━━━━━━━━━━━━━━━━━━━\n` +
+        `_Pedido realizado pelo Cardápio Direto da Loja Oficial_`;
+
+      const waNumber = '5511999999999'; // Telefone da hamburgueria
+      const waUrl = `https://api.whatsapp.com/send?phone=${waNumber}&text=${encodeURIComponent(msg)}`;
+
+      window.open(waUrl, '_blank');
+      closeCheckoutModal();
+    }
+
+    // FLYER MODAL
     function openFlyerModal() {
       document.getElementById('flyerModal').classList.remove('hidden');
     }
@@ -3349,52 +4049,30 @@
       document.getElementById('flyerModal').classList.add('hidden');
     }
 
-    // Setup Viewport Event Listeners (Cursor Magnetism, Drag & Wheel)
-    function setupMagneticViewportListeners() {
+    // HORIZONTAL VIEWPORT LISTENERS (DRAG & TOUCH & WHEEL)
+    function setupHorizontalViewportListeners() {
       const viewport = document.getElementById('magneticViewport');
       if (!viewport) return;
 
-      // Mouse Move Magnetism
-      viewport.addEventListener('mousemove', (e) => {
-        if (openIndex !== null) return;
-        setTargetFromCursor(e.clientX);
-      });
-
-      // Mouse Leave Magnetism Reset
-      viewport.addEventListener('mouseleave', () => {
-        if (openIndex !== null) return;
-        targetFactors = currentItems.map(() => 0);
-        startMagneticLoop();
-      });
-
-      // Drag to Pan horizontally
       let isDown = false;
       let startX = 0;
       let scrollLeft = 0;
 
       viewport.addEventListener('mousedown', (e) => {
-        if (openIndex !== null) return;
-        if (e.target.closest('button')) return;
+        if (e.target.closest('button') || e.target.closest('a')) return;
         isDown = true;
-        hasDragged = false;
         startX = e.pageX - viewport.offsetLeft;
         scrollLeft = viewport.scrollLeft;
       });
 
       window.addEventListener('mouseup', () => {
-        if (isDown) {
-          isDown = false;
-          setTimeout(() => { hasDragged = false; }, 50);
-        }
+        isDown = false;
       });
 
       viewport.addEventListener('mousemove', (e) => {
         if (!isDown) return;
         const x = e.pageX - viewport.offsetLeft;
-        const walk = (x - startX) * 1.4;
-        if (Math.abs(walk) > 6) {
-          hasDragged = true;
-        }
+        const walk = (x - startX) * 1.5;
         viewport.scrollLeft = scrollLeft - walk;
       });
 
@@ -3404,33 +4082,19 @@
           viewport.scrollLeft += e.deltaY * 0.75;
         }
       }, { passive: true });
-
-      // Click outside open card to close
-      const stage = document.getElementById('magneticStageWrapper');
-      if (stage) {
-        stage.addEventListener('click', (e) => {
-          if (openIndex !== null && !e.target.closest('.magnetic-card.is-open')) {
-            closeMagneticCard();
-          }
-        });
-      }
     }
 
-    // Resize handler to adjust responsive metrics
-    window.addEventListener('resize', () => {
-      applyMagneticSizes();
-    });
-
-    // Render on load
+    // INITIALIZATION ON LOAD
     document.addEventListener('DOMContentLoaded', () => {
       renderMenu('all');
-      setupMagneticViewportListeners();
+      setupHorizontalViewportListeners();
       selectSensoryBurger(0);
       if (window.lucide) lucide.createIcons();
     });
+
     if (document.readyState === 'complete' || document.readyState === 'interactive') {
       renderMenu('all');
-      setupMagneticViewportListeners();
+      setupHorizontalViewportListeners();
       selectSensoryBurger(0);
       if (window.lucide) lucide.createIcons();
     }
