@@ -1,0 +1,17 @@
+﻿# Video drafts and heavy working source files
+video hamburgeur .mp4
+video hamburgeur doi .mp4
+_backup_pre_scrolldriven/
+
+# Python scripts and cache
+*.py
+*.pyc
+__pycache__/
+.venv/
+
+# Environment / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.vercel

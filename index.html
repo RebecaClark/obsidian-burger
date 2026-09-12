@@ -1,0 +1,3439 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OBSIDIAN BURGER | Exclusive Culinary Reserve</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            obsidian: {
+              950: '#040406',
+              900: '#07070a',
+              850: '#0c0c11',
+              800: '#121218',
+              700: '#1b1b24',
+              600: '#282836',
+            },
+            amber: {
+              gold: '#d49a42',
+              glow: '#f3b75d',
+              dark: '#9a6b24',
+              burn: '#e07a2c'
+            }
+          },
+          fontFamily: {
+            cinzel: ['Cinzel', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'serif'],
+            mono: ['"Space Grotesk"', 'monospace']
+          },
+          animation: {
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'shimmer': 'shimmer 2.5s infinite linear',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-8px)' },
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '-200% 0' },
+              '100%': { backgroundPosition: '200% 0' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #07070a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #282836;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #d49a42;
+    }
+
+    /* Glow utilities */
+    .glow-amber {
+      box-shadow: 0 0 35px -5px rgba(212, 154, 66, 0.25);
+    }
+    .glow-amber-lg {
+      box-shadow: 0 0 70px -10px rgba(212, 154, 66, 0.35);
+    }
+    .text-glow-amber {
+      text-shadow: 0 0 20px rgba(212, 154, 66, 0.4);
+    }
+
+    /* Glass Panels */
+    .glass-dark {
+      background: rgba(12, 12, 17, 0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(212, 154, 66, 0.12);
+    }
+    .glass-card {
+      background: linear-gradient(135deg, rgba(27, 27, 36, 0.4) 0%, rgba(12, 12, 17, 0.8) 100%);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .glass-card:hover {
+      border-color: rgba(212, 154, 66, 0.3);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 30px -5px rgba(212, 154, 66, 0.15);
+    }
+
+    /* Equalizer Sound bars animation */
+    .eq-bar {
+      display: inline-block;
+      width: 3px;
+      background: #d49a42;
+      border-radius: 2px;
+      animation: eq 1.2s ease-in-out infinite alternate;
+    }
+    .eq-bar:nth-child(1) { height: 8px; animation-delay: 0.1s; }
+    .eq-bar:nth-child(2) { height: 16px; animation-delay: 0.3s; }
+    .eq-bar:nth-child(3) { height: 12px; animation-delay: 0.2s; }
+    .eq-bar:nth-child(4) { height: 18px; animation-delay: 0.4s; }
+    .eq-bar.paused {
+      animation-play-state: paused;
+      height: 4px !important;
+    }
+
+    @keyframes eq {
+      0% { height: 4px; }
+      100% { height: 20px; }
+    }
+
+    /* Originkit Magnetic Carousel Styles */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .magnetic-card {
+      display: flex;
+      flex-direction: column;
+      will-change: width, height;
+      transform: translateZ(0);
+      transition: width 0.35s cubic-bezier(0.44, 0, 0.56, 1), height 0.35s cubic-bezier(0.44, 0, 0.56, 1);
+    }
+    .magnetic-card.is-open .card-img-container,
+    .magnetic-card.is-open .card-collapsed-info {
+      display: none !important;
+    }
+    .magnetic-card.is-open .card-expanded-view {
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+
+    /* Infinite Marquee Keyframes */
+    @keyframes marqueeLeft {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes marqueeRight {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+    .animate-marquee-left {
+      display: flex;
+      width: max-content;
+      animation: marqueeLeft 34s linear infinite;
+    }
+    .animate-marquee-right {
+      display: flex;
+      width: max-content;
+      animation: marqueeRight 38s linear infinite;
+    }
+    .marquee-container:hover .animate-marquee-left,
+    .marquee-container:hover .animate-marquee-right {
+      animation-play-state: paused;
+    }
+
+    /* Sensory Bars transitions */
+    .sensory-meter-bar {
+      transition: width 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+  </style>
+</head>
+<body class="bg-obsidian-950 text-neutral-100 font-sans antialiased overflow-x-hidden selection:bg-amber-gold selection:text-obsidian-950">
+
+  <!-- Ambient Luxury Vignette Overlay -->
+  <div class="fixed inset-0 pointer-events-none z-30 bg-[radial-gradient(ellipse_at_center,_transparent_40%,_rgba(4,4,6,0.85)_100%)]"></div>
+
+  <!-- Subtle Film Grain / Grid Background -->
+  <div class="fixed inset-0 pointer-events-none z-10 opacity-[0.025] bg-[radial-gradient(#d49a42_1px,transparent_1px)] [background-size:24px_24px]"></div>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-4 sm:px-6 py-3.5 lg:px-12 lg:py-5 flex items-center justify-between glass-dark border-b border-amber-gold/10">
+    <div class="flex items-center gap-3 sm:gap-4">
+      <a href="#hero" class="flex items-center gap-2.5 sm:gap-3 group">
+        <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-amber-gold/40 flex items-center justify-center bg-obsidian-900 group-hover:border-amber-gold transition-colors duration-300">
+          <span class="font-cinzel font-bold text-amber-gold text-base sm:text-lg group-hover:scale-110 transition-transform">Ω</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-cinzel tracking-[0.2em] sm:tracking-[0.25em] text-xs sm:text-sm lg:text-base font-bold text-neutral-100 group-hover:text-amber-gold transition-colors">OBSIDIAN</span>
+          <span class="text-[8px] sm:text-[9px] font-mono tracking-[0.25em] sm:tracking-[0.3em] text-amber-gold/70 uppercase">Reserve Burger House</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Center Nav Links -->
+    <nav class="hidden lg:flex items-center gap-7 text-xs font-mono tracking-[0.15em] text-neutral-400">
+      <a href="#cortes" class="hover:text-amber-gold transition-colors duration-200">01. CORTES & MACRO</a>
+      <a href="#anatomy" class="hover:text-amber-gold transition-colors duration-200">02. ANATOMIA 3D</a>
+      <a href="#alquimia" class="hover:text-amber-gold transition-colors duration-200">03. A ALQUIMIA</a>
+      <a href="#menu" class="hover:text-amber-gold transition-colors duration-200">04. CARDÁPIO</a>
+      <a href="#sensorial" class="hover:text-amber-gold transition-colors duration-200">05. SENSORIAL</a>
+      <a href="#experience" class="hover:text-amber-gold transition-colors duration-200">06. RESERVA VIP</a>
+    </nav>
+
+    <!-- Header Actions -->
+    <div class="flex items-center gap-2 sm:gap-3">
+      <!-- Media Config Drawer Trigger (Pipeline inspection for director) -->
+      <button onclick="openMediaModal()" title="Configurações do Master Comercial" class="p-2 sm:p-2.5 rounded-full border border-neutral-800 hover:border-amber-gold/40 text-neutral-400 hover:text-amber-gold transition-all text-xs flex items-center gap-1.5 sm:gap-2">
+        <i data-lucide="film" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+        <span class="hidden sm:inline font-mono text-[10px] tracking-wider uppercase text-amber-gold">4K Master</span>
+      </button>
+
+      <!-- VIP Reserve CTA -->
+      <button onclick="openReservationModal()" class="relative group overflow-hidden px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-amber-gold to-amber-dark text-obsidian-950 font-mono text-[10px] sm:text-xs font-bold tracking-[0.1em] sm:tracking-[0.15em] uppercase hover:shadow-[0_0_25px_rgba(212,154,66,0.4)] transition-all duration-300">
+        <span class="relative z-10 flex items-center gap-1.5">
+          <i data-lucide="calendar" class="w-3 h-3 sm:w-3.5 sm:h-3.5"></i>
+          <span>Reservar</span>
+        </span>
+        <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+      </button>
+
+      <!-- Mobile Menu Toggle Button (Visible only on < lg screens) -->
+      <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-full border border-amber-gold/30 hover:border-amber-gold text-amber-gold bg-obsidian-900/80 transition-colors" aria-label="Abrir Menu">
+        <i data-lucide="menu" id="mobileMenuIcon" class="w-4 h-4"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- LUXURY MOBILE DRAWER MENU -->
+  <div id="mobileDrawer" class="fixed inset-0 z-40 bg-obsidian-950/98 backdrop-blur-2xl transition-all duration-300 opacity-0 pointer-events-none flex flex-col justify-between pt-24 pb-8 px-6 lg:hidden">
+    <div class="flex flex-col space-y-3 font-mono text-xs tracking-[0.2em]">
+      <div class="text-[9px] text-amber-gold uppercase tracking-[0.3em] pb-2 border-b border-amber-gold/20">Menu de Navegação</div>
+      <a href="#cortes" onclick="closeMobileMenu()" class="text-neutral-300 hover:text-amber-gold transition-colors py-2.5 flex items-center justify-between border-b border-white/5">
+        <span>01. CORTES & MACRO</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-amber-gold/60"></i>
+      </a>
+      <a href="#anatomy" onclick="closeMobileMenu()" class="text-neutral-300 hover:text-amber-gold transition-colors py-2.5 flex items-center justify-between border-b border-white/5">
+        <span>02. ANATOMIA 3D</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-amber-gold/60"></i>
+      </a>
+      <a href="#alquimia" onclick="closeMobileMenu()" class="text-neutral-300 hover:text-amber-gold transition-colors py-2.5 flex items-center justify-between border-b border-white/5">
+        <span>03. A ALQUIMIA</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-amber-gold/60"></i>
+      </a>
+      <a href="#menu" onclick="closeMobileMenu()" class="text-neutral-300 hover:text-amber-gold transition-colors py-2.5 flex items-center justify-between border-b border-white/5">
+        <span>04. CARDÁPIO OFICIAL</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-amber-gold/60"></i>
+      </a>
+      <a href="#sensorial" onclick="closeMobileMenu()" class="text-neutral-300 hover:text-amber-gold transition-colors py-2.5 flex items-center justify-between border-b border-white/5">
+        <span>05. LABORATÓRIO 360°</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-amber-gold/60"></i>
+      </a>
+      <a href="#experience" onclick="closeMobileMenu()" class="text-neutral-300 hover:text-amber-gold transition-colors py-2.5 flex items-center justify-between border-b border-white/5">
+        <span>06. RESERVA VIP</span>
+        <i data-lucide="chevron-right" class="w-4 h-4 text-amber-gold/60"></i>
+      </a>
+    </div>
+
+    <!-- Drawer Footer Actions -->
+    <div class="space-y-3 pt-6 border-t border-amber-gold/20">
+      <button onclick="closeMobileMenu(); openReservationModal();" class="w-full py-3 rounded-full bg-gradient-to-r from-amber-gold to-amber-dark text-obsidian-950 font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2">
+        <i data-lucide="calendar" class="w-4 h-4"></i>
+        Reservar Experiência
+      </button>
+      <div class="text-center font-mono text-[9px] text-neutral-500 uppercase tracking-widest">
+        Taboão da Serra • Reserva Burger House
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: CINEMATIC SCROLL-DRIVEN HERO TRACK -->
+  <section id="hero" class="relative w-full bg-obsidian-950" style="height: 480vh;">
+    
+    <!-- Sticky Fullscreen Viewport Window -->
+    <div id="heroStickyStage" class="sticky top-0 w-full h-screen h-[100dvh] overflow-hidden bg-obsidian-950 flex flex-col justify-between">
+      
+      <!-- Canvas Render Target (60fps Accelerated Hardware Layer) -->
+      <canvas id="cinematicCanvas" class="absolute inset-0 w-full h-full z-0 block"></canvas>
+
+      <!-- Ambient Luxury Vignette & Contrast Gradients (Preserves visual fidelity without altering image pixels) -->
+      <div class="absolute inset-0 z-10 pointer-events-none bg-[radial-gradient(circle_at_center,_transparent_45%,_rgba(4,4,6,0.7)_100%)]"></div>
+      <div class="absolute inset-0 z-10 pointer-events-none bg-gradient-to-t from-obsidian-950 via-transparent to-obsidian-950/70"></div>
+      <!-- Subtle Exit Dissolve Layer into Content below -->
+      <div id="heroExitOverlay" class="absolute inset-0 z-15 pointer-events-none bg-gradient-to-t from-obsidian-950 via-obsidian-950/60 to-transparent opacity-0 transition-opacity duration-200"></div>
+
+      <!-- Minimalist Luxury Preloader Overlay -->
+      <div id="cinematicLoader" class="absolute inset-0 z-40 bg-obsidian-950 flex flex-col items-center justify-center transition-opacity duration-700 pointer-events-auto">
+        <div class="relative flex flex-col items-center max-w-xs text-center px-6">
+          <div class="w-12 h-12 rounded-full border border-amber-gold/40 flex items-center justify-center bg-obsidian-900 mb-4 shadow-[0_0_25px_rgba(212,154,66,0.2)]">
+            <span class="font-cinzel font-bold text-amber-gold text-xl">Ω</span>
+          </div>
+          <span class="font-mono text-[10px] tracking-[0.3em] text-amber-gold uppercase mb-3 font-semibold">
+            Sincronizando Master Cinematográfico
+          </span>
+          <!-- Hairline Gold Progress Track -->
+          <div class="w-48 h-[2px] bg-neutral-800 rounded-full overflow-hidden mb-2.5">
+            <div id="loaderProgressBar" class="h-full bg-gradient-to-r from-amber-gold to-amber-burn w-0 transition-all duration-150"></div>
+          </div>
+          <div class="flex items-center gap-2 font-mono text-[11px] text-neutral-400">
+            <span id="loaderPercent">0%</span>
+            <span class="text-neutral-600">•</span>
+            <span id="loaderFramesLoaded">0 / 248 quadros</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOP HUD LAYER: Status & Camera Frame Coordinates -->
+      <div class="relative z-20 pt-24 px-6 lg:px-16 flex items-center justify-between pointer-events-none">
+        <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-amber-gold/30 bg-obsidian-900/80 backdrop-blur-md pointer-events-auto">
+          <span class="w-2 h-2 rounded-full bg-amber-gold animate-ping"></span>
+          <span class="text-[10px] font-mono tracking-[0.25em] text-amber-gold uppercase font-bold">
+            Câmera Contínua • Controle por Scroll
+          </span>
+        </div>
+
+        <!-- Frame HUD Counter -->
+        <div class="flex items-center gap-3 bg-obsidian-900/80 border border-white/10 backdrop-blur-md rounded-full px-4 py-1.5 font-mono text-[10px] text-neutral-400 pointer-events-auto">
+          <span class="text-neutral-500 uppercase tracking-widest hidden sm:inline">Tempo Câmera:</span>
+          <span id="hudFrameCounter" class="text-amber-gold font-bold">FRAME 001 / 248</span>
+          <div class="w-px h-3 bg-white/20"></div>
+          <span id="hudProgressPercent" class="text-neutral-200">0%</span>
+        </div>
+      </div>
+
+      <!-- CENTER / DYNAMIC EDITORIAL STORY CARDS (Synchronized with camera progress) -->
+      <div class="relative z-20 px-4 sm:px-6 lg:px-16 my-auto max-w-4xl pointer-events-none min-h-[220px]">
+        
+        <!-- Story State 0: Initial Hook (Progress 0.00 to 0.20) -->
+        <div id="storyCard0" class="story-card transition-all duration-500 opacity-100 translate-y-0">
+          <p class="font-mono text-[10px] sm:text-xs tracking-[0.3em] sm:tracking-[0.4em] text-amber-gold uppercase mb-2 sm:mb-3 flex items-center gap-2 sm:gap-3">
+            <span class="w-6 sm:w-8 h-px bg-amber-gold"></span>
+            A Suprema Alta Gastronomia em Hambúrguer
+          </p>
+          <h1 class="font-cinzel text-3xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.1] mb-3 sm:mb-6">
+            ONDE A OBSCURIDADE <br/>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-gold via-amber-glow to-amber-burn text-glow-amber">
+              ENCONTRA A BRASA.
+            </span>
+          </h1>
+          <p class="font-serif italic text-sm sm:text-xl text-neutral-300 max-w-2xl font-light leading-relaxed mb-4 sm:mb-6">
+            "Um único plano-sequência ininterrupto. Role a página para comandar a aproximação física da câmera."
+          </p>
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full border border-amber-gold/30 bg-obsidian-900/80 backdrop-blur-md text-amber-gold font-mono text-[10px] sm:text-xs tracking-widest uppercase">
+            <i data-lucide="arrow-down" class="w-3 h-3 sm:w-3.5 sm:h-3.5 animate-bounce"></i>
+            Role para avançar a cena
+          </div>
+        </div>
+
+        <!-- Story State 1: The Corridor Walk (Progress 0.22 to 0.44) -->
+        <div id="storyCard1" class="story-card transition-all duration-500 opacity-0 translate-y-4 absolute top-0 left-0 right-0 sm:left-6 lg:left-16 pointer-events-none p-4 sm:p-0 rounded-2xl sm:rounded-none bg-obsidian-950/70 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none border border-amber-gold/20 sm:border-0 max-w-xl">
+          <p class="font-mono text-[10px] sm:text-xs tracking-[0.25em] sm:tracking-[0.3em] text-amber-gold uppercase mb-1.5 sm:mb-2">ATO I • A TRAVESSIA</p>
+          <h2 class="font-cinzel text-2xl sm:text-4xl lg:text-5xl font-bold text-white mb-2 sm:mb-4">
+            A MARCHA DO SALÃO
+          </h2>
+          <p class="font-serif italic text-xs sm:text-base lg:text-lg text-neutral-300 max-w-xl leading-relaxed">
+            A atmosfera intimista do restaurante. O garçom conduz o corte recém-braseado em carvão botânico, mantendo o ponto térmico ideal.
+          </p>
+        </div>
+
+        <!-- Story State 2: The Table Placement (Progress 0.48 to 0.68) -->
+        <div id="storyCard2" class="story-card transition-all duration-500 opacity-0 translate-y-4 absolute top-0 left-0 right-0 sm:left-6 lg:left-16 pointer-events-none p-4 sm:p-0 rounded-2xl sm:rounded-none bg-obsidian-950/70 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none border border-amber-gold/20 sm:border-0 max-w-xl">
+          <p class="font-mono text-[10px] sm:text-xs tracking-[0.25em] sm:tracking-[0.3em] text-amber-gold uppercase mb-1.5 sm:mb-2">ATO II • O ASSENTAMENTO</p>
+          <h2 class="font-cinzel text-2xl sm:text-4xl lg:text-5xl font-bold text-white mb-2 sm:mb-4">
+            O CONTATO COM A MADEIRA
+          </h2>
+          <p class="font-serif italic text-xs sm:text-base lg:text-lg text-neutral-300 max-w-xl leading-relaxed">
+            Sem qualquer corte ou hesitação. O prato rústico toca o carvalho maciço e o burger torna-se o centro de gravidade da cena.
+          </p>
+        </div>
+
+        <!-- Story State 3: The Hand Grip & Macro Push (Progress 0.72 to 0.88) -->
+        <div id="storyCard3" class="story-card transition-all duration-500 opacity-0 translate-y-4 absolute top-0 left-0 right-0 sm:left-6 lg:left-16 pointer-events-none p-4 sm:p-0 rounded-2xl sm:rounded-none bg-obsidian-950/70 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none border border-amber-gold/20 sm:border-0 max-w-xl">
+          <p class="font-mono text-[10px] sm:text-xs tracking-[0.25em] sm:tracking-[0.3em] text-amber-gold uppercase mb-1.5 sm:mb-2">ATO III • A ANTECIPAÇÃO</p>
+          <h2 class="font-cinzel text-2xl sm:text-4xl lg:text-5xl font-bold text-white mb-2 sm:mb-4">
+            A EMPUNHADURA & O MACRO
+          </h2>
+          <p class="font-serif italic text-xs sm:text-base lg:text-lg text-neutral-300 max-w-xl leading-relaxed">
+            As mãos envolvem o brioche aquecido. A câmera executa um push-in controlado e cinematográfico até as gotas de queijo em fusão.
+          </p>
+        </div>
+
+        <!-- Empty placeholder for storyCard4 so no HTML text collides with the final logo frame -->
+        <div id="storyCard4" class="hidden"></div>
+
+      </div>
+
+      <!-- BOTTOM HUD LAYER: Interactive Scrub Bar & Reversibility Indicator -->
+      <div class="relative z-20 pb-8 px-6 lg:px-16 border-t border-white/10 pointer-events-none">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-4">
+          
+          <div class="flex items-center gap-3 text-[11px] font-mono tracking-wider text-neutral-400">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
+            <span class="text-neutral-300">Controle Tátil Bidirecional (60 FPS)</span>
+            <span class="text-neutral-600 hidden md:inline">|</span>
+            <span class="text-neutral-500 hidden md:inline">Desça para avançar • Suba para rebobinar</span>
+          </div>
+
+          <!-- Bottom Timeline Progress Bar -->
+          <div class="flex items-center gap-3 font-mono text-xs text-neutral-400 w-full sm:w-auto justify-between sm:justify-end">
+            <span id="hudBottomTime">00:00</span>
+            <div class="w-36 md:w-56 h-1 bg-neutral-800 rounded-full overflow-hidden">
+              <div id="hudBottomProgressBar" class="h-full bg-gradient-to-r from-amber-gold to-amber-burn w-0 transition-all duration-75"></div>
+            </div>
+            <span id="hudBottomTotal">00:20</span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 2: EDITORIAL FOTOGRÁFICO DE CORTES & DETALHES MACRO -->
+  <section id="cortes" class="py-24 px-6 lg:px-16 bg-obsidian-900 border-t border-b border-amber-gold/15 relative overflow-hidden">
+    <!-- Ambient gold glow spot -->
+    <div class="absolute top-1/3 -left-48 w-96 h-96 bg-amber-gold/5 rounded-full blur-[140px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto relative z-10">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div>
+          <div class="inline-flex items-center gap-2 font-mono text-xs tracking-[0.3em] text-amber-gold uppercase mb-2">
+            <i data-lucide="camera" class="w-3.5 h-3.5 text-amber-gold"></i>
+            Fotografia Gastronômica Editorial
+          </div>
+          <h2 class="font-cinzel text-3xl sm:text-5xl font-bold text-white tracking-tight">
+            A ARTE DO CORTE & <br/>
+            <span class="text-amber-gold">PONTO PERFEITO</span>
+          </h2>
+        </div>
+        <p class="font-sans text-neutral-400 text-sm max-w-md leading-relaxed">
+          Sem artifícios ou filtros. A lente macro revela o ponto rosado exato do Wagyu, a retenção de sucos nobres e a fusão aveludada do queijo sobre a brasa.
+        </p>
+      </div>
+
+      <!-- Main Feature: Master Cross-Section Display (Split 12 cols) -->
+      <div class="glass-card rounded-2xl p-4 sm:p-8 border border-amber-gold/25 relative overflow-hidden mb-12 shadow-2xl">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <!-- Master Cross-Section Image (7 cols) -->
+          <div class="lg:col-span-7 relative aspect-[16/10] sm:aspect-[16/9] rounded-xl overflow-hidden bg-obsidian-950 border border-white/10 group">
+            <img src="assets/editorial/corte_perfeito_macro.jpg" 
+                 alt="Corte Transversal Macro Obsidian Prime" 
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            
+            <!-- Quality & Detail Badges Over Image -->
+            <div class="absolute top-4 left-4 flex flex-wrap gap-2">
+              <span class="px-3 py-1 rounded-md bg-black/80 border border-amber-gold/40 text-amber-gold font-mono text-[10px] font-bold tracking-wider backdrop-blur-md">
+                CORTE TRANSVERSAL 1:1
+              </span>
+              <span class="px-3 py-1 rounded-md bg-black/80 border border-white/20 text-white font-mono text-[10px] tracking-wider backdrop-blur-md">
+                WAGYU A5 • BMS 9+
+              </span>
+            </div>
+
+            <div class="absolute bottom-4 left-4 right-4 p-3 rounded-lg bg-black/75 border border-white/10 backdrop-blur-md flex items-center justify-between text-xs font-mono">
+              <span class="text-neutral-300 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-amber-gold animate-ping"></span>
+                Ponto Rosado com 100% de Mioglobina Preservada
+              </span>
+              <span class="text-amber-gold font-bold hidden sm:inline">54°C ao Centro</span>
+            </div>
+          </div>
+
+          <!-- Editorial Narrative Breakdown (5 cols) -->
+          <div class="lg:col-span-5 space-y-5">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-gold/30 bg-amber-gold/10 text-amber-gold font-mono text-[10px] uppercase tracking-widest font-bold">
+              Dissecção Gastronômica
+            </div>
+
+            <h3 class="font-cinzel text-2xl sm:text-3xl font-bold text-white leading-tight">
+              O Equilíbrio Entre Crosta & Suculência Rosada
+            </h3>
+
+            <p class="text-neutral-300 text-xs sm:text-sm leading-relaxed font-sans">
+              O corte ao meio com lâmina japonesa revela o que os olhos não veem por fora: uma selagem rápida a 400°C que carameliza a camada externa sem cozinhar em excesso o centro. A gordura nobre entremeada derrete a partir de 38°C, irrigando cada fibra de carne de dentro para fora.
+            </p>
+
+            <!-- 3 Pill Highlight Metrics -->
+            <div class="grid grid-cols-3 gap-3 pt-4 border-t border-white/10 text-center font-mono">
+              <div class="p-3 rounded-xl bg-obsidian-950/80 border border-white/5">
+                <span class="text-neutral-500 block text-[9px] uppercase">Ponto Térmico</span>
+                <span class="text-amber-gold font-bold text-sm">54° C</span>
+                <span class="text-neutral-400 block text-[9px]">Rosado Quente</span>
+              </div>
+              <div class="p-3 rounded-xl bg-obsidian-950/80 border border-white/5">
+                <span class="text-neutral-500 block text-[9px] uppercase">Gramatura</span>
+                <span class="text-white font-bold text-sm">150g</span>
+                <span class="text-neutral-400 block text-[9px]">Corte Artesanal</span>
+              </div>
+              <div class="p-3 rounded-xl bg-obsidian-950/80 border border-white/5">
+                <span class="text-neutral-500 block text-[9px] uppercase">Marmoreio</span>
+                <span class="text-amber-gold font-bold text-sm">BMS 9+</span>
+                <span class="text-neutral-400 block text-[9px]">Gordura Nobre</span>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <a href="#anatomy" class="inline-flex items-center gap-2 text-xs font-mono text-amber-gold hover:text-white transition-colors">
+                <span>Inspecionar camadas explodidas na anatomia</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Secondary Row: 3 High-Definition Macro Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Macro Card 1: Cheese Melt -->
+        <div class="glass-card rounded-xl p-5 group transition-all duration-300 hover:-translate-y-1 border border-white/10 hover:border-amber-gold/40">
+          <div class="relative aspect-[4/3] rounded-lg overflow-hidden mb-4 bg-obsidian-950">
+            <img src="assets/editorial/fusao_queijo_macro.jpg" alt="Fusão de Queijo Cheddar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute top-2 left-2 px-2.5 py-0.5 rounded bg-black/75 border border-amber-gold/30 text-amber-gold font-mono text-[10px] font-bold">
+              FUSÃO • 65°C
+            </div>
+          </div>
+          <h4 class="font-cinzel font-bold text-white text-base group-hover:text-amber-gold transition-colors mb-1.5">A Cascata de Cheddar 18M</h4>
+          <p class="text-xs text-neutral-400 leading-relaxed font-sans">Queijo cheddar inglês maturado levado ao ponto exato de fusão, criando uma emulsão densa que abraça todas as reentrâncias da crosta.</p>
+        </div>
+
+        <!-- Macro Card 2: Charcoal Ember -->
+        <div class="glass-card rounded-xl p-5 group transition-all duration-300 hover:-translate-y-1 border border-white/10 hover:border-amber-gold/40">
+          <div class="relative aspect-[4/3] rounded-lg overflow-hidden mb-4 bg-obsidian-950">
+            <img src="assets/editorial/brasa_binchotan_macro.jpg" alt="Crosta Maillard e Brasa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute top-2 left-2 px-2.5 py-0.5 rounded bg-black/75 border border-amber-gold/30 text-amber-gold font-mono text-[10px] font-bold">
+              BRASA • 400°C
+            </div>
+          </div>
+          <h4 class="font-cinzel font-bold text-white text-base group-hover:text-amber-gold transition-colors mb-1.5">Crosta Maillard & Fogo Vivo</h4>
+          <p class="text-xs text-neutral-400 leading-relaxed font-sans">O calor radiante de 400°C do carvão mineral Binchotan sela o burger em segundos, garantindo crocância externa e interior suculento.</p>
+        </div>
+
+        <!-- Macro Card 3: Brioche & Butter -->
+        <div class="glass-card rounded-xl p-5 group transition-all duration-300 hover:-translate-y-1 border border-white/10 hover:border-amber-gold/40">
+          <div class="relative aspect-[4/3] rounded-lg overflow-hidden mb-4 bg-obsidian-950">
+            <img src="assets/editorial/pao_manteiga_macro.jpg" alt="Brioche Tostado na Manteiga Ghee" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute top-2 left-2 px-2.5 py-0.5 rounded bg-black/75 border border-amber-gold/30 text-amber-gold font-mono text-[10px] font-bold">
+              TOSTA GHEE
+            </div>
+          </div>
+          <h4 class="font-cinzel font-bold text-white text-base group-hover:text-amber-gold transition-colors mb-1.5">Pão Brioche Tostado na Ghee</h4>
+          <p class="text-xs text-neutral-400 leading-relaxed font-sans">Selagem a seco com manteiga clarificada que impermeabiliza a base do pão, mantendo a textura fofa e protegendo contra a umidade dos molhos.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MARQUEE INFINITO BIDIRECIONAL DE SELOS NOBRES (AULA 2 / LUXURY BADGES) -->
+  <div class="marquee-container py-10 bg-obsidian-950 border-y border-amber-gold/20 overflow-hidden relative select-none">
+    <!-- Ambient gold glow spot -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-24 bg-amber-gold/10 blur-[100px] pointer-events-none"></div>
+
+    <!-- Gradient Edge Masks for soft fade -->
+    <div class="absolute inset-y-0 left-0 w-24 sm:w-48 bg-gradient-to-r from-obsidian-950 via-obsidian-950/80 to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute inset-y-0 right-0 w-24 sm:w-48 bg-gradient-to-l from-obsidian-950 via-obsidian-950/80 to-transparent z-10 pointer-events-none"></div>
+
+    <!-- Track 1: Moving Left (Continuous Smooth Loop) -->
+    <div class="animate-marquee-left mb-3.5">
+      <!-- Set 1 -->
+      <div class="inline-flex items-center">
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-amber-gold/30 bg-obsidian-900/80 text-white text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-amber-gold hover:text-amber-gold transition-colors">
+          <i data-lucide="award" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Wagyu A5 Certificado BMS 9+
+        </span>
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-white/10 bg-obsidian-900/80 text-neutral-300 text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-amber-gold hover:text-amber-gold transition-colors">
+          <i data-lucide="flame" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Carvão Binchotan a 400°C
+        </span>
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-white/10 bg-obsidian-900/80 text-neutral-300 text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-amber-gold hover:text-amber-gold transition-colors">
+          <i data-lucide="clock" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Levain Natural 48 Horas
+        </span>
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-amber-gold/30 bg-obsidian-900/80 text-white text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-amber-gold hover:text-amber-gold transition-colors">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Cheddar Inglês Curado 18M
+        </span>
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-white/10 bg-obsidian-900/80 text-neutral-300 text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-amber-gold hover:text-amber-gold transition-colors">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Manteiga Clarificada Ghee
+        </span>
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-white/10 bg-obsidian-900/80 text-neutral-300 text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-amber-gold hover:text-amber-gold transition-colors">
+          <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-amber-gold"></i>
+          100% Carnes Nobres Sem Conservantes
+        </span>
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-amber-gold/30 bg-obsidian-900/80 text-white text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-amber-gold hover:text-amber-gold transition-colors">
+          <i data-lucide="wind" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Defumação Cold-Smoke em Macieira
+        </span>
+      </div>
+
+      <!-- Duplicate Set 1 for seamless loop -->
+      <div class="inline-flex items-center">
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-amber-gold/30 bg-obsidian-900/80 text-white text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-amber-gold hover:text-amber-gold transition-colors">
+          <i data-lucide="award" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Wagyu A5 Certificado BMS 9+
+        </span>
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-white/10 bg-obsidian-900/80 text-neutral-300 text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-amber-gold hover:text-amber-gold transition-colors">
+          <i data-lucide="flame" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Carvão Binchotan a 400°C
+        </span>
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-white/10 bg-obsidian-900/80 text-neutral-300 text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-amber-gold hover:text-amber-gold transition-colors">
+          <i data-lucide="clock" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Levain Natural 48 Horas
+        </span>
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-amber-gold/30 bg-obsidian-900/80 text-white text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-amber-gold hover:text-amber-gold transition-colors">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Cheddar Inglês Curado 18M
+        </span>
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-white/10 bg-obsidian-900/80 text-neutral-300 text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-amber-gold hover:text-amber-gold transition-colors">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Manteiga Clarificada Ghee
+        </span>
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-white/10 bg-obsidian-900/80 text-neutral-300 text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-amber-gold hover:text-amber-gold transition-colors">
+          <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-amber-gold"></i>
+          100% Carnes Nobres Sem Conservantes
+        </span>
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-amber-gold/30 bg-obsidian-900/80 text-white text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-amber-gold hover:text-amber-gold transition-colors">
+          <i data-lucide="wind" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Defumação Cold-Smoke em Macieira
+        </span>
+      </div>
+    </div>
+
+    <!-- Track 2: Moving Right (Opposite Direction Continuous Loop) -->
+    <div class="animate-marquee-right">
+      <!-- Set 2 -->
+      <div class="inline-flex items-center">
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-amber-gold/30 bg-obsidian-900/80 text-amber-gold text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-white/30 hover:text-white transition-colors">
+          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Taboão da Serra • SP
+        </span>
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-white/10 bg-obsidian-900/80 text-neutral-300 text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-amber-gold hover:text-amber-gold transition-colors">
+          <i data-lucide="gem" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Trufa Negra Italiana de Verão
+        </span>
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-white/10 bg-obsidian-900/80 text-neutral-300 text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-amber-gold hover:text-amber-gold transition-colors">
+          <i data-lucide="hand-metal" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Corte Artesanal Moldado à Mão
+        </span>
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-amber-gold/30 bg-obsidian-900/80 text-white text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-amber-gold hover:text-amber-gold transition-colors">
+          <i data-lucide="thermometer" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Crosta Maillard Milimétrica
+        </span>
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-white/10 bg-obsidian-900/80 text-neutral-300 text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-amber-gold hover:text-amber-gold transition-colors">
+          <i data-lucide="package-check" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Embalagem Térmica Selada
+        </span>
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-white/10 bg-obsidian-900/80 text-neutral-300 text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-amber-gold hover:text-amber-gold transition-colors">
+          <i data-lucide="droplet" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Maionese Secreta de Ervas Nobres
+        </span>
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-amber-gold/30 bg-obsidian-900/80 text-white text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-amber-gold hover:text-amber-gold transition-colors">
+          <i data-lucide="film" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Experiência Cinematográfica 4K
+        </span>
+      </div>
+
+      <!-- Duplicate Set 2 for seamless loop -->
+      <div class="inline-flex items-center">
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-amber-gold/30 bg-obsidian-900/80 text-amber-gold text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-white/30 hover:text-white transition-colors">
+          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Taboão da Serra • SP
+        </span>
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-white/10 bg-obsidian-900/80 text-neutral-300 text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-amber-gold hover:text-amber-gold transition-colors">
+          <i data-lucide="gem" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Trufa Negra Italiana de Verão
+        </span>
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-white/10 bg-obsidian-900/80 text-neutral-300 text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-amber-gold hover:text-amber-gold transition-colors">
+          <i data-lucide="hand-metal" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Corte Artesanal Moldado à Mão
+        </span>
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-amber-gold/30 bg-obsidian-900/80 text-white text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-amber-gold hover:text-amber-gold transition-colors">
+          <i data-lucide="thermometer" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Crosta Maillard Milimétrica
+        </span>
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-white/10 bg-obsidian-900/80 text-neutral-300 text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-amber-gold hover:text-amber-gold transition-colors">
+          <i data-lucide="package-check" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Embalagem Térmica Selada
+        </span>
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-white/10 bg-obsidian-900/80 text-neutral-300 text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-amber-gold hover:text-amber-gold transition-colors">
+          <i data-lucide="droplet" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Maionese Secreta de Ervas Nobres
+        </span>
+        <span class="inline-flex items-center gap-2.5 px-5 py-2.5 mx-2 rounded-full border border-amber-gold/30 bg-obsidian-900/80 text-white text-xs font-mono tracking-[0.16em] uppercase shadow-lg hover:border-amber-gold hover:text-amber-gold transition-colors">
+          <i data-lucide="film" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Experiência Cinematográfica 4K
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: THE ANATOMY (EXPLODED LAYER INSPECTOR) -->
+  <section id="anatomy" class="py-24 px-6 lg:px-16 bg-obsidian-950 relative">
+    <div class="max-w-7xl mx-auto">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="font-mono text-xs tracking-[0.3em] text-amber-gold uppercase">Engenharia de Sabor</span>
+        <h2 class="font-cinzel text-3xl sm:text-5xl font-bold text-white mt-2 mb-4">
+          A ANATOMIA DE UMA OBSESSÃO
+        </h2>
+        <p class="font-serif italic text-neutral-400 text-lg">
+          "Cada elemento possui uma temperatura exata de fusão e um tempo matemático de contato."
+        </p>
+      </div>
+
+      <!-- Top Control Bar (Apple / Awwwards Style 3D Explosion Controller) -->
+      <div class="mb-8 sm:mb-12 p-3.5 sm:p-4 rounded-2xl glass-dark border border-amber-gold/25 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 max-w-4xl mx-auto shadow-2xl">
+        <div class="flex items-center gap-2.5 w-full sm:w-auto justify-between sm:justify-start">
+          <div class="flex items-center gap-2.5">
+            <div class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-amber-gold animate-ping"></div>
+            <span class="font-mono text-[11px] sm:text-xs text-neutral-200 uppercase tracking-widest font-bold">
+              Dissecção 3D • Eixo Vertical
+            </span>
+          </div>
+          <!-- Quick Action Buttons for small screen inline -->
+          <div class="flex items-center gap-1.5 sm:hidden">
+            <button onclick="setExplosionPreset(0)" class="px-2.5 py-1 rounded-lg border border-white/10 text-[9px] font-mono text-neutral-300">
+              Montar
+            </button>
+            <button onclick="setExplosionPreset(100)" class="px-2.5 py-1 rounded-lg border border-amber-gold/50 bg-amber-gold/15 text-[9px] font-mono text-amber-gold font-bold">
+              Explodir
+            </button>
+          </div>
+        </div>
+
+        <!-- Slider Range -->
+        <div class="flex items-center gap-3 w-full sm:flex-1 sm:max-w-md mx-auto">
+          <span class="font-mono text-[9px] sm:text-[10px] text-neutral-400 uppercase tracking-wider flex-shrink-0">Montado</span>
+          <input type="range" id="anatomyExplodeSlider" min="0" max="100" value="85" oninput="setExplosionFromSlider(this.value)" class="w-full accent-amber-500 cursor-pointer h-1.5 bg-neutral-800 rounded-lg">
+          <span class="font-mono text-[9px] sm:text-[10px] text-amber-gold uppercase tracking-wider font-bold flex-shrink-0">Explodido</span>
+        </div>
+
+        <!-- Quick Action Buttons (Desktop) -->
+        <div class="hidden sm:flex items-center gap-2">
+          <button onclick="setExplosionPreset(0)" class="px-3.5 py-1.5 rounded-lg border border-white/10 hover:border-amber-gold/40 text-[10px] font-mono text-neutral-300 hover:text-amber-gold transition-colors">
+            Montar
+          </button>
+          <button onclick="setExplosionPreset(100)" class="px-3.5 py-1.5 rounded-lg border border-amber-gold/50 bg-amber-gold/15 text-[10px] font-mono text-amber-gold font-bold transition-colors">
+            Explodir
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
+        
+        <!-- Left: Layer Interactive Selectors (Horizontal scroll on mobile, vertical on desktop) -->
+        <div class="lg:col-span-4 flex lg:flex-col overflow-x-auto pb-2.5 lg:pb-0 gap-2.5 no-scrollbar">
+          
+          <button onclick="selectLayer(0)" id="layerBtn0" class="layer-tab flex-shrink-0 w-[240px] sm:w-[280px] lg:w-full text-left p-3 sm:p-3.5 rounded-xl border border-amber-gold bg-obsidian-850/80 transition-all flex items-center justify-between group">
+            <div class="flex items-center gap-3">
+              <span class="font-mono text-xs text-amber-gold font-bold">01</span>
+              <div>
+                <h4 class="font-cinzel font-bold text-white text-xs sm:text-sm group-hover:text-amber-gold transition-colors">Coroa Brioche de Ouro</h4>
+                <p class="text-[10px] sm:text-[11px] text-neutral-400">Fermentação de 48h com manteiga</p>
+              </div>
+            </div>
+            <i data-lucide="chevron-right" class="w-4 h-4 text-amber-gold hidden lg:block"></i>
+          </button>
+
+          <button onclick="selectLayer(1)" id="layerBtn1" class="layer-tab flex-shrink-0 w-[240px] sm:w-[280px] lg:w-full text-left p-3 sm:p-3.5 rounded-xl border border-white/5 bg-obsidian-900/60 hover:border-amber-gold/40 transition-all flex items-center justify-between group">
+            <div class="flex items-center gap-3">
+              <span class="font-mono text-xs text-neutral-500 group-hover:text-amber-gold font-bold">02</span>
+              <div>
+                <h4 class="font-cinzel font-bold text-white text-xs sm:text-sm group-hover:text-amber-gold transition-colors">Cheddar Inglês 18 Meses</h4>
+                <p class="text-[10px] sm:text-[11px] text-neutral-400">Somerset fundido no maçarico</p>
+              </div>
+            </div>
+            <i data-lucide="chevron-right" class="w-4 h-4 text-neutral-600 group-hover:text-amber-gold hidden lg:block"></i>
+          </button>
+
+          <button onclick="selectLayer(2)" id="layerBtn2" class="layer-tab flex-shrink-0 w-[240px] sm:w-[280px] lg:w-full text-left p-3 sm:p-3.5 rounded-xl border border-white/5 bg-obsidian-900/60 hover:border-amber-gold/40 transition-all flex items-center justify-between group">
+            <div class="flex items-center gap-3">
+              <span class="font-mono text-xs text-neutral-500 group-hover:text-amber-gold font-bold">03</span>
+              <div>
+                <h4 class="font-cinzel font-bold text-white text-xs sm:text-sm group-hover:text-amber-gold transition-colors">Double Wagyu A5 & Angus</h4>
+                <p class="text-[10px] sm:text-[11px] text-neutral-400">Marbling BMS 9+, braseado 400°C</p>
+              </div>
+            </div>
+            <i data-lucide="chevron-right" class="w-4 h-4 text-neutral-600 group-hover:text-amber-gold hidden lg:block"></i>
+          </button>
+
+          <button onclick="selectLayer(3)" id="layerBtn3" class="layer-tab flex-shrink-0 w-[240px] sm:w-[280px] lg:w-full text-left p-3 sm:p-3.5 rounded-xl border border-white/5 bg-obsidian-900/60 hover:border-amber-gold/40 transition-all flex items-center justify-between group">
+            <div class="flex items-center gap-3">
+              <span class="font-mono text-xs text-neutral-500 group-hover:text-amber-gold font-bold">04</span>
+              <div>
+                <h4 class="font-cinzel font-bold text-white text-xs sm:text-sm group-hover:text-amber-gold transition-colors">Bacon Defumado & Trufas</h4>
+                <p class="text-[10px] sm:text-[11px] text-neutral-400">Cura em madeira nobre e glace</p>
+              </div>
+            </div>
+            <i data-lucide="chevron-right" class="w-4 h-4 text-neutral-600 group-hover:text-amber-gold hidden lg:block"></i>
+          </button>
+
+          <button onclick="selectLayer(4)" id="layerBtn4" class="layer-tab flex-shrink-0 w-[240px] sm:w-[280px] lg:w-full text-left p-3 sm:p-3.5 rounded-xl border border-white/5 bg-obsidian-900/60 hover:border-amber-gold/40 transition-all flex items-center justify-between group">
+            <div class="flex items-center gap-3">
+              <span class="font-mono text-xs text-neutral-500 group-hover:text-amber-gold font-bold">05</span>
+              <div>
+                <h4 class="font-cinzel font-bold text-white text-xs sm:text-sm group-hover:text-amber-gold transition-colors">Base Selada Obsidian</h4>
+                <p class="text-[10px] sm:text-[11px] text-neutral-400">Selagem térmica que blinda o caldo</p>
+              </div>
+            </div>
+            <i data-lucide="chevron-right" class="w-4 h-4 text-neutral-600 group-hover:text-amber-gold hidden lg:block"></i>
+          </button>
+
+        </div>
+
+        <!-- Center: 3D Exploded Burger Stage (4 cols) -->
+        <div class="lg:col-span-4 flex flex-col items-center justify-center relative min-h-[460px] sm:min-h-[500px]">
+          
+          <!-- Volumetric Glow Halo -->
+          <div class="absolute inset-0 bg-gradient-to-b from-amber-gold/10 via-transparent to-amber-burn/10 rounded-full blur-3xl pointer-events-none"></div>
+
+          <!-- Central Axis Laser Guideline -->
+          <div class="absolute top-8 bottom-8 w-px bg-gradient-to-b from-transparent via-amber-gold/30 to-transparent pointer-events-none"></div>
+
+          <!-- Interactive 3D Exploded View Container -->
+          <div id="explodedStage" class="relative w-full h-[460px] sm:h-[500px] flex items-center justify-center select-none" style="perspective: 1000px;">
+            
+            <!-- Layer 0: Brioche Top Bun -->
+            <div id="stageLayer0" onclick="selectLayer(0)" class="exploded-stage-layer absolute cursor-pointer transition-all duration-500 hover:scale-105 group" style="top: 50%; transform: translate(-50%, -150px);">
+              <img src="assets/anatomy_layers/layer_0_brioche_top.jpg" alt="Coroa Brioche" class="w-64 sm:w-72 max-w-full drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)] rounded-xl border border-transparent group-hover:border-amber-gold/40 transition-colors">
+              <div class="layer-hud-tag absolute -right-2 top-1/2 -translate-y-1/2 translate-x-full px-2 py-0.5 rounded bg-black/80 border border-amber-gold/40 text-[9px] font-mono text-amber-gold font-bold opacity-0 group-hover:opacity-100 transition-opacity hidden sm:block">
+                01 • COROA BRIOCHE
+              </div>
+            </div>
+
+            <!-- Layer 1: Melted Cheddar -->
+            <div id="stageLayer1" onclick="selectLayer(1)" class="exploded-stage-layer absolute cursor-pointer transition-all duration-500 hover:scale-105 group" style="top: 50%; transform: translate(-50%, -75px);">
+              <img src="assets/anatomy_layers/layer_1_cheddar_melt.jpg" alt="Cheddar Inglês" class="w-64 sm:w-72 max-w-full drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)] rounded-xl border border-transparent group-hover:border-amber-gold/40 transition-colors">
+              <div class="layer-hud-tag absolute -left-2 top-1/2 -translate-y-1/2 -translate-x-full px-2 py-0.5 rounded bg-black/80 border border-amber-gold/40 text-[9px] font-mono text-amber-gold font-bold opacity-0 group-hover:opacity-100 transition-opacity hidden sm:block">
+                02 • CHEDDAR SOMERSET
+              </div>
+            </div>
+
+            <!-- Layer 2: Wagyu Patty -->
+            <div id="stageLayer2" onclick="selectLayer(2)" class="exploded-stage-layer absolute cursor-pointer transition-all duration-500 hover:scale-105 group" style="top: 50%; transform: translate(-50%, 0px);">
+              <img src="assets/anatomy_layers/layer_2_wagyu_patty.jpg" alt="Double Wagyu" class="w-64 sm:w-72 max-w-full drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)] rounded-xl border border-transparent group-hover:border-amber-gold/40 transition-colors">
+              <div class="layer-hud-tag absolute -right-2 top-1/2 -translate-y-1/2 translate-x-full px-2 py-0.5 rounded bg-black/80 border border-amber-gold/40 text-[9px] font-mono text-amber-gold font-bold opacity-0 group-hover:opacity-100 transition-opacity hidden sm:block">
+                03 • DOUBLE WAGYU A5
+              </div>
+            </div>
+
+            <!-- Layer 3: Smoked Bacon -->
+            <div id="stageLayer3" onclick="selectLayer(3)" class="exploded-stage-layer absolute cursor-pointer transition-all duration-500 hover:scale-105 group" style="top: 50%; transform: translate(-50%, 75px);">
+              <img src="assets/anatomy_layers/layer_3_smoked_bacon.jpg" alt="Bacon Defumado" class="w-64 sm:w-72 max-w-full drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)] rounded-xl border border-transparent group-hover:border-amber-gold/40 transition-colors">
+              <div class="layer-hud-tag absolute -left-2 top-1/2 -translate-y-1/2 -translate-x-full px-2 py-0.5 rounded bg-black/80 border border-amber-gold/40 text-[9px] font-mono text-amber-gold font-bold opacity-0 group-hover:opacity-100 transition-opacity hidden sm:block">
+                04 • BACON & TRUFAS
+              </div>
+            </div>
+
+            <!-- Layer 4: Brioche Base -->
+            <div id="stageLayer4" onclick="selectLayer(4)" class="exploded-stage-layer absolute cursor-pointer transition-all duration-500 hover:scale-105 group" style="top: 50%; transform: translate(-50%, 150px);">
+              <img src="assets/anatomy_layers/layer_4_brioche_base.jpg" alt="Base Selada" class="w-64 sm:w-72 max-w-full drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)] rounded-xl border border-transparent group-hover:border-amber-gold/40 transition-colors">
+              <div class="layer-hud-tag absolute -right-2 top-1/2 -translate-y-1/2 translate-x-full px-2 py-0.5 rounded bg-black/80 border border-amber-gold/40 text-[9px] font-mono text-amber-gold font-bold opacity-0 group-hover:opacity-100 transition-opacity hidden sm:block">
+                05 • BASE OBSIDIAN
+              </div>
+            </div>
+
+          </div>
+
+          <span class="text-[10px] font-mono text-neutral-500 tracking-wider mt-2">
+            Clique em qualquer camada para inspecionar
+          </span>
+        </div>
+
+        <!-- Right: Active Layer Detail Spotlight Card (4 cols) -->
+        <div class="lg:col-span-4">
+          <div class="glass-card rounded-2xl p-6 sm:p-8 relative overflow-hidden border border-amber-gold/30 glow-amber shadow-2xl">
+            <div class="absolute -right-20 -top-20 w-72 h-72 bg-amber-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="flex items-center justify-between mb-4">
+              <span id="layerTag" class="px-3 py-1 rounded-full bg-amber-gold/15 text-amber-gold font-mono text-[11px] tracking-widest uppercase font-bold">
+                CAMADA 01 • COBERTURA
+              </span>
+              <span id="layerOrigin" class="text-xs font-mono text-neutral-400">Origem: Padaria Artesanal Própria</span>
+            </div>
+
+            <h3 id="layerTitle" class="font-cinzel text-xl sm:text-2xl font-bold text-white mb-3">
+              Coroa Brioche de Ouro & Manteiga de Tutano
+            </h3>
+
+            <p id="layerDescription" class="text-neutral-300 text-xs sm:text-sm leading-relaxed mb-6">
+              Pão desenvolvido ao longo de 6 meses de testes moleculares. Fermentação ultra-lenta com levain selvagem de maçã verde, finalizado com pinceladas de manteiga de ossobuco clarificada e pó de ouro comestível de 24k antes de ser tostado ao vivo na brasa.
+            </p>
+
+            <!-- Metrics Grid -->
+            <div class="grid grid-cols-3 gap-2.5 p-3.5 rounded-xl bg-obsidian-950/80 border border-white/10 mb-5">
+              <div>
+                <span class="block text-[9px] font-mono text-neutral-500 uppercase">Tempo Cura</span>
+                <span id="layerMetric1" class="font-cinzel font-bold text-amber-gold text-base">48 Horas</span>
+              </div>
+              <div>
+                <span class="block text-[9px] font-mono text-neutral-500 uppercase">Ponto Calor</span>
+                <span id="layerMetric2" class="font-cinzel font-bold text-amber-gold text-base">220° C</span>
+              </div>
+              <div>
+                <span class="block text-[9px] font-mono text-neutral-500 uppercase">Sensorial</span>
+                <span id="layerMetric3" class="font-cinzel font-bold text-amber-gold text-base">Umami Doce</span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between text-xs text-neutral-400 pt-2 border-t border-white/5">
+              <span class="flex items-center gap-1.5 text-amber-gold text-[11px]">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                Equilíbrio de acidez calculado
+              </span>
+              <a href="#cortes" class="text-neutral-300 hover:text-white underline font-mono text-[10px] flex items-center gap-1">
+                Ver cortes & macro →
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 3.5: BENTO GRID EDITORIAL DE BASTIDORES & TÉCNICAS ("A ALQUIMIA OBSIDIAN" - AULA 2) -->
+  <section id="alquimia" class="py-24 px-6 lg:px-16 bg-obsidian-950 border-t border-amber-gold/15 relative overflow-hidden">
+    <!-- Ambient gold background glow -->
+    <div class="absolute top-1/4 -right-32 w-96 h-96 bg-amber-gold/5 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-10 -left-32 w-96 h-96 bg-amber-burn/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto relative z-10">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="inline-flex items-center gap-2 font-mono text-xs tracking-[0.3em] text-amber-gold uppercase mb-3">
+          <i data-lucide="flame" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Rigor Culinário & Alta Gastronomia
+        </div>
+        <h2 class="font-cinzel text-3xl sm:text-5xl font-bold text-white tracking-tight">
+          A ALQUIMIA <span class="text-amber-gold">OBSIDIAN</span>
+        </h2>
+        <p class="font-serif italic text-neutral-400 text-base sm:text-lg mt-3">
+          "Onde o fogo ancestral encontra a matemática dos pontos de fusão, texturas e aromas nobres."
+        </p>
+      </div>
+
+      <!-- Bento Grid Layout -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Bento Card 1: Main Feature (Spans 2 cols on lg) -->
+        <div class="lg:col-span-2 glass-card rounded-2xl p-7 sm:p-9 border border-amber-gold/25 relative overflow-hidden group hover:border-amber-gold/50 transition-all duration-300">
+          <div class="absolute -right-16 -bottom-16 w-64 h-64 bg-amber-gold/10 rounded-full blur-3xl group-hover:bg-amber-gold/20 transition-all"></div>
+          
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-amber-gold/15 border border-amber-gold/30 flex items-center justify-center text-amber-gold">
+                <i data-lucide="flame" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <span class="font-mono text-[10px] uppercase text-amber-gold tracking-widest font-bold">Processo Térmico</span>
+                <h4 class="font-cinzel font-bold text-white text-lg">O Fogo de Binchotan & Reação Maillard</h4>
+              </div>
+            </div>
+            <span class="font-mono text-[11px] px-3 py-1 rounded-full bg-amber-gold/10 border border-amber-gold/30 text-amber-gold font-bold">
+              400° C • Chapa Vulcânica
+            </span>
+          </div>
+
+          <p class="text-neutral-300 text-sm sm:text-base leading-relaxed mb-6 font-sans">
+            Submetemos cada smash e burger tradicional a uma superfície de ferro fundido mineral aquecida por carvão Binchotan de altíssima densidade energética. O choque térmico instantâneo carameliza os açúcares naturais e aminoácidos da carne em menos de 120 segundos, forjando uma crosta dourada e crocante que aprisiona 100% da mioglobina e dos sucos nobres em seu núcleo.
+          </p>
+
+          <div class="grid grid-cols-3 gap-4 pt-6 border-t border-white/10 text-xs font-mono">
+            <div>
+              <span class="text-neutral-500 block text-[10px] uppercase">Choque Térmico</span>
+              <span class="text-white font-bold text-sm sm:text-base">120 Segundos</span>
+            </div>
+            <div>
+              <span class="text-neutral-500 block text-[10px] uppercase">Crosta Maillard</span>
+              <span class="text-amber-gold font-bold text-sm sm:text-base">Milimétrica</span>
+            </div>
+            <div>
+              <span class="text-neutral-500 block text-[10px] uppercase">Retenção de Suco</span>
+              <span class="text-white font-bold text-sm sm:text-base">100% Suculento</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bento Card 2: Maturação & Blend (1 col) -->
+        <div class="glass-card rounded-2xl p-7 border border-white/10 relative overflow-hidden group hover:border-amber-gold/40 transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-amber-gold/15 border border-amber-gold/30 flex items-center justify-center text-amber-gold mb-5">
+              <i data-lucide="gem" class="w-5 h-5"></i>
+            </div>
+            <span class="font-mono text-[10px] uppercase text-amber-gold tracking-widest font-bold block mb-1">Genética & Corte</span>
+            <h4 class="font-cinzel font-bold text-white text-lg mb-3">Maturação a Frio & Blend Nobre</h4>
+            <p class="text-neutral-400 text-xs sm:text-sm leading-relaxed">
+              Carne desossada e moída diariamente sob temperatura estrita de 2°C. A proporção áurea de Wagyu A5 e Costela Angus garante marbling BMS 9+ sem oxidação da gordura antes da brasa.
+            </p>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono">
+            <span class="text-neutral-500">Marmoreio</span>
+            <span class="text-amber-gold font-bold">BMS 9+ Certificado</span>
+          </div>
+        </div>
+
+        <!-- Bento Card 3: Levain Natural 48h (1 col) -->
+        <div class="glass-card rounded-2xl p-7 border border-white/10 relative overflow-hidden group hover:border-amber-gold/40 transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-amber-gold/15 border border-amber-gold/30 flex items-center justify-center text-amber-gold mb-5">
+              <i data-lucide="clock" class="w-5 h-5"></i>
+            </div>
+            <span class="font-mono text-[10px] uppercase text-amber-gold tracking-widest font-bold block mb-1">Panificação Viva</span>
+            <h4 class="font-cinzel font-bold text-white text-lg mb-3">Brioche Levain de 48 Horas</h4>
+            <p class="text-neutral-400 text-xs sm:text-sm leading-relaxed">
+              Fermentação selvagem lenta que confere alvéolos perfeitos, extrema leveza digestiva e estrutura que sustenta molhos generosos sem desmontar nem murchar no trajeto do delivery.
+            </p>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono">
+            <span class="text-neutral-500">Manteiga</span>
+            <span class="text-amber-gold font-bold">Ghee Clarificada 100%</span>
+          </div>
+        </div>
+
+        <!-- Bento Card 4: Cold-Smoke Bacon (1 col) -->
+        <div class="glass-card rounded-2xl p-7 border border-white/10 relative overflow-hidden group hover:border-amber-gold/40 transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-amber-gold/15 border border-amber-gold/30 flex items-center justify-center text-amber-gold mb-5">
+              <i data-lucide="wind" class="w-5 h-5"></i>
+            </div>
+            <span class="font-mono text-[10px] uppercase text-amber-gold tracking-widest font-bold block mb-1">Cura Ancestral</span>
+            <h4 class="font-cinzel font-bold text-white text-lg mb-3">Defumação em Lenha de Macieira</h4>
+            <p class="text-neutral-400 text-xs sm:text-sm leading-relaxed">
+              Pancetta artesanal curada a seco durante 7 dias em especiarias e mel de cacau. Defumação lenta por 14 horas em fumaça fria com lascas selecionadas de macieira e carvalho.
+            </p>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono">
+            <span class="text-neutral-500">Tempo de Banho</span>
+            <span class="text-amber-gold font-bold">14 Horas Cold-Smoke</span>
+          </div>
+        </div>
+
+        <!-- Bento Card 5: Molhos & Emulsões (1 col) -->
+        <div class="glass-card rounded-2xl p-7 border border-white/10 relative overflow-hidden group hover:border-amber-gold/40 transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-amber-gold/15 border border-amber-gold/30 flex items-center justify-center text-amber-gold mb-5">
+              <i data-lucide="sparkles" class="w-5 h-5"></i>
+            </div>
+            <span class="font-mono text-[10px] uppercase text-amber-gold tracking-widest font-bold block mb-1">Laboratório de Molhos</span>
+            <h4 class="font-cinzel font-bold text-white text-lg mb-3">Emulsões Frescas & Trufas</h4>
+            <p class="text-neutral-400 text-xs sm:text-sm leading-relaxed">
+              Maioneses artesanais batidas a cada turno com gemas caipiras pasteurizadas, azeite extravirgem aromatizado com trufas negras de verão e sementes de mostarda dijon.
+            </p>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono">
+            <span class="text-neutral-500">Frescor</span>
+            <span class="text-amber-gold font-bold">Batido a Cada Serviço</span>
+          </div>
+        </div>
+
+        <!-- Bento Card 6: Metrics Ribbon Strip (Full 3 cols width) -->
+        <div class="lg:col-span-3 p-6 sm:p-8 rounded-2xl glass-dark border border-amber-gold/30 shadow-2xl">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            
+            <div class="p-4 rounded-xl bg-obsidian-950/60 border border-white/5">
+              <span class="font-cinzel text-3xl sm:text-4xl font-bold text-amber-gold block mb-1">100%</span>
+              <span class="font-mono text-xs text-white uppercase tracking-wider block">Carne Nobre Fresca</span>
+              <span class="font-mono text-[10px] text-neutral-500 mt-1 block">Zero aditivos ou congelados</span>
+            </div>
+
+            <div class="p-4 rounded-xl bg-obsidian-950/60 border border-white/5">
+              <span class="font-cinzel text-3xl sm:text-4xl font-bold text-amber-gold block mb-1">48h</span>
+              <span class="font-mono text-xs text-white uppercase tracking-wider block">Fermentação Levain</span>
+              <span class="font-mono text-[10px] text-neutral-500 mt-1 block">Digestão leve e alvéolos nobres</span>
+            </div>
+
+            <div class="p-4 rounded-xl bg-obsidian-950/60 border border-white/5">
+              <span class="font-cinzel text-3xl sm:text-4xl font-bold text-amber-gold block mb-1">65°C</span>
+              <span class="font-mono text-xs text-white uppercase tracking-wider block">Ponto Fusão do Cheddar</span>
+              <span class="font-mono text-[10px] text-neutral-500 mt-1 block">Cascata cremosa impecável</span>
+            </div>
+
+            <div class="p-4 rounded-xl bg-obsidian-950/60 border border-white/5">
+              <span class="font-cinzel text-3xl sm:text-4xl font-bold text-amber-gold block mb-1">4.9★</span>
+              <span class="font-mono text-xs text-white uppercase tracking-wider block">Excelência Consagrada</span>
+              <span class="font-mono text-[10px] text-neutral-500 mt-1 block">Avaliação dos clientes de Taboão</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 4: CARDÁPIO OFICIAL & DELIVERY -->
+  <section id="menu" class="py-24 px-6 lg:px-16 bg-obsidian-900 border-t border-b border-amber-gold/15 relative">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div>
+          <div class="inline-flex items-center gap-2 font-mono text-xs tracking-[0.3em] text-amber-gold uppercase mb-2">
+            <i data-lucide="utensils" class="w-3.5 h-3.5"></i>
+            Nossa Casa • Magnetic Burger Showcase
+          </div>
+          <h2 class="font-cinzel text-3xl sm:text-5xl font-bold text-white tracking-tight">
+            CARDÁPIO <span class="text-amber-gold">MAGNÉTICO</span>
+          </h2>
+          <p class="font-serif italic text-neutral-400 text-sm sm:text-base mt-2">
+            "Sinta a atração de cada receita artesanal. Deslize para explorar e toque em qualquer criação para ver a ficha técnica e pedir online."
+          </p>
+        </div>
+
+        <!-- Action Pills: iFood & Original Flyer -->
+        <div class="flex flex-wrap items-center gap-3 font-mono text-xs">
+          <button onclick="openFlyerModal()" class="px-4 py-2.5 rounded-full border border-amber-gold/40 hover:border-amber-gold text-amber-gold hover:bg-amber-gold/10 transition-all flex items-center gap-2">
+            <i data-lucide="file-text" class="w-4 h-4"></i>
+            Ver Folheto Original
+          </button>
+          
+          <a href="https://www.ifood.com.br" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold tracking-wider uppercase transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(220,38,38,0.4)]">
+            <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+            Pedir no iFood
+          </a>
+        </div>
+      </div>
+
+      <!-- Address & Highlights Info Strip -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-5 rounded-2xl glass-card border border-amber-gold/20 mb-10 text-xs font-mono">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-amber-gold/20 text-amber-gold flex items-center justify-center flex-shrink-0">
+            <i data-lucide="map-pin" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <span class="text-neutral-500 block text-[10px] uppercase">Endereço em Taboão</span>
+            <span class="text-white font-semibold">Rua Milton Inocêncio, 61</span>
+            <span class="text-neutral-400 block text-[10px]">Pq. Pinheiros, Taboão da Serra - SP</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-amber-gold/20 text-amber-gold flex items-center justify-center flex-shrink-0">
+            <i data-lucide="flame" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <span class="text-neutral-500 block text-[10px] uppercase">Carne Selecionada</span>
+            <span class="text-white font-semibold">100% Artesanal</span>
+            <span class="text-neutral-400 block text-[10px]">Tradicionais 150g & Smash 60g</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-amber-gold/20 text-amber-gold flex items-center justify-center flex-shrink-0">
+            <i data-lucide="bike" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <span class="text-neutral-500 block text-[10px] uppercase">Delivery Ágil</span>
+            <span class="text-white font-semibold">Entrega Rápida & Segura</span>
+            <span class="text-neutral-400 block text-[10px]">Embalagem térmica selada</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-amber-gold/20 text-amber-gold flex items-center justify-center flex-shrink-0">
+            <i data-lucide="heart" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <span class="text-neutral-500 block text-[10px] uppercase">Padrão da Casa</span>
+            <span class="text-amber-gold font-semibold">Feito com Carinho</span>
+            <span class="text-neutral-400 block text-[10px]">Molhos & temperos especiais</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category Filter Tabs & Navigation Controls -->
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6 text-xs font-mono">
+        <!-- Categories -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 tracking-wider flex-1 no-scrollbar">
+          <button onclick="filterMenu('all', this)" class="menu-tab-btn active px-4 py-2 rounded-full border border-amber-gold bg-amber-gold text-obsidian-950 font-bold transition-all whitespace-nowrap shadow-[0_0_15px_rgba(212,154,66,0.3)]">
+            Todos os Itens (20)
+          </button>
+          <button onclick="filterMenu('tradicionais', this)" class="menu-tab-btn px-4 py-2 rounded-full border border-white/10 hover:border-amber-gold/50 bg-obsidian-950/60 text-neutral-300 hover:text-white transition-all whitespace-nowrap">
+            Tradicionais (150g)
+          </button>
+          <button onclick="filterMenu('smash', this)" class="menu-tab-btn px-4 py-2 rounded-full border border-white/10 hover:border-amber-gold/50 bg-obsidian-950/60 text-neutral-300 hover:text-white transition-all whitespace-nowrap">
+            Linha Smash (60g)
+          </button>
+          <button onclick="filterMenu('especiais', this)" class="menu-tab-btn px-4 py-2 rounded-full border border-white/10 hover:border-amber-gold/50 bg-obsidian-950/60 text-neutral-300 hover:text-white transition-all whitespace-nowrap">
+            Especiais da Casa
+          </button>
+          <button onclick="filterMenu('combos', this)" class="menu-tab-btn px-4 py-2 rounded-full border border-white/10 hover:border-amber-gold/50 bg-obsidian-950/60 text-neutral-300 hover:text-white transition-all whitespace-nowrap">
+            Combos com Fritas & Refri
+          </button>
+          <button onclick="filterMenu('porcoes', this)" class="menu-tab-btn px-4 py-2 rounded-full border border-white/10 hover:border-amber-gold/50 bg-obsidian-950/60 text-neutral-300 hover:text-white transition-all whitespace-nowrap">
+            Porções
+          </button>
+          <button onclick="filterMenu('bebidas', this)" class="menu-tab-btn px-4 py-2 rounded-full border border-white/10 hover:border-amber-gold/50 bg-obsidian-950/60 text-neutral-300 hover:text-white transition-all whitespace-nowrap">
+            Bebidas & Doces
+          </button>
+        </div>
+
+        <!-- Controls: Magnetic Indicator, Arrows, View Mode -->
+        <div class="flex items-center gap-3 self-end lg:self-auto flex-shrink-0">
+          <div class="hidden sm:flex items-center gap-1.5 text-amber-gold text-[11px] font-mono px-3 py-1 rounded-full bg-amber-gold/10 border border-amber-gold/20">
+            <span class="inline-block w-2 h-2 rounded-full bg-amber-gold animate-pulse"></span>
+            Magnetismo Ativo
+          </div>
+
+          <div class="flex items-center gap-1.5" id="carouselNavArrows">
+            <button onclick="scrollMagneticTrack(-320)" class="w-8 h-8 rounded-full border border-white/10 hover:border-amber-gold text-neutral-400 hover:text-amber-gold bg-obsidian-950/80 flex items-center justify-center transition-colors" title="Deslizar para esquerda">
+              <i data-lucide="chevron-left" class="w-4 h-4"></i>
+            </button>
+            <button onclick="scrollMagneticTrack(320)" class="w-8 h-8 rounded-full border border-white/10 hover:border-amber-gold text-neutral-400 hover:text-amber-gold bg-obsidian-950/80 flex items-center justify-center transition-colors" title="Deslizar para direita">
+              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+          <button id="viewToggleBtn" onclick="toggleMenuView()" class="px-3.5 py-1.5 rounded-full border border-white/15 hover:border-amber-gold text-neutral-400 hover:text-white text-[11px] font-mono flex items-center gap-1.5 transition-colors">
+            <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
+            <span id="viewToggleText">Ver Grade</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- MAIN FEATURE: THE ORIGINKIT MAGNETIC CAROUSEL STAGE -->
+      <div id="magneticStageWrapper" class="relative w-full rounded-3xl p-4 sm:p-8 bg-gradient-to-b from-obsidian-950 via-obsidian-900/90 to-obsidian-950 border border-amber-gold/25 glow-amber shadow-2xl">
+        
+        <!-- Ambient stage gold glow -->
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(212,154,66,0.07)_0%,_transparent_75%)] pointer-events-none"></div>
+
+        <!-- Backdrop overlay when a card is opened (closes on click) -->
+        <div id="magneticBackdrop" onclick="closeMagneticCard()" class="absolute inset-0 z-20 bg-black/70 backdrop-blur-xs opacity-0 pointer-events-none transition-opacity duration-300 rounded-3xl"></div>
+
+        <!-- Magnetic Viewport (Horizontally scrollable and mouse-reactive) -->
+        <div id="magneticViewport" class="w-full overflow-x-auto overflow-y-visible no-scrollbar py-8 flex items-center min-h-[460px] sm:min-h-[500px] relative select-none cursor-grab active:cursor-grabbing">
+          
+          <!-- Magnetic Track (Flex row containing magnetic cards) -->
+          <div id="magneticTrack" class="flex items-center justify-center gap-4 relative transition-all mx-auto" style="min-width: max-content;">
+            <!-- Rendered dynamically by JavaScript -->
+          </div>
+
+        </div>
+
+        <!-- Magnetic Info & Interaction Guidance Bar -->
+        <div class="flex flex-col sm:flex-row items-center justify-between pt-4 border-t border-white/5 text-[11px] font-mono text-neutral-400 gap-2">
+          <div class="flex items-center gap-2 text-amber-gold">
+            <i data-lucide="mouse-pointer" class="w-3.5 h-3.5"></i>
+            <span>Mova o mouse sobre os cards para atrair e expandir com física suave</span>
+          </div>
+          <div class="flex items-center gap-4 text-neutral-500">
+            <span class="flex items-center gap-1.5">
+              <i data-lucide="hand" class="w-3.5 h-3.5"></i>
+              Arraste para rolar
+            </span>
+            <span>•</span>
+            <span class="flex items-center gap-1.5">
+              <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+              Clique no burger para ver receita completa
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ALTERNATIVE GRID VIEW CONTAINER (Hidden by default, toggled via 'Ver Grade') -->
+      <div id="menuGrid" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-8">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 4.5: LABORATÓRIO SENSORIAL & MULTIÂNGULO 360° (AULAS 2 E 3) -->
+  <section id="sensorial" class="py-24 px-6 lg:px-16 bg-obsidian-950 border-b border-amber-gold/15 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto relative z-10">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="inline-flex items-center gap-2 font-mono text-xs tracking-[0.3em] text-amber-gold uppercase mb-3">
+          <i data-lucide="compass" class="w-3.5 h-3.5 text-amber-gold"></i>
+          Engenharia Organoléptica & Sommelier
+        </div>
+        <h2 class="font-cinzel text-3xl sm:text-5xl font-bold text-white tracking-tight">
+          LABORATÓRIO <span class="text-amber-gold">SENSORIAL 360°</span>
+        </h2>
+        <p class="font-serif italic text-neutral-400 text-base sm:text-lg mt-3">
+          "Cada criação é concebida com métricas exatas de umami, crocância e ponto de carne. Inspecione em múltiplos ângulos."
+        </p>
+      </div>
+
+      <!-- Burger Selection Tabs -->
+      <div class="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-10 max-w-4xl mx-auto">
+        <button onclick="selectSensoryBurger(0)" id="sensoryTab0" class="sensory-tab px-4 sm:px-6 py-2.5 rounded-full border border-amber-gold bg-amber-gold/15 text-amber-gold font-mono text-xs font-bold tracking-wider uppercase transition-all duration-300 shadow-[0_0_15px_rgba(212,154,66,0.3)]">
+          The Obsidian Prime
+        </button>
+        <button onclick="selectSensoryBurger(1)" id="sensoryTab1" class="sensory-tab px-4 sm:px-6 py-2.5 rounded-full border border-white/10 hover:border-amber-gold/40 text-neutral-400 hover:text-white font-mono text-xs tracking-wider uppercase transition-all duration-300">
+          Smash Cheddar Melt
+        </button>
+        <button onclick="selectSensoryBurger(2)" id="sensoryTab2" class="sensory-tab px-4 sm:px-6 py-2.5 rounded-full border border-white/10 hover:border-amber-gold/40 text-neutral-400 hover:text-white font-mono text-xs tracking-wider uppercase transition-all duration-300">
+          Smoked Double Bacon
+        </button>
+        <button onclick="selectSensoryBurger(3)" id="sensoryTab3" class="sensory-tab px-4 sm:px-6 py-2.5 rounded-full border border-white/10 hover:border-amber-gold/40 text-neutral-400 hover:text-white font-mono text-xs tracking-wider uppercase transition-all duration-300">
+          Truffle Supreme Reserve
+        </button>
+      </div>
+
+      <!-- Main Showcase Grid (2 Columns on desktop) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Left: Multi-angle 3D Visual Stage (7 Cols) -->
+        <div class="lg:col-span-7 glass-card rounded-2xl p-6 sm:p-8 border border-amber-gold/25 relative overflow-hidden flex flex-col justify-between">
+          <div class="absolute -top-12 -left-12 w-64 h-64 bg-amber-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+
+          <!-- Header info inside stage -->
+          <div class="flex items-center justify-between mb-4 z-10">
+            <div>
+              <span id="sensoryBurgerTagline" class="font-mono text-[10px] text-amber-gold uppercase tracking-widest block font-bold">
+                Wagyu A5 BMS 9+ & Trufa Negra
+              </span>
+              <h3 id="sensoryBurgerName" class="font-cinzel text-xl sm:text-2xl font-bold text-white mt-0.5">
+                The Obsidian Prime
+              </h3>
+            </div>
+            <div class="text-right">
+              <span id="sensoryBurgerPrice" class="font-cinzel text-lg sm:text-xl font-bold text-amber-gold block">
+                R$ 68,00
+              </span>
+              <span id="sensoryBurgerTemp" class="font-mono text-[10px] text-neutral-400 block">
+                54°C (Ao Ponto Menos)
+              </span>
+            </div>
+          </div>
+
+          <!-- Central Visual Display Canvas / Image -->
+          <div class="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-xl overflow-hidden bg-obsidian-950/90 border border-white/10 flex items-center justify-center p-4 my-2 group">
+            <img id="sensoryImage" src="assets/burger_exploded_master.jpg" alt="Showcase Burger" class="w-full h-full object-contain filter drop-shadow-[0_15px_30px_rgba(0,0,0,0.9)] transition-all duration-500 group-hover:scale-105">
+            
+            <!-- Angle Descriptor HUD Badge -->
+            <div class="absolute bottom-3 left-3 px-3 py-1 rounded-md bg-black/80 border border-amber-gold/30 text-neutral-300 font-mono text-[10px] backdrop-blur-md flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-gold animate-pulse"></span>
+              <span id="sensoryAngleDesc">Visão frontal da silhueta nobre</span>
+            </div>
+          </div>
+
+          <!-- Interactive Angle Switcher Bar (360 Simulation) -->
+          <div class="mt-4 pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 z-10">
+            <div class="flex items-center gap-1.5">
+              <span class="font-mono text-[10px] text-neutral-500 uppercase tracking-widest">Ângulo 360:</span>
+              <div class="flex items-center gap-1.5">
+                <button onclick="selectSensoryAngle(0)" id="angleBtn0" class="angle-btn px-3 py-1 rounded-lg border border-amber-gold bg-amber-gold/20 text-amber-gold font-mono text-[10px] font-bold transition-all">
+                  Frontal
+                </button>
+                <button onclick="selectSensoryAngle(1)" id="angleBtn1" class="angle-btn px-3 py-1 rounded-lg border border-white/10 hover:border-amber-gold/40 text-neutral-400 hover:text-white font-mono text-[10px] transition-all">
+                  Ângulo 45°
+                </button>
+                <button onclick="selectSensoryAngle(2)" id="angleBtn2" class="angle-btn px-3 py-1 rounded-lg border border-white/10 hover:border-amber-gold/40 text-neutral-400 hover:text-white font-mono text-[10px] transition-all">
+                  Topo / Camadas
+                </button>
+                <button onclick="selectSensoryAngle(3)" id="angleBtn3" class="angle-btn px-3 py-1 rounded-lg border border-white/10 hover:border-amber-gold/40 text-neutral-400 hover:text-white font-mono text-[10px] transition-all">
+                  Macro Clímax
+                </button>
+              </div>
+            </div>
+
+            <span class="font-mono text-[10px] text-amber-gold flex items-center gap-1">
+              <i data-lucide="rotate-cw" class="w-3 h-3"></i>
+              Inspeção Multi-Ângulo
+            </span>
+          </div>
+
+        </div>
+
+        <!-- Right: Sensory Profile Meters & Sommelier Notes (5 Cols) -->
+        <div class="lg:col-span-5 space-y-6">
+          
+          <!-- Sensory Meters Box -->
+          <div class="glass-dark rounded-2xl p-6 sm:p-7 border border-amber-gold/25 space-y-4 shadow-xl">
+            <div class="flex items-center justify-between pb-3 border-b border-white/10">
+              <span class="font-mono text-xs uppercase text-amber-gold tracking-widest font-bold flex items-center gap-2">
+                <i data-lucide="activity" class="w-4 h-4"></i>
+                Métricas Organolépticas
+              </span>
+              <span class="font-mono text-[10px] text-neutral-400">Escala de 0 a 100</span>
+            </div>
+
+            <!-- Meter 1: Umami -->
+            <div>
+              <div class="flex justify-between text-xs font-mono mb-1">
+                <span class="text-neutral-300">Umami & Profundidade</span>
+                <span id="sensoryValUmami" class="text-amber-gold font-bold">98%</span>
+              </div>
+              <div class="h-2 w-full bg-obsidian-950 rounded-full overflow-hidden border border-white/10">
+                <div id="sensoryBarUmami" class="sensory-meter-bar h-full bg-gradient-to-r from-amber-dark via-amber-gold to-amber-glow rounded-full" style="width: 98%;"></div>
+              </div>
+            </div>
+
+            <!-- Meter 2: Suculência -->
+            <div>
+              <div class="flex justify-between text-xs font-mono mb-1">
+                <span class="text-neutral-300">Suculência & Mioglobina</span>
+                <span id="sensoryValSuculencia" class="text-amber-gold font-bold">96%</span>
+              </div>
+              <div class="h-2 w-full bg-obsidian-950 rounded-full overflow-hidden border border-white/10">
+                <div id="sensoryBarSuculencia" class="sensory-meter-bar h-full bg-gradient-to-r from-amber-dark via-amber-gold to-amber-glow rounded-full" style="width: 96%;"></div>
+              </div>
+            </div>
+
+            <!-- Meter 3: Defumado -->
+            <div>
+              <div class="flex justify-between text-xs font-mono mb-1">
+                <span class="text-neutral-300">Defumação & Madeira Nobre</span>
+                <span id="sensoryValDefumado" class="text-amber-gold font-bold">85%</span>
+              </div>
+              <div class="h-2 w-full bg-obsidian-950 rounded-full overflow-hidden border border-white/10">
+                <div id="sensoryBarDefumado" class="sensory-meter-bar h-full bg-gradient-to-r from-amber-dark via-amber-gold to-amber-glow rounded-full" style="width: 85%;"></div>
+              </div>
+            </div>
+
+            <!-- Meter 4: Crostinha Maillard -->
+            <div>
+              <div class="flex justify-between text-xs font-mono mb-1">
+                <span class="text-neutral-300">Crocância da Crosta Maillard</span>
+                <span id="sensoryValCrostinha" class="text-amber-gold font-bold">92%</span>
+              </div>
+              <div class="h-2 w-full bg-obsidian-950 rounded-full overflow-hidden border border-white/10">
+                <div id="sensoryBarCrostinha" class="sensory-meter-bar h-full bg-gradient-to-r from-amber-dark via-amber-gold to-amber-glow rounded-full" style="width: 92%;"></div>
+              </div>
+            </div>
+
+            <!-- Meter 5: Acidez & Equilíbrio -->
+            <div>
+              <div class="flex justify-between text-xs font-mono mb-1">
+                <span class="text-neutral-300">Acidez & Equilíbrio de Gordura</span>
+                <span id="sensoryValAcidez" class="text-amber-gold font-bold">88%</span>
+              </div>
+              <div class="h-2 w-full bg-obsidian-950 rounded-full overflow-hidden border border-white/10">
+                <div id="sensoryBarAcidez" class="sensory-meter-bar h-full bg-gradient-to-r from-amber-dark via-amber-gold to-amber-glow rounded-full" style="width: 88%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sommelier Pairing Note Box -->
+          <div class="glass-card rounded-2xl p-6 border border-white/10 space-y-3">
+            <div class="flex items-center gap-2.5 text-amber-gold font-mono text-xs uppercase font-bold">
+              <i data-lucide="wine" class="w-4 h-4"></i>
+              Harmonização Sugerida pelo Sommelier
+            </div>
+            <h5 id="sensorySommelierDrink" class="font-cinzel text-white font-bold text-sm sm:text-base">
+              Bourbon Smoked Wood & Laranja Bahia
+            </h5>
+            <p id="sensorySommelierNotes" class="text-xs text-neutral-400 leading-relaxed font-sans">
+              As notas amendoadas do carvalho americano equilibram a intensidade do marmoreio Wagyu e amplificam o aroma terroso da trufa.
+            </p>
+
+            <div class="pt-2 flex items-center gap-3">
+              <a href="#menu" class="flex-1 py-2.5 rounded-xl border border-amber-gold/40 hover:border-amber-gold text-amber-gold text-center font-mono text-xs uppercase tracking-wider transition-colors">
+                Ver no Cardápio
+              </a>
+              <button onclick="orderCurrentSensoryBurger()" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-amber-gold to-amber-dark text-obsidian-950 font-mono text-xs font-bold uppercase tracking-wider hover:shadow-[0_0_20px_rgba(212,154,66,0.35)] transition-all">
+                Pedir no WhatsApp
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 5: THE RITUAL & RESERVATION CALL -->
+  <section id="experience" class="py-24 px-6 lg:px-16 bg-obsidian-950 relative overflow-hidden">
+    <div class="max-w-5xl mx-auto rounded-3xl p-8 sm:p-14 border border-amber-gold/30 bg-gradient-to-br from-obsidian-850 via-obsidian-900 to-obsidian-950 relative glow-amber-lg text-center">
+      
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-amber-gold/40 bg-obsidian-950 text-amber-gold font-mono text-xs uppercase tracking-[0.2em] mb-6">
+        <i data-lucide="crown" class="w-3.5 h-3.5"></i>
+        Apenas 12 Mesas por Noite
+      </div>
+
+      <h2 class="font-cinzel text-3xl sm:text-5xl font-bold text-white mb-6 leading-tight">
+        VIVA O RITUAL OBSIDIAN <br/>
+        <span class="text-amber-gold">EM SUA PLENITUDE</span>
+      </h2>
+
+      <p class="font-serif italic text-neutral-300 text-base sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+        Não servimos refeições apressadas. Cada reserva garante 2 horas e meia de imersão sensorial com carta de Bourbons artesanais e serviço exclusivo.
+      </p>
+
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <button onclick="openReservationModal()" class="px-9 py-4 rounded-full bg-gradient-to-r from-amber-gold to-amber-glow text-obsidian-950 font-mono text-xs font-bold tracking-[0.2em] uppercase hover:shadow-[0_0_35px_rgba(212,154,66,0.5)] transition-all duration-300 flex items-center gap-2">
+          <i data-lucide="calendar" class="w-4 h-4"></i>
+          Solicitar Reserva VIP
+        </button>
+
+        <a href="#hero" class="px-8 py-4 rounded-full border border-white/20 hover:border-amber-gold text-neutral-200 font-mono text-xs tracking-[0.2em] uppercase transition-colors">
+          Rever o Filme no Hero
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="pt-12 pb-28 sm:pb-20 px-6 lg:px-16 bg-obsidian-950 border-t border-white/10 text-neutral-500 text-xs font-mono">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      
+      <div class="flex items-center gap-3">
+        <div class="w-7 h-7 rounded-full border border-amber-gold/40 flex items-center justify-center text-amber-gold font-cinzel font-bold text-xs">
+          Ω
+        </div>
+        <span class="text-neutral-300 tracking-wider font-cinzel font-bold">OBSIDIAN BURGER HOUSE</span>
+        <span class="text-neutral-600">|</span>
+        <span>Curadoria Gastronômica & Cinema</span>
+      </div>
+
+      <div class="flex items-center gap-6">
+        <a href="#hero" class="hover:text-amber-gold transition-colors">Início</a>
+        <a href="#cortes" class="hover:text-amber-gold transition-colors">Cortes & Macro</a>
+        <a href="#anatomy" class="hover:text-amber-gold transition-colors">Camadas 3D</a>
+        <a href="#alquimia" class="hover:text-amber-gold transition-colors">A Alquimia</a>
+        <a href="#menu" class="hover:text-amber-gold transition-colors">Menu</a>
+      </div>
+
+      <div>
+        <span>© 2026 Obsidian Burger Reserve. All rights reserved.</span>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- MODAL 1: VIP RESERVATION FORM -->
+  <div id="reservationModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-all duration-300">
+    <div class="glass-card rounded-2xl p-6 sm:p-8 max-w-lg w-full border border-amber-gold/30 shadow-2xl relative">
+      
+      <button onclick="closeReservationModal()" class="absolute top-4 right-4 p-2 text-neutral-400 hover:text-white transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="text-center mb-6">
+        <span class="text-amber-gold font-mono text-[10px] tracking-[0.25em] uppercase">Private Booking</span>
+        <h3 class="font-cinzel text-2xl font-bold text-white mt-1">Reserva VIP Obsidian</h3>
+        <p class="text-xs text-neutral-400 mt-1">Selecione data, horário e corte gastronômico desejado</p>
+      </div>
+
+      <form id="reservationForm" onsubmit="handleReservationSubmit(event)" class="space-y-4 text-xs font-mono">
+        <div>
+          <label class="block text-neutral-400 mb-1">Nome do Titular</label>
+          <input type="text" required placeholder="Ex: Alexandre de Orleans" class="w-full px-4 py-2.5 rounded-lg bg-obsidian-950 border border-white/10 focus:border-amber-gold text-white outline-none">
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-neutral-400 mb-1">Telefone / WhatsApp</label>
+            <input type="tel" required placeholder="+55 (11) 99999-9999" class="w-full px-4 py-2.5 rounded-lg bg-obsidian-950 border border-white/10 focus:border-amber-gold text-white outline-none">
+          </div>
+          <div>
+            <label class="block text-neutral-400 mb-1">Nº de Convidados</label>
+            <select class="w-full px-4 py-2.5 rounded-lg bg-obsidian-950 border border-white/10 focus:border-amber-gold text-white outline-none">
+              <option>1 Convidado (Balcão do Chef)</option>
+              <option selected>2 Convidados (Mesa Reservada)</option>
+              <option>4 Convidados (Salão Privativo)</option>
+              <option>6 Convidados (Experiência Completa)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-neutral-400 mb-1">Data Desejada</label>
+            <input type="date" required class="w-full px-4 py-2.5 rounded-lg bg-obsidian-950 border border-white/10 focus:border-amber-gold text-white outline-none">
+          </div>
+          <div>
+            <label class="block text-neutral-400 mb-1">Turno</label>
+            <select class="w-full px-4 py-2.5 rounded-lg bg-obsidian-950 border border-white/10 focus:border-amber-gold text-white outline-none">
+              <option>19:00 - Primeiro Serviço</option>
+              <option selected>20:45 - Segundo Serviço</option>
+              <option>22:30 - Serviço Noturno</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-neutral-400 mb-1">Corte Selecionado</label>
+          <input type="text" id="selectedBurgerInput" value="The Obsidian Prime" class="w-full px-4 py-2.5 rounded-lg bg-obsidian-950/60 border border-amber-gold/30 text-amber-gold outline-none">
+        </div>
+
+        <div class="pt-3">
+          <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-gold to-amber-dark text-obsidian-950 font-bold uppercase tracking-widest hover:shadow-[0_0_20px_rgba(212,154,66,0.4)] transition-all">
+            Confirmar Pedido de Reserva
+          </button>
+        </div>
+      </form>
+
+      <!-- Reservation Success Box (Hidden initially) -->
+      <div id="reservationSuccess" class="hidden text-center py-6">
+        <div class="w-12 h-12 rounded-full border border-amber-gold text-amber-gold flex items-center justify-center mx-auto mb-4">
+          <i data-lucide="check" class="w-6 h-6"></i>
+        </div>
+        <h4 class="font-cinzel text-xl font-bold text-white mb-2">Reserva Registrada com Sucesso!</h4>
+        <p class="text-xs text-neutral-400 mb-6 leading-relaxed">
+          O Concierge Obsidian entrará em contato via WhatsApp nas próximas 2 horas para confirmar os detalhes e harmonização de bebidas.
+        </p>
+        <div class="p-4 rounded-xl bg-obsidian-950 border border-amber-gold/20 font-mono text-[11px] text-amber-gold mb-6">
+          CÓDIGO VIP: <span class="font-bold text-white">#OBS-8842-2026</span>
+        </div>
+        <button onclick="closeReservationModal()" class="px-6 py-2.5 rounded-lg border border-white/20 text-neutral-300 hover:text-white font-mono text-xs">
+          Fechar Janela
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL 2: VIDEO MEDIA PIPELINE SETTINGS (FOR THE DIRECTOR) -->
+  <div id="mediaModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-all">
+    <div class="glass-card rounded-2xl p-6 sm:p-8 max-w-xl w-full border border-amber-gold/30 shadow-2xl relative">
+      
+      <button onclick="closeMediaModal()" class="absolute top-4 right-4 p-2 text-neutral-400 hover:text-white transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-4">
+        <div class="p-2 rounded-lg bg-amber-gold/20 text-amber-gold">
+          <i data-lucide="sliders" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h3 class="font-cinzel text-xl font-bold text-white">Pipeline de Vídeo Cinema 4K</h3>
+          <p class="text-xs text-neutral-400">Controle do Master e Integração de Novos Clipes (Parte 3 - A Mordida)</p>
+        </div>
+      </div>
+
+      <div class="space-y-4 text-xs font-mono">
+        <div class="p-4 rounded-xl bg-obsidian-950 border border-white/10 space-y-2">
+          <div class="flex justify-between">
+            <span class="text-neutral-500">Vídeo Master Atual:</span>
+            <span class="text-amber-gold font-bold">obsidian_burger_master_commercial.mp4</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-neutral-500">Resolução & Taxa:</span>
+            <span class="text-neutral-300">3840x2160 (4K UHD) @ 30fps</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-neutral-500">Transição Title Card:</span>
+            <span class="text-neutral-300">Xfade Black a 17.2s com 'OBSIDIAN BURGER'</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-neutral-500">Versão Web 1080p:</span>
+            <span class="text-neutral-300">obsidian_burger_master_1080p.mp4</span>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-obsidian-950/70 border border-amber-gold/20">
+          <label class="block text-amber-gold font-bold mb-2 flex items-center gap-2">
+            <i data-lucide="plus-circle" class="w-4 h-4"></i>
+            Adicionar Novo Trecho (Ex: A Mordida / Final Parte 3)
+          </label>
+          <p class="text-[11px] text-neutral-400 mb-3 leading-relaxed">
+            Caso você gere uma continuação do take com a mordida a partir de <code class="text-amber-gold">hero_close_up_frame_4k.jpg</code>, basta colocar o nome do arquivo abaixo:
+          </p>
+          <div class="flex gap-2">
+            <input type="text" id="nextVideoInput" placeholder="Ex: video_mordida_parte3.mp4" class="flex-1 px-3 py-2 rounded-lg bg-obsidian-900 border border-white/20 text-white outline-none focus:border-amber-gold">
+            <button onclick="applyCustomVideoClip()" class="px-4 py-2 rounded-lg bg-amber-gold text-obsidian-950 font-bold uppercase tracking-wider hover:bg-amber-glow transition-colors">
+              Carregar
+            </button>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center pt-2">
+          <span class="text-neutral-500 text-[10px]">Renderizado com FFmpeg 8.1 / Gyan Build</span>
+          <button onclick="closeMediaModal()" class="px-5 py-2 rounded-lg border border-white/20 hover:border-amber-gold text-white">
+            Concluir
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL 3: ORIGINAL FLYER LIGHTBOX -->
+  <div id="flyerModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/85 backdrop-blur-md transition-all duration-300">
+    <div class="glass-card rounded-2xl max-w-4xl w-full max-h-[92vh] flex flex-col border border-amber-gold/30 shadow-2xl relative overflow-hidden">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-obsidian-950/90">
+        <div class="flex items-center gap-3">
+          <div class="p-2 rounded-lg bg-amber-gold/20 text-amber-gold">
+            <i data-lucide="file-text" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="font-cinzel text-lg sm:text-xl font-bold text-white">Folheto Original • Nossa Casa</h3>
+            <p class="text-xs text-neutral-400 font-mono">Restaurante & Hamburgueria • Cardápio Oficial de Reabertura</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <a href="assets/cardapio_original.jpg" download="Cardapio_Nossa_Casa_Reabertura.jpg" class="px-3 py-1.5 rounded-lg border border-white/20 hover:border-amber-gold text-xs font-mono text-neutral-300 hover:text-white flex items-center gap-1.5 transition-colors">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i>
+            Baixar Imagem
+          </a>
+          <button onclick="closeFlyerModal()" class="p-2 text-neutral-400 hover:text-white transition-colors">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Body (Image) -->
+      <div class="p-4 sm:p-6 overflow-y-auto flex-1 flex flex-col items-center justify-center bg-obsidian-950/50">
+        <img src="assets/cardapio_original.jpg" alt="Cardápio Original de Reabertura Nossa Casa Hamburgueria" class="max-h-[68vh] w-auto rounded-xl object-contain border border-white/10 shadow-2xl">
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 py-3 border-t border-white/10 bg-obsidian-950 flex flex-wrap items-center justify-between text-xs font-mono text-neutral-400 gap-3">
+        <div class="flex items-center gap-2">
+          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-amber-gold"></i>
+          <span>Rua Milton Inocêncio, 61 - Parque Pinheiros - Taboão da Serra - SP</span>
+        </div>
+        <div>
+          <button onclick="filterMenu('all'); closeFlyerModal(); document.getElementById('menu').scrollIntoView({behavior: 'smooth'});" class="text-amber-gold hover:underline font-bold">
+            Ver Cardápio Interativo Completo ↓
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FLOATING LUXURY CONCIERGE DOCK (AULA 3 / "REGRA DO JARVIS") -->
+  <aside id="floatingConciergeDock" class="fixed left-1/2 -translate-x-1/2 z-40 w-[94%] sm:w-auto max-w-xl transition-all duration-500 transform hover:scale-[1.02]" style="bottom: max(1rem, env(safe-area-inset-bottom, 1rem));">
+    <div class="glass-dark border border-amber-gold/40 rounded-full px-3.5 sm:px-6 py-2.5 sm:py-3 shadow-[0_15px_40px_rgba(0,0,0,0.85),0_0_30px_rgba(212,154,66,0.25)] flex items-center justify-between gap-2.5 sm:gap-6 backdrop-blur-2xl">
+      
+      <!-- Live Status Indicator -->
+      <div class="flex items-center gap-2 flex-shrink-0">
+        <span class="relative flex h-2.5 w-2.5 sm:h-3 sm:w-3">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 sm:h-3 sm:w-3 bg-emerald-500"></span>
+        </span>
+        <div class="flex flex-col">
+          <span class="font-mono text-[9px] sm:text-[10px] uppercase tracking-widest text-neutral-200 font-bold flex items-center gap-1">
+            Cozinha Aberta
+          </span>
+          <span class="font-mono text-[8px] sm:text-[9px] text-amber-gold flex items-center gap-1">
+            <span class="hidden sm:inline">Tempo Médio: </span>25-35 min • Taboão
+          </span>
+        </div>
+      </div>
+
+      <div class="hidden sm:block h-6 w-px bg-white/10"></div>
+
+      <!-- Quick Actions -->
+      <div class="flex items-center gap-1.5 sm:gap-2">
+        <!-- WhatsApp Concierge Button -->
+        <a href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20um%20pedido%20VIP%20na%20Obsidian%20Burger!" target="_blank" rel="noopener noreferrer" class="px-3 sm:px-4 py-2 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white font-mono text-[10px] sm:text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.35)] transition-all flex-shrink-0">
+          <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+          <span>WhatsApp<span class="hidden sm:inline"> VIP</span></span>
+        </a>
+
+        <!-- iFood Button -->
+        <a href="https://www.ifood.com.br" target="_blank" rel="noopener noreferrer" class="px-3 sm:px-4 py-2 rounded-full bg-red-600 hover:bg-red-700 text-white font-mono text-[10px] sm:text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-[0_0_15px_rgba(220,38,38,0.35)] transition-all flex-shrink-0">
+          <i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i>
+          <span>iFood</span>
+        </a>
+
+        <!-- Quick Scroll to Menu -->
+        <a href="#menu" class="hidden md:flex px-3 py-2 rounded-full border border-amber-gold/40 hover:border-amber-gold text-amber-gold text-[10px] font-mono uppercase tracking-wider items-center gap-1 transition-colors">
+          <i data-lucide="utensils" class="w-3 h-3"></i>
+          Cardápio
+        </a>
+      </div>
+
+    </div>
+  </aside>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // =========================================================================
+    // CINEMATIC FRAME SEQUENCE ENGINE (HIGH-PERFORMANCE OPTIMIZED ARCHITECTURE)
+    // =========================================================================
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = window.innerWidth < 768;
+    const TOTAL_FRAMES = isMobile ? 143 : 248;
+    const INITIAL_CRITICAL_FRAMES = isMobile ? 10 : 16;
+    const FRAMES_DIR = isMobile ? 'public/frames/burger-mobile/' : 'public/frames/burger/';
+    
+    // Canvas & Context Setup (desynchronized hardware layer)
+    const canvas = document.getElementById('cinematicCanvas');
+    const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
+    
+    // Elements
+    const heroSection = document.getElementById('hero');
+    if (heroSection) {
+      heroSection.style.height = prefersReducedMotion 
+        ? '120vh' 
+        : (isMobile ? '340vh' : '460vh');
+    }
+    const cinematicLoader = document.getElementById('cinematicLoader');
+    const loaderProgressBar = document.getElementById('loaderProgressBar');
+    const loaderPercent = document.getElementById('loaderPercent');
+    const loaderFramesLoaded = document.getElementById('loaderFramesLoaded');
+    const hudFrameCounter = document.getElementById('hudFrameCounter');
+    const hudProgressPercent = document.getElementById('hudProgressPercent');
+    const hudBottomProgressBar = document.getElementById('hudBottomProgressBar');
+    const hudBottomTime = document.getElementById('hudBottomTime');
+    const heroExitOverlay = document.getElementById('heroExitOverlay');
+
+    // Story Cards
+    const storyCards = [
+      document.getElementById('storyCard0'),
+      document.getElementById('storyCard1'),
+      document.getElementById('storyCard2'),
+      document.getElementById('storyCard3'),
+      document.getElementById('storyCard4')
+    ];
+
+    // =========================================================================
+    // SMART TIERED PRELOADING & DYNAMIC LOOKAHEAD QUEUE
+    // =========================================================================
+    const STATUS_UNLOADED = 0;
+    const STATUS_LOADING = 1;
+    const STATUS_LOADED = 2;
+    const STATUS_ERROR = 3;
+
+    const frameStatus = new Uint8Array(TOTAL_FRAMES);
+    const framesCache = new Array(TOTAL_FRAMES);
+    let loadedCount = 0;
+    let criticalLoaded = false;
+    let lastRenderedIndex = -1;
+    let lastDrawnImage = null;
+
+    // Concurrency limiter to prevent network queue congestion
+    const MAX_CONCURRENT_LOADS = isMobile ? 4 : 6;
+    let activeLoads = 0;
+    const priorityQueue = []; // Frame indices to load in order of urgency
+
+    // Scroll & Interpolation Physics
+    let targetProgress = 0;
+    let currentProgress = 0;
+    let lastTargetProgress = 0;
+    let isTicking = false;
+
+    // HUD Cached States to prevent layout thrashing
+    let _lastHudFrameText = '';
+    let _lastHudPercentText = '';
+    let _lastHudProgressBar = -1;
+    let _lastHudTimeText = '';
+
+    // Build Filename helper: frame_0001.webp to frame_XXXX.webp
+    function getFrameUrl(index) {
+      const num = String(index + 1).padStart(4, '0');
+      return `${FRAMES_DIR}frame_${num}.webp`;
+    }
+
+    // High Performance Canvas Resizing with Capped DPR (Prevents huge 4K/retina buffer overhead)
+    function resizeCanvas() {
+      // Cap DPR to 1.5 on mobile and 1.75 on desktop for peak sharpness with low memory
+      const maxDpr = isMobile ? 1.5 : 1.75;
+      const dpr = Math.min(window.devicePixelRatio || 1, maxDpr);
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      
+      // Force immediate redraw of current frame
+      lastRenderedIndex = -1;
+      const currentIndex = calculateFrameIndex(currentProgress);
+      drawFrame(currentIndex);
+    }
+
+    // Preserve 16:9 Aspect Ratio with Object-Fit Cover Math (Centered & Distortion-Free)
+    function drawFrame(frameIndex) {
+      const img = getAvailableImage(frameIndex);
+      if (!img || !img.complete || img.naturalWidth === 0) return;
+
+      const cw = canvas.width;
+      const ch = canvas.height;
+      const nw = img.naturalWidth;
+      const nh = img.naturalHeight;
+
+      const imgRatio = nw / nh;
+      const canvasRatio = cw / ch;
+
+      let drawW, drawH, offsetX, offsetY;
+
+      if (canvasRatio > imgRatio) {
+        drawW = cw;
+        drawH = cw / imgRatio;
+        offsetX = 0;
+        offsetY = (ch - drawH) / 2;
+      } else {
+        drawW = ch * imgRatio;
+        drawH = ch;
+        if (isMobile) {
+          // MOBILE DYNAMIC FOCAL TRACKING:
+          // In early frames (0% to 35%), the waiter enters carrying the dish on the left (focalX = 0.41)
+          // As the camera tracks forward (35% to 65%), smoothly pan to center (focalX = 0.50)
+          // In the climax (65% to 100%), maintain exact center 0.50 for the burger macro shot.
+          const progressNorm = Math.min(Math.max(frameIndex / TOTAL_FRAMES, 0), 1);
+          let focalX = 0.50;
+          if (progressNorm < 0.35) {
+            focalX = 0.41;
+          } else if (progressNorm < 0.65) {
+            const t = (progressNorm - 0.35) / 0.30;
+            focalX = 0.41 + (0.50 - 0.41) * t;
+          }
+          offsetX = (cw * 0.5) - (drawW * focalX);
+          // Clamp so canvas never reveals black borders outside image
+          offsetX = Math.min(0, Math.max(cw - drawW, offsetX));
+        } else {
+          offsetX = (cw - drawW) / 2;
+        }
+        offsetY = 0;
+      }
+
+      ctx.drawImage(img, offsetX, offsetY, drawW, drawH);
+      lastDrawnImage = img;
+    }
+
+    // Graceful fallback to closest loaded frame: ZERO blank screen or black flicker guaranteed
+    function getAvailableImage(index) {
+      if (frameStatus[index] === STATUS_LOADED && framesCache[index]) {
+        return framesCache[index];
+      }
+
+      // If requested frame isn't loaded yet, immediately queue it with top priority
+      if (frameStatus[index] === STATUS_UNLOADED) {
+        queuePriorityFrame(index, true);
+      }
+
+      // Nearest-neighbor outward search
+      for (let delta = 1; delta < TOTAL_FRAMES; delta++) {
+        const prev = index - delta;
+        if (prev >= 0 && frameStatus[prev] === STATUS_LOADED && framesCache[prev]) {
+          return framesCache[prev];
+        }
+        const next = index + delta;
+        if (next < TOTAL_FRAMES && frameStatus[next] === STATUS_LOADED && framesCache[next]) {
+          return framesCache[next];
+        }
+      }
+
+      return lastDrawnImage;
+    }
+
+    // Queue frame into priority loader (unshift for immediate, push for background)
+    function queuePriorityFrame(index, immediate = false) {
+      if (index < 0 || index >= TOTAL_FRAMES) return;
+      if (frameStatus[index] !== STATUS_UNLOADED) return;
+
+      const existingIdx = priorityQueue.indexOf(index);
+      if (existingIdx !== -1) {
+        if (immediate && existingIdx > 0) {
+          priorityQueue.splice(existingIdx, 1);
+          priorityQueue.unshift(index);
+        }
+        return;
+      }
+
+      if (immediate) {
+        priorityQueue.unshift(index);
+      } else {
+        priorityQueue.push(index);
+      }
+
+      processQueue();
+    }
+
+    // Process queued requests with concurrency limiter
+    function processQueue() {
+      while (activeLoads < MAX_CONCURRENT_LOADS && priorityQueue.length > 0) {
+        const nextIndex = priorityQueue.shift();
+        if (frameStatus[nextIndex] === STATUS_UNLOADED) {
+          executeSingleFrameLoad(nextIndex);
+        }
+      }
+    }
+
+    // Execute single frame download with asynchronous decode (offloads WebP decode from main thread)
+    function executeSingleFrameLoad(index) {
+      frameStatus[index] = STATUS_LOADING;
+      activeLoads++;
+
+      const img = new Image();
+      img.src = getFrameUrl(index);
+
+      const onComplete = (success) => {
+        activeLoads--;
+        if (success) {
+          frameStatus[index] = STATUS_LOADED;
+          framesCache[index] = img;
+          loadedCount++;
+          updateLoaderUI();
+
+          // If this is the initial frame or currently visible frame, redraw instantly
+          if (index === 0 && lastRenderedIndex === -1) {
+            drawFrame(0);
+          } else if (index === calculateFrameIndex(currentProgress)) {
+            drawFrame(index);
+          }
+        } else {
+          frameStatus[index] = STATUS_ERROR;
+        }
+
+        processQueue();
+      };
+
+      if ('decode' in img) {
+        img.decode().then(() => {
+          onComplete(true);
+        }).catch(() => {
+          if (img.complete && img.naturalWidth > 0) {
+            onComplete(true);
+          } else {
+            onComplete(false);
+          }
+        });
+      } else {
+        img.onload = () => onComplete(true);
+        img.onerror = () => onComplete(false);
+      }
+    }
+
+    // Dynamic Lookahead Scheduler: predicts user scroll intent & prioritizes forward/backward window
+    function scheduleLookaheadFrames(currentFrame) {
+      const scrollDirection = targetProgress >= lastTargetProgress ? 1 : -1;
+      lastTargetProgress = targetProgress;
+
+      // Priority 1: Immediate neighborhood & lookahead cone
+      const forwardRange = isMobile ? 8 : 14;
+      const backwardRange = isMobile ? 3 : 6;
+
+      // Prioritize forward in direction of scroll
+      for (let i = 0; i <= forwardRange; i++) {
+        const idx = currentFrame + (i * scrollDirection);
+        queuePriorityFrame(idx, true);
+      }
+
+      // Prioritize backward buffer for quick reverse scroll
+      for (let i = 1; i <= backwardRange; i++) {
+        const idx = currentFrame - (i * scrollDirection);
+        queuePriorityFrame(idx, true);
+      }
+
+      // Priority 2: Radial spread surrounding current position
+      for (let delta = forwardRange + 1; delta <= forwardRange + 15; delta++) {
+        queuePriorityFrame(currentFrame + delta, false);
+        queuePriorityFrame(currentFrame - delta, false);
+      }
+    }
+
+    function updateLoaderUI() {
+      if (!cinematicLoader || criticalLoaded) return;
+      const pct = Math.min(Math.round((loadedCount / INITIAL_CRITICAL_FRAMES) * 100), 100);
+      if (loaderPercent) loaderPercent.textContent = `${pct}%`;
+      if (loaderProgressBar) loaderProgressBar.style.width = `${pct}%`;
+      if (loaderFramesLoaded) loaderFramesLoaded.textContent = `${loadedCount} / ${INITIAL_CRITICAL_FRAMES} essenciais`;
+    }
+
+    // Initialize Tiered Preload Architecture
+    function initPreloader() {
+      // Step 1 (Priority 1): Load frame 0 immediately
+      queuePriorityFrame(0, true);
+
+      // Step 2: Queue initial critical window
+      for (let i = 1; i < INITIAL_CRITICAL_FRAMES; i++) {
+        queuePriorityFrame(i, true);
+      }
+
+      // Check critical readiness to unlock experience smoothly without delay
+      const checkCriticalInterval = setInterval(() => {
+        if (frameStatus[0] === STATUS_LOADED && lastRenderedIndex === -1) {
+          drawFrame(0);
+        }
+
+        if (loadedCount >= Math.min(INITIAL_CRITICAL_FRAMES, 8)) {
+          clearInterval(checkCriticalInterval);
+          criticalLoaded = true;
+          drawFrame(calculateFrameIndex(currentProgress));
+
+          if (cinematicLoader) {
+            cinematicLoader.style.opacity = '0';
+            setTimeout(() => {
+              cinematicLoader.style.display = 'none';
+            }, 500);
+          }
+
+          // Step 3 (Priority 2 & 3): Background progressive preload of remaining sequence
+          preloadBackgroundSequence();
+        }
+      }, 50);
+    }
+
+    // Background Progressive Preload using requestIdleCallback
+    function preloadBackgroundSequence() {
+      let nextIndex = INITIAL_CRITICAL_FRAMES;
+
+      function idleWorker(deadline) {
+        while ((deadline ? deadline.timeRemaining() > 5 : true) && nextIndex < TOTAL_FRAMES) {
+          if (frameStatus[nextIndex] === STATUS_UNLOADED) {
+            queuePriorityFrame(nextIndex, false);
+          }
+          nextIndex++;
+        }
+
+        if (nextIndex < TOTAL_FRAMES) {
+          if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(idleWorker, { timeout: 250 });
+          } else {
+            setTimeout(() => idleWorker(null), 35);
+          }
+        }
+      }
+
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(idleWorker, { timeout: 250 });
+      } else {
+        setTimeout(() => idleWorker(null), 35);
+      }
+    }
+
+    // Timeline Mapping & Hold Transition:
+    // 0% scroll -> opening composition
+    // 25% -> waiter approaches table
+    // 50% -> burger placed on table
+    // 65% -> camera pushes through
+    // 80% -> customer grabs burger
+    // 90% -> extreme burger close-up reached
+    // 90% to 100% -> Hold final frame & subtle dissolve into content
+    function calculateFrameIndex(progress) {
+      if (prefersReducedMotion) {
+        // In reduced motion, present the pristine focal moment of the burger
+        return Math.round(TOTAL_FRAMES * 0.75);
+      }
+      const sequenceProgress = Math.min(progress / 0.90, 1.0);
+      return Math.min(
+        Math.max(Math.round(sequenceProgress * (TOTAL_FRAMES - 1)), 0),
+        TOTAL_FRAMES - 1
+      );
+    }
+
+    // Scroll Mapping: Map exact position of #hero track to [0.0, 1.0]
+    function onScrollUpdate() {
+      if (prefersReducedMotion) return;
+
+      const rect = heroSection.getBoundingClientRect();
+      const scrollableDist = heroSection.offsetHeight - window.innerHeight;
+      if (scrollableDist <= 0) return;
+
+      const scrolled = Math.max(0, -rect.top);
+      targetProgress = Math.min(Math.max(scrolled / scrollableDist, 0), 1);
+
+      // Trigger dynamic lookahead preloading for incoming frames
+      const targetFrame = calculateFrameIndex(targetProgress);
+      scheduleLookaheadFrames(targetFrame);
+
+      if (!isTicking) {
+        isTicking = true;
+        requestAnimationFrame(renderLoop);
+      }
+    }
+
+    // Temporal Interpolation (Calibrated LERP: 0.36 on mobile for touch responsiveness, 0.28 on desktop)
+    function renderLoop() {
+      const diff = targetProgress - currentProgress;
+      const lerpFactor = isMobile ? 0.36 : 0.28;
+      currentProgress += diff * lerpFactor;
+
+      if (Math.abs(diff) < 0.0002) {
+        currentProgress = targetProgress;
+      }
+
+      const frameIndex = calculateFrameIndex(currentProgress);
+
+      // Only perform canvas draw when frame index actually changes
+      if (frameIndex !== lastRenderedIndex) {
+        drawFrame(frameIndex);
+        lastRenderedIndex = frameIndex;
+        updateHUD(frameIndex, currentProgress);
+        updateStoryCards(currentProgress);
+      }
+
+      // Exit dissolve into following section
+      if (heroExitOverlay) {
+        const exitOpacity = currentProgress >= 0.88 ? Math.min((currentProgress - 0.88) / 0.12, 0.95) : 0;
+        heroExitOverlay.style.opacity = exitOpacity.toFixed(2);
+      }
+
+      // Continue render loop while progress is settling
+      if (Math.abs(targetProgress - currentProgress) > 0.0002) {
+        requestAnimationFrame(renderLoop);
+      } else {
+        isTicking = false;
+      }
+    }
+
+    // HUD Synchronization with DOM Layout Thrift Caching
+    function updateHUD(frameIndex, progress) {
+      const frameStr = `FRAME ${String(frameIndex + 1).padStart(3, '0')} / ${TOTAL_FRAMES}`;
+      if (hudFrameCounter && _lastHudFrameText !== frameStr) {
+        hudFrameCounter.textContent = frameStr;
+        _lastHudFrameText = frameStr;
+      }
+
+      const pctStr = `${Math.round(progress * 100)}%`;
+      if (hudProgressPercent && _lastHudPercentText !== pctStr) {
+        hudProgressPercent.textContent = pctStr;
+        _lastHudPercentText = pctStr;
+      }
+
+      const barWidth = Math.round(progress * 100);
+      if (hudBottomProgressBar && _lastHudProgressBar !== barWidth) {
+        hudBottomProgressBar.style.width = `${barWidth}%`;
+        _lastHudProgressBar = barWidth;
+      }
+
+      const timeStr = formatTime(progress * 17.9);
+      if (hudBottomTime && _lastHudTimeText !== timeStr) {
+        hudBottomTime.textContent = timeStr;
+        _lastHudTimeText = timeStr;
+      }
+    }
+
+    function formatTime(seconds) {
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    // Story Editorial Timeline:
+    // 74% - 100%: ALL text cards hidden -> ONLY the clean, centered OBSIDIAN BURGER logo is displayed
+    function updateStoryCards(p) {
+      setCardState(0, p >= 0.00 && p < 0.18);
+      setCardState(1, p >= 0.22 && p < 0.44);
+      setCardState(2, p >= 0.48 && p < 0.62);
+      setCardState(3, p >= 0.64 && p < 0.73);
+      setCardState(4, false); // Completely clean: no HTML text over the logo
+    }
+
+    function setCardState(index, active) {
+      const el = storyCards[index];
+      if (!el) return;
+      if (active) {
+        el.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+        el.classList.add('opacity-100', 'translate-y-0');
+      } else {
+        el.classList.remove('opacity-100', 'translate-y-0');
+        el.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+      }
+    }
+
+    // Initialize Event Listeners
+    window.addEventListener('scroll', onScrollUpdate, { passive: true });
+    window.addEventListener('resize', resizeCanvas);
+
+    // Bootstrap Canvas Engine
+    resizeCanvas();
+    initPreloader();
+    onScrollUpdate();
+
+    // Mobile Drawer Navigation Controllers
+    function toggleMobileMenu() {
+      const drawer = document.getElementById('mobileDrawer');
+      const icon = document.getElementById('mobileMenuIcon');
+      if (!drawer) return;
+      const isOpen = !drawer.classList.contains('pointer-events-none');
+      if (isOpen) {
+        closeMobileMenu();
+      } else {
+        drawer.classList.remove('opacity-0', 'pointer-events-none');
+        drawer.classList.add('opacity-100', 'pointer-events-auto');
+        if (icon) icon.setAttribute('data-lucide', 'x');
+        lucide.createIcons();
+      }
+    }
+
+    function closeMobileMenu() {
+      const drawer = document.getElementById('mobileDrawer');
+      const icon = document.getElementById('mobileMenuIcon');
+      if (!drawer) return;
+      drawer.classList.remove('opacity-100', 'pointer-events-auto');
+      drawer.classList.add('opacity-0', 'pointer-events-none');
+      if (icon) icon.setAttribute('data-lucide', 'menu');
+      lucide.createIcons();
+    }
+
+    // =========================================================================
+    // THEATRE SECTION & GENERAL CONTROLS
+    // =========================================================================
+    const theatreVideo = document.getElementById('theatreVideo');
+
+    function seekVideo(timeInSeconds) {
+      // If user clicks a keyframe act in section 2, smoothly scrolls to hero and scrubs frame
+      const progress = Math.min(Math.max(timeInSeconds / 20.9, 0), 1);
+      const scrollableDist = heroSection.offsetHeight - window.innerHeight;
+      const targetScroll = heroSection.offsetTop + (progress * scrollableDist);
+      
+      window.scrollTo({
+        top: targetScroll,
+        behavior: 'smooth'
+      });
+    }
+
+    function downloadMasterVideo() {
+      const a = document.createElement('a');
+      a.href = 'obsidian_burger_master_commercial.mp4';
+      a.download = 'obsidian_burger_master_commercial_4k.mp4';
+      a.click();
+    }
+
+    // Interactive Anatomy Layers Data
+    const layersData = [
+      {
+        tag: 'CAMADA 01 • COBERTURA',
+        origin: 'Padaria Artesanal Própria',
+        title: 'Coroa Brioche de Ouro & Manteiga de Tutano',
+        description: 'Pão desenvolvido ao longo de 6 meses de testes moleculares. Fermentação ultra-lenta com levain selvagem de maçã verde, finalizado com pinceladas de manteiga de tutano clarificada e pó de ouro comestível de 24k antes de ser tostado ao vivo na brasa.',
+        m1: '48 Horas',
+        m2: '220° C',
+        m3: 'Umami Doce'
+      },
+      {
+        tag: 'CAMADA 02 • FUNDENTE',
+        origin: 'Somerset, Reino Unido',
+        title: 'Cheddar Inglês Artesanal 18 Meses',
+        description: 'Maturado em cavernas tradicionais de calcário. O ponto de fusão é controlado segundo a segundo no maçarico botânico, gerando aquela cascata de queijo densa, aveludada e pungente visualizada no macro do filme.',
+        m1: '18 Meses',
+        m2: '65° C (Fusão)',
+        m3: 'Castanhas & Sal'
+      },
+      {
+        tag: 'CAMADA 03 • CORAÇÃO DO CORTE',
+        origin: 'Miyazaki & Sul do Brasil',
+        title: 'Double Wagyu A5 & Black Angus Blend',
+        description: 'Dois discos de 100g de marmoreio BMS 9+. O calor violento do carvão botânico Binchotan sela uma crosta maillard caramelizada enquanto preserva o centro incrivelmente rosado, macio e rico em gordura oleica.',
+        m1: 'BMS 9+',
+        m2: '400° C Brasa',
+        m3: 'Manteiga Nobre'
+      },
+      {
+        tag: 'CAMADA 04 • O ELIXIR',
+        origin: 'Bourbon County, Kentucky',
+        title: 'Glace de Trufa Negra & Bourbon Artesanal',
+        description: 'Redução espessa e brilhante de uísque americano envelhecido em barril de carvalho tostado número 4, fundido com manteiga trufada e caldo demi-glace de ossos assados durante 72 horas.',
+        m1: '72h Redução',
+        m2: '45% Vol Base',
+        m3: 'Fumaça & Carvalho'
+      },
+      {
+        tag: 'CAMADA 05 • ESTRUTURA',
+        origin: 'Engenharia Culinária',
+        title: 'Base Selada Obsidian',
+        description: 'A metade inferior do brioche recebe uma fina camada impermeabilizante de emulsão de tutano e cebola tostada, garantindo firmeza até o último segundo sem amolecer com os sucos abundantes da carne.',
+        m1: 'Zero Umidade',
+        m2: 'Crosta 1mm',
+        m3: 'Crocância Firme'
+      }
+    ];
+
+    let currentExplosionVal = 85;
+    let activeLayerIndex = 0;
+
+    function setExplosionFromSlider(val) {
+      currentExplosionVal = parseFloat(val);
+      updateExplodedLayersLayout();
+    }
+
+    function setExplosionPreset(val) {
+      const slider = document.getElementById('anatomyExplodeSlider');
+      if (slider) slider.value = val;
+      currentExplosionVal = val;
+      updateExplodedLayersLayout();
+    }
+
+    function updateExplodedLayersLayout() {
+      const t = currentExplosionVal / 100.0;
+      // Interpolate offsets from assembled (t=0) to fully exploded (t=1)
+      const offsets = [
+        -60 + (-110 * t),  // Layer 0 (Top Bun)
+        -25 + (-60 * t),   // Layer 1 (Cheddar)
+        0,                 // Layer 2 (Wagyu)
+        25 + (60 * t),     // Layer 3 (Bacon)
+        55 + (115 * t)     // Layer 4 (Base Bun)
+      ];
+
+      for (let i = 0; i < 5; i++) {
+        const el = document.getElementById(`stageLayer${i}`);
+        if (!el) continue;
+
+        const isActive = (i === activeLayerIndex);
+        const scale = isActive ? 1.08 : 1.0;
+        const zIndex = isActive ? 30 : (20 - Math.abs(i - 2));
+        const yOffset = offsets[i];
+
+        el.style.transform = `translate(-50%, ${yOffset}px) scale(${scale})`;
+        el.style.zIndex = zIndex;
+
+        const img = el.querySelector('img');
+        const hud = el.querySelector('.layer-hud-tag');
+
+        if (img) {
+          if (isActive) {
+            img.style.filter = 'drop-shadow(0 0 30px rgba(212,154,66,0.85)) brightness(1.12)';
+            img.classList.add('border-amber-gold');
+            img.classList.remove('border-transparent');
+          } else {
+            img.style.filter = 'drop-shadow(0 15px 25px rgba(0,0,0,0.8))';
+            img.classList.remove('border-amber-gold');
+            img.classList.add('border-transparent');
+          }
+        }
+
+        if (hud) {
+          if (isActive) {
+            hud.classList.remove('opacity-0');
+            hud.classList.add('opacity-100');
+          } else {
+            hud.classList.remove('opacity-100');
+            hud.classList.add('opacity-0');
+          }
+        }
+      }
+    }
+
+    function selectLayer(index) {
+      activeLayerIndex = index;
+
+      // Update Tab Styles
+      for (let i = 0; i < 5; i++) {
+        const btn = document.getElementById(`layerBtn${i}`);
+        if (!btn) continue;
+        if (i === index) {
+          btn.className = 'layer-tab w-full text-left p-3.5 rounded-xl border border-amber-gold bg-obsidian-850/90 shadow-[0_0_15px_rgba(212,154,66,0.25)] transition-all flex items-center justify-between group';
+          const icon = btn.querySelector('i');
+          if (icon) icon.className = 'w-4 h-4 text-amber-gold';
+          const num = btn.querySelector('span');
+          if (num) num.className = 'font-mono text-xs text-amber-gold font-bold';
+        } else {
+          btn.className = 'layer-tab w-full text-left p-3.5 rounded-xl border border-white/5 bg-obsidian-900/60 hover:border-amber-gold/40 transition-all flex items-center justify-between group';
+          const icon = btn.querySelector('i');
+          if (icon) icon.className = 'w-4 h-4 text-neutral-600 group-hover:text-amber-gold';
+          const num = btn.querySelector('span');
+          if (num) num.className = 'font-mono text-xs text-neutral-500 group-hover:text-amber-gold font-bold';
+        }
+      }
+
+      // Update Details Content
+      const data = layersData[index];
+      if (data) {
+        const tag = document.getElementById('layerTag');
+        const orig = document.getElementById('layerOrigin');
+        const tit = document.getElementById('layerTitle');
+        const desc = document.getElementById('layerDescription');
+        const m1 = document.getElementById('layerMetric1');
+        const m2 = document.getElementById('layerMetric2');
+        const m3 = document.getElementById('layerMetric3');
+
+        if (tag) tag.textContent = data.tag;
+        if (orig) orig.textContent = `Origem: ${data.origin}`;
+        if (tit) tit.textContent = data.title;
+        if (desc) desc.textContent = data.description;
+        if (m1) m1.textContent = data.m1;
+        if (m2) m2.textContent = data.m2;
+        if (m3) m3.textContent = data.m3;
+      }
+
+      // Sync 3D Exploded Burger Stage
+      updateExplodedLayersLayout();
+    }
+
+    // Initialize Exploded View on load
+    document.addEventListener('DOMContentLoaded', () => {
+      selectLayer(0);
+      updateExplodedLayersLayout();
+    });
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      selectLayer(0);
+      updateExplodedLayersLayout();
+    }
+
+    // Reservation Modal Controls
+    function openReservationModal(burgerName = 'The Obsidian Prime') {
+      document.getElementById('selectedBurgerInput').value = burgerName;
+      document.getElementById('reservationModal').classList.remove('hidden');
+      document.getElementById('reservationForm').classList.remove('hidden');
+      document.getElementById('reservationSuccess').classList.add('hidden');
+    }
+
+    function closeReservationModal() {
+      document.getElementById('reservationModal').classList.add('hidden');
+    }
+
+    function handleReservationSubmit(e) {
+      e.preventDefault();
+      document.getElementById('reservationForm').classList.add('hidden');
+      document.getElementById('reservationSuccess').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    // Director Media Modal Controls
+    function openMediaModal() {
+      document.getElementById('mediaModal').classList.remove('hidden');
+    }
+
+    function closeMediaModal() {
+      document.getElementById('mediaModal').classList.add('hidden');
+    }
+
+    function applyCustomVideoClip() {
+      const val = document.getElementById('nextVideoInput').value.trim();
+      if (!val) return;
+      if (theatreVideo) {
+        theatreVideo.src = val;
+        theatreVideo.play();
+      }
+      alert(`Novo clipe '${val}' carregado com sucesso no player de cinema!`);
+      closeMediaModal();
+    }
+
+    // =========================================================================
+    // LABORATÓRIO SENSORIAL & MULTIÂNGULO 360° (AULAS 2 E 3)
+    // =========================================================================
+    const SENSORY_DATA = [
+      {
+        id: "obsidian-prime",
+        name: "The Obsidian Prime",
+        tagline: "Wagyu A5 BMS 9+ & Trufa Negra",
+        angles: [
+          { label: "Frontal", src: "assets/burger_exploded_master.jpg", desc: "Visão frontal com dissecção de camadas nobres" },
+          { label: "Ângulo 45°", src: "assets/sensorial/obsidian_prime_45.jpg", desc: "Perfil com corte Wagyu A5 certificado e cheddar fundido" },
+          { label: "Topo / Camadas", src: "assets/sensorial/obsidian_prime_topo.jpg", desc: "Vista aérea com coroa brioche, flor de sal e alecrim fresco" },
+          { label: "Macro Clímax", src: "assets/editorial/corte_perfeito_macro.jpg", desc: "Corte transversal ao meio revelando ponto rosado suculento a 54°C" }
+        ],
+        metrics: { umami: 98, suculencia: 96, defumado: 85, crostinha: 92, acidez: 88 },
+        sommelier: {
+          drink: "Bourbon Smoked Wood & Laranja Bahia",
+          notes: "As notas amendoadas do carvalho americano equilibram a intensidade do marmoreio Wagyu e amplificam o aroma terroso da trufa."
+        },
+        temp: "54°C (Ao Ponto Menos)",
+        preco: "R$ 68,00"
+      },
+      {
+        id: "smash-cheddar",
+        name: "Smash Cheddar Melt",
+        tagline: "Double Smash 60g & Cheddar 18 Meses",
+        angles: [
+          { label: "Frontal", src: "assets/menu/smash_cheddar.jpg", desc: "Duplo smash artesanal com borda rendada ultrafina" },
+          { label: "Ângulo 45°", src: "assets/sensorial/smash_cheddar_45.jpg", desc: "Perfil suculento com crosta caramelizada e molho da casa" },
+          { label: "Topo / Camadas", src: "assets/sensorial/obsidian_prime_topo.jpg", desc: "Pão brioche dourado com gergelim tostado na manteiga" },
+          { label: "Macro Clímax", src: "assets/editorial/fusao_queijo_macro.jpg", desc: "Fusão cremosa do queijo cheddar inglês a 65°C de calor" }
+        ],
+        metrics: { umami: 94, suculencia: 90, defumado: 78, crostinha: 99, acidez: 82 },
+        sommelier: {
+          drink: "American IPA Resinosa com Dry Hopping",
+          notes: "O amargor cítrico dos lúpulos corta a untuosidade rica do queijo cheddar maturado, preparando o paladar para a próxima mordida."
+        },
+        temp: "62°C (Ponto Quente Crocante)",
+        preco: "R$ 38,00"
+      },
+      {
+        id: "smoked-bacon",
+        name: "Smoked Double Bacon",
+        tagline: "Bacon Curado a Frio & Mel Silvestre",
+        angles: [
+          { label: "Frontal", src: "assets/menu/x_bacon.jpg", desc: "Apresentação frontal com fatias cruzadas de bacon artesanal" },
+          { label: "Ângulo 45°", src: "assets/menu/combo_bacon.jpg", desc: "Visão 45° com batatas rústicas douradas e molho especial" },
+          { label: "Topo / Camadas", src: "assets/sensorial/obsidian_prime_topo.jpg", desc: "Coroa brioche macia com selagem térmica impecável" },
+          { label: "Macro Clímax", src: "assets/sensorial/bacon_macro_glaze.jpg", desc: "Gotas de glaze bourbon sobre tiras de bacon crocante e queijo" }
+        ],
+        metrics: { umami: 96, suculencia: 92, defumado: 99, crostinha: 95, acidez: 86 },
+        sommelier: {
+          drink: "Cerveja Rauchbier Artesanal ou Stout",
+          notes: "A defumação em malte tostado ressoa com a madeira nobre de macieira da cura artesanal de 7 dias da pancetta."
+        },
+        temp: "56°C (Suculência Rosada)",
+        preco: "R$ 44,00"
+      },
+      {
+        id: "truffle-reserve",
+        name: "Truffle Supreme Reserve",
+        tagline: "Corte Nobre 150g & Manteiga Ghee",
+        angles: [
+          { label: "Frontal", src: "assets/menu/picanha_cheddar_bacon.jpg", desc: "Equilíbrio arquitetônico de cortes nobres selecionados" },
+          { label: "Ângulo 45°", src: "assets/sensorial/obsidian_prime_45.jpg", desc: "Perfil nobre com crosta dourada e queijo gratinado" },
+          { label: "Topo / Camadas", src: "assets/sensorial/truffle_macro_slices.jpg", desc: "Lâminas frescas de trufas negras caindo sobre a carne fundente" },
+          { label: "Macro Clímax", src: "assets/editorial/brasa_binchotan_macro.jpg", desc: "Selagem extrema na brasa incandescente de carvão Binchotan a 400°C" }
+        ],
+        metrics: { umami: 99, suculencia: 98, defumado: 82, crostinha: 89, acidez: 91 },
+        sommelier: {
+          drink: "Vinho Tinto Syrah Gran Reserva",
+          notes: "Taninos redondos e final longo e persistente que sustentam a untuosidade da manteiga ghee e o aroma terroso das trufas."
+        },
+        temp: "53°C (Rosado Quente)",
+        preco: "R$ 52,00"
+      }
+    ];
+
+    let currentSensoryBurgerIdx = 0;
+    let currentSensoryAngleIdx = 0;
+
+    function selectSensoryBurger(index) {
+      currentSensoryBurgerIdx = index;
+      currentSensoryAngleIdx = 0;
+      const b = SENSORY_DATA[index];
+      if (!b) return;
+
+      const nameEl = document.getElementById('sensoryBurgerName');
+      const tagEl = document.getElementById('sensoryBurgerTagline');
+      const priceEl = document.getElementById('sensoryBurgerPrice');
+      const tempEl = document.getElementById('sensoryBurgerTemp');
+      if (nameEl) nameEl.textContent = b.name;
+      if (tagEl) tagEl.textContent = b.tagline;
+      if (priceEl) priceEl.textContent = b.preco;
+      if (tempEl) tempEl.textContent = b.temp;
+
+      const drinkEl = document.getElementById('sensorySommelierDrink');
+      const notesEl = document.getElementById('sensorySommelierNotes');
+      if (drinkEl) drinkEl.textContent = b.sommelier.drink;
+      if (notesEl) notesEl.textContent = b.sommelier.notes;
+
+      const m = b.metrics;
+      updateSensoryBar('sensoryBarUmami', 'sensoryValUmami', m.umami);
+      updateSensoryBar('sensoryBarSuculencia', 'sensoryValSuculencia', m.suculencia);
+      updateSensoryBar('sensoryBarDefumado', 'sensoryValDefumado', m.defumado);
+      updateSensoryBar('sensoryBarCrostinha', 'sensoryValCrostinha', m.crostinha);
+      updateSensoryBar('sensoryBarAcidez', 'sensoryValAcidez', m.acidez);
+
+      for (let i = 0; i < 4; i++) {
+        const tab = document.getElementById(`sensoryTab${i}`);
+        if (tab) {
+          if (i === index) {
+            tab.className = 'sensory-tab px-4 sm:px-6 py-2.5 rounded-full border border-amber-gold bg-amber-gold/15 text-amber-gold font-mono text-xs font-bold tracking-wider uppercase transition-all duration-300 shadow-[0_0_15px_rgba(212,154,66,0.3)]';
+          } else {
+            tab.className = 'sensory-tab px-4 sm:px-6 py-2.5 rounded-full border border-white/10 hover:border-amber-gold/40 text-neutral-400 hover:text-white font-mono text-xs tracking-wider uppercase transition-all duration-300';
+          }
+        }
+      }
+
+      selectSensoryAngle(0);
+    }
+
+    function updateSensoryBar(barId, valId, val) {
+      const bar = document.getElementById(barId);
+      const txt = document.getElementById(valId);
+      if (bar) bar.style.width = `${val}%`;
+      if (txt) txt.textContent = `${val}%`;
+    }
+
+    function selectSensoryAngle(angleIdx) {
+      currentSensoryAngleIdx = angleIdx;
+      const b = SENSORY_DATA[currentSensoryBurgerIdx];
+      if (!b) return;
+      const angle = b.angles[angleIdx];
+      if (!angle) return;
+
+      const imgEl = document.getElementById('sensoryImage');
+      const descEl = document.getElementById('sensoryAngleDesc');
+
+      if (imgEl) {
+        imgEl.style.opacity = '0.3';
+        imgEl.style.transform = 'scale(0.96)';
+        setTimeout(() => {
+          imgEl.src = angle.src;
+          imgEl.style.opacity = '1';
+          imgEl.style.transform = 'scale(1)';
+        }, 120);
+      }
+
+      if (descEl) {
+        descEl.textContent = `${angle.label}: ${angle.desc}`;
+      }
+
+      for (let i = 0; i < 4; i++) {
+        const btn = document.getElementById(`angleBtn${i}`);
+        if (btn) {
+          if (i === angleIdx) {
+            btn.className = 'angle-btn px-3 py-1 rounded-lg border border-amber-gold bg-amber-gold/20 text-amber-gold font-mono text-[10px] font-bold transition-all';
+          } else {
+            btn.className = 'angle-btn px-3 py-1 rounded-lg border border-white/10 hover:border-amber-gold/40 text-neutral-400 hover:text-white font-mono text-[10px] transition-all';
+          }
+        }
+      }
+    }
+
+    function orderCurrentSensoryBurger() {
+      const b = SENSORY_DATA[currentSensoryBurgerIdx];
+      if (!b) return;
+      const msg = `Olá! Gostaria de pedir o ${b.name} (${b.preco}) da linha de alta gastronomia Obsidian!`;
+      const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+    }
+
+    // =========================================================================
+    // CARDÁPIO OFICIAL NOSSA CASA (REABERTURA - 20 ITENS)
+    // =========================================================================
+    const MENU_DATA = [
+      // 1. TRADICIONAIS (150g)
+      {
+        id: 'x_burger',
+        name: 'X-Burger Artesanal',
+        category: 'tradicionais',
+        tag: '150g • Tradicional',
+        badgeClass: 'bg-amber-gold/20 text-amber-gold border-amber-gold/40',
+        price: 'R$ 22,90',
+        desc: 'Pão brioche especial levemente tostado na chapa, hambúrguer bovino artesanal de 150g no ponto perfeito, queijo prato derretido e nossa maionese especial.',
+        image: 'assets/menu/x_burger.jpg',
+        popular: false
+      },
+      {
+        id: 'x_cheddar',
+        name: 'X-Cheddar Cremoso',
+        category: 'tradicionais',
+        tag: '150g • Tradicional',
+        badgeClass: 'bg-amber-gold/20 text-amber-gold border-amber-gold/40',
+        price: 'R$ 24,90',
+        desc: 'Pão selado na manteiga, hambúrguer artesanal de 150g, generosa camada de cheddar cremoso fundente e cebola caramelizada lentamente no ponto.',
+        image: 'assets/menu/x_cheddar.jpg',
+        popular: false
+      },
+      {
+        id: 'x_salada',
+        name: 'X-Salada Clássico',
+        category: 'tradicionais',
+        tag: '150g • Tradicional',
+        badgeClass: 'bg-amber-gold/20 text-amber-gold border-amber-gold/40',
+        price: 'R$ 26,90',
+        desc: 'Hambúrguer artesanal de 150g, queijo prato derretido na chapa, alface americana crocante, rodelas de tomate fresco selecionado e maionese da casa.',
+        image: 'assets/menu/x_salada.jpg',
+        popular: false
+      },
+      {
+        id: 'x_bacon',
+        name: 'X-Bacon Crocante',
+        category: 'tradicionais',
+        tag: '150g • Mais Pedido',
+        badgeClass: 'bg-amber-500/20 text-amber-300 border-amber-500/40',
+        price: 'R$ 29,90',
+        desc: 'Hambúrguer artesanal de 150g suculento, queijo prato tostado, fatias generosas de bacon crocante artesanalmente defumado e maionese da casa.',
+        image: 'assets/menu/x_bacon.jpg',
+        popular: true
+      },
+      {
+        id: 'x_picanha_bacon',
+        name: 'X-Picanha Bacon Nobre',
+        category: 'tradicionais',
+        tag: '150g • Nobre',
+        badgeClass: 'bg-red-500/20 text-red-300 border-red-500/40',
+        price: 'R$ 34,90',
+        desc: 'Blend nobre de Picanha bovina 150g temperada com flor de sal na brasa, queijo prato, fatias crocantes de bacon e maionese especial da casa.',
+        image: 'assets/menu/x_picanha_bacon.jpg',
+        popular: true
+      },
+
+      // 2. LINHA SMASH (60g)
+      {
+        id: 'smash_cheese',
+        name: 'Smash Cheese',
+        category: 'smash',
+        tag: '60g • Linha Smash',
+        badgeClass: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
+        price: 'R$ 24,90',
+        desc: 'Pão brioche prensado e tostado, smash burger 60g prensado na chapa ultra quente com crosta maillard caramelizada, queijo prato duplo derretido e molho especial.',
+        image: 'assets/menu/smash_cheese.jpg',
+        popular: false
+      },
+      {
+        id: 'smash_cheddar',
+        name: 'Smash Cheddar Melt',
+        category: 'smash',
+        tag: '60g • Linha Smash',
+        badgeClass: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
+        price: 'R$ 26,90',
+        desc: 'Pão tostado na manteiga, smash burger 60g crocante e suculento, generosa cobertura de cheddar fundente cremoso e toque exclusivo de molho da casa.',
+        image: 'assets/menu/smash_cheddar.jpg',
+        popular: false
+      },
+
+      // 3. ESPECIAIS DA CASA
+      {
+        id: 'picanha_cheddar_bacon',
+        name: 'Picanha Cheddar Bacon Master',
+        category: 'especiais',
+        tag: '150g • Especial Chef',
+        badgeClass: 'bg-amber-glow/20 text-amber-200 border-amber-glow/50',
+        price: 'R$ 36,90',
+        desc: 'A estrela da casa: Hambúrguer de Picanha nobre 150g, banhado com farta cascata de cheddar cremoso derretido e salpicado com crocantes cubos de bacon.',
+        image: 'assets/menu/picanha_cheddar_bacon.jpg',
+        popular: true
+      },
+      {
+        id: 'pernil_defumado',
+        name: 'Pernil Suíno Defumado',
+        category: 'especiais',
+        tag: '150g • Especial Chef',
+        badgeClass: 'bg-amber-glow/20 text-amber-200 border-amber-glow/50',
+        price: 'R$ 34,90',
+        desc: 'Receita autoral Nossa Casa: Delicioso burger de pernil suíno artesanal 150g defumado lentamente, queijo derretido e molho barbecue rústico caramelizado.',
+        image: 'assets/menu/pernil_defumado.jpg',
+        popular: false
+      },
+
+      // 4. COMBOS ESPECIAIS (Burger + Fritas + Refri)
+      {
+        id: 'combo_x_burger',
+        name: 'Combo X-Burger Completo',
+        category: 'combos',
+        tag: 'COMBO COMPLETO',
+        badgeClass: 'bg-blue-500/20 text-blue-300 border-blue-500/40',
+        price: 'R$ 29,90',
+        desc: 'X-Burger Artesanal 150g no pão brioche com queijo e maionese + Porção de Batata Frita individual crocante + Refrigerante gelado em lata 350ml.',
+        image: 'assets/menu/combo_x_burger.jpg',
+        popular: false
+      },
+      {
+        id: 'combo_x_salada',
+        name: 'Combo X-Salada Completo',
+        category: 'combos',
+        tag: 'COMBO COMPLETO',
+        badgeClass: 'bg-blue-500/20 text-blue-300 border-blue-500/40',
+        price: 'R$ 34,90',
+        desc: 'X-Salada Clássico 150g com salada crocante fresca e maionese da casa + Batata Frita individual sequinha + Refrigerante em lata 350ml gelado.',
+        image: 'assets/menu/combo_x_salada.jpg',
+        popular: false
+      },
+      {
+        id: 'combo_bacon',
+        name: 'Combo X-Bacon Supremo',
+        category: 'combos',
+        tag: 'COMBO CAMPEÃO',
+        badgeClass: 'bg-blue-500/20 text-blue-300 border-blue-500/40',
+        price: 'R$ 37,90',
+        desc: 'O combo mais pedido da hamburgueria! X-Bacon 150g com fatias crocantes de bacon e queijo + Batata Frita individual + Refrigerante lata 350ml.',
+        image: 'assets/menu/combo_bacon.jpg',
+        popular: true
+      },
+      {
+        id: 'combo_picanha',
+        name: 'Combo Picanha Especial',
+        category: 'combos',
+        tag: 'COMBO PREMIUM',
+        badgeClass: 'bg-blue-500/20 text-blue-300 border-blue-500/40',
+        price: 'R$ 42,90',
+        desc: 'A experiência máxima: Hambúrguer de Picanha Nobre artesanal 150g + Porção de Batata Frita dourada crocante + Refrigerante lata 350ml geladinho.',
+        image: 'assets/menu/combo_picanha.jpg',
+        popular: true
+      },
+
+      // 5. PORÇÕES & ACOMPANHAMENTOS
+      {
+        id: 'batata_frita',
+        name: 'Batata Frita Tradicional',
+        category: 'porcoes',
+        tag: 'PORÇÃO INDIVIDUAL',
+        badgeClass: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/40',
+        price: 'R$ 14,90',
+        desc: 'Porção de batatas palito crocantes por fora e macias por dentro, douradas na temperatura perfeita e finalizadas com tempero especial da casa.',
+        image: 'assets/menu/batata_frita.jpg',
+        popular: false
+      },
+      {
+        id: 'batata_cheddar_bacon',
+        name: 'Batata Frita Cheddar & Bacon',
+        category: 'porcoes',
+        tag: 'PORÇÃO ESPECIAL',
+        badgeClass: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/40',
+        price: 'R$ 19,90',
+        desc: 'Batatas fritas super crocantes cobertas por generosa cascata de creme cheddar aveludado e chuva de bacon defumado crocante em cubos.',
+        image: 'assets/menu/batata_cheddar_bacon.jpg',
+        popular: true
+      },
+      {
+        id: 'isca_frango',
+        name: 'Iscas de Frango Empanadas',
+        category: 'porcoes',
+        tag: 'PORÇÃO CROCANTE',
+        badgeClass: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/40',
+        price: 'R$ 18,90',
+        desc: 'Tiras suculentas de peito de frango selecionado temperadas com especiarias, empanadas em crosta ultra crocante e servidas com molho da casa.',
+        image: 'assets/menu/isca_frango.jpg',
+        popular: false
+      },
+      {
+        id: 'mandioca_frita',
+        name: 'Mandioca Frita Especial',
+        category: 'porcoes',
+        tag: 'PORÇÃO TRADICIONAL',
+        badgeClass: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/40',
+        price: 'R$ 16,90',
+        desc: 'Mandioca nobre cozida e frita até formar uma casquinha dourada crocante com interior aveludado e macio. Um clássico irresistível.',
+        image: 'assets/menu/mandioca_frita.jpg',
+        popular: false
+      },
+
+      // 6. BEBIDAS & SOBREMESAS
+      {
+        id: 'bebidas',
+        name: 'Refrigerantes em Lata & Água',
+        category: 'bebidas',
+        tag: 'BEBIDAS GELADAS',
+        badgeClass: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40',
+        price: 'A partir de R$ 4,00',
+        desc: 'Refrigerantes Lata 350ml (Coca-Cola, Guaraná Antarctica, Fanta, Sprite) por R$ 6,00 ou Água Mineral com ou sem gás 500ml por R$ 4,00.',
+        image: 'assets/menu/bebidas.jpg',
+        popular: false
+      },
+      {
+        id: 'milkshake',
+        name: 'Milk-Shake Artesanal 400ml',
+        category: 'bebidas',
+        tag: 'SOBREMESA CREMOSA',
+        badgeClass: 'bg-pink-500/20 text-pink-300 border-pink-500/40',
+        price: 'R$ 16,90',
+        desc: 'Batido na hora com sorvete artesanal cremoso de alta densidade e calda especial. Disponível nos sabores Chocolate Belga, Morango Silvestre e Baunilha.',
+        image: 'assets/menu/milkshake.jpg',
+        popular: true
+      },
+      {
+        id: 'brownie',
+        name: 'Brownie com Sorvete de Creme',
+        category: 'bebidas',
+        tag: 'SOBREMESA ESPECIAL',
+        badgeClass: 'bg-pink-500/20 text-pink-300 border-pink-500/40',
+        price: 'R$ 16,90',
+        desc: 'Brownie farto de chocolate intenso meio amargo aquecido, servido com bola generosa de sorvete de creme artesanal e calda quente de chocolate.',
+        image: 'assets/menu/brownie.jpg',
+        popular: true
+      }
+    ];
+
+    // =========================================================================
+    // ORIGINKIT MAGNETIC CAROUSEL ENGINE & MENU LOGIC
+    // =========================================================================
+    function getMagneticConfig() {
+      const isMob = window.innerWidth < 768;
+      return {
+        collapsedWidth: isMob ? 190 : 250,
+        hoverWidth: isMob ? 250 : 330,
+        collapsedHeight: isMob ? 360 : 410,
+        hoverHeight: isMob ? 390 : 440,
+        openSize: isMob ? Math.min(window.innerWidth - 32, 460) : 620,
+        openHeight: isMob ? 500 : 530,
+        gap: isMob ? 12 : 20,
+        influence: isMob ? 190 : 280,
+        blur: 2.5,
+        dur: 0.35,
+        ease: 'cubic-bezier(0.44, 0, 0.56, 1)'
+      };
+    }
+
+    let currentCategory = 'all';
+    let currentItems = [];
+    let targetFactors = [];
+    let curFactors = [];
+    let openIndex = null;
+    let isClosing = false;
+    let magneticLoopRef = null;
+    let magneticCloseTimer = null;
+    let isGridView = false;
+    let hasDragged = false;
+
+    function renderMenu(category = 'all') {
+      currentCategory = category;
+      currentItems = category === 'all' 
+        ? MENU_DATA 
+        : MENU_DATA.filter(item => item.category === category);
+
+      // 1. Render Magnetic Track
+      const track = document.getElementById('magneticTrack');
+      if (track) {
+        track.innerHTML = currentItems.map((item, index) => `
+          <div class="magnetic-card flex-none rounded-2xl overflow-hidden relative cursor-pointer select-none bg-obsidian-950 border border-white/10 hover:border-amber-gold/50 shadow-xl group transition-all" onclick="handleCardClick(${index}, event)">
+            
+            <!-- 1. Pure Burger Image Section: 100% CLEAN, ZERO TEXT OVER IMAGE, ZERO CLIPPING -->
+            <div class="card-img-container relative w-full h-48 sm:h-52 overflow-hidden bg-obsidian-950 flex items-center justify-center flex-shrink-0 p-2 sm:p-2.5">
+              <img src="${item.image}" alt="${item.name}" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" loading="lazy">
+              <div class="absolute inset-0 border-b border-white/10 group-hover:border-amber-gold/30 transition-colors pointer-events-none"></div>
+            </div>
+
+            <!-- 2. Clean Dedicated Information Box Below The Picture -->
+            <div class="card-collapsed-info p-4 flex flex-col justify-between flex-1 bg-obsidian-900/90 group-hover:bg-obsidian-900 transition-colors">
+              <div>
+                <!-- Grammage & Tag Pill -->
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="px-2 py-0.5 rounded-full bg-amber-gold/15 border border-amber-gold/30 text-[10px] font-mono text-amber-gold font-bold tracking-wider uppercase">
+                    ${item.tag}
+                  </span>
+                  ${item.popular ? `
+                    <span class="flex items-center gap-1 text-[10px] font-mono text-amber-gold font-bold uppercase">
+                      <i data-lucide="sparkles" class="w-3 h-3 text-amber-gold"></i> Destaque
+                    </span>
+                  ` : ''}
+                </div>
+
+                <!-- Product Name: Fully visible, clean typography -->
+                <h4 class="font-cinzel font-bold text-white text-sm sm:text-base tracking-wide leading-tight group-hover:text-amber-gold transition-colors line-clamp-1">
+                  ${item.name}
+                </h4>
+
+                <!-- Price in amber gold -->
+                <div class="text-amber-gold font-cinzel font-bold text-sm sm:text-base mt-1">
+                  ${item.price}
+                </div>
+
+                <!-- Ingredients description revealed on magnetic hover expansion -->
+                <div class="card-hover-details opacity-0 transition-opacity duration-150 pt-2 pointer-events-none">
+                  <p class="text-[11px] text-neutral-300 line-clamp-2 leading-relaxed font-sans">
+                    ${item.desc}
+                  </p>
+                </div>
+              </div>
+
+              <!-- Bottom Action Prompt -->
+              <div class="pt-2.5 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-amber-gold/90 group-hover:text-amber-gold">
+                <span class="uppercase font-semibold tracking-wider">Ver & Pedir</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+              </div>
+            </div>
+
+            <!-- Expanded Showcase (Revealed when is-open) -->
+            <div class="card-expanded-view absolute inset-0 z-30 bg-obsidian-950/95 p-5 sm:p-7 flex flex-col justify-between overflow-y-auto opacity-0 pointer-events-none transition-opacity duration-300">
+              <!-- Header -->
+              <div class="flex items-center justify-between pb-3 border-b border-white/10">
+                <div class="flex items-center gap-2">
+                  <span class="px-2.5 py-0.5 rounded-full bg-amber-gold/20 text-amber-gold border border-amber-gold/40 font-mono text-[10px] font-bold uppercase tracking-wider">
+                    ${item.tag}
+                  </span>
+                  ${item.popular ? `
+                    <span class="px-2.5 py-0.5 rounded-full bg-amber-gold text-obsidian-950 font-mono text-[10px] font-extrabold uppercase tracking-wider flex items-center gap-1">
+                      <i data-lucide="sparkles" class="w-3 h-3"></i> Mais Pedido
+                    </span>
+                  ` : ''}
+                </div>
+                <button onclick="event.stopPropagation(); closeMagneticCard();" class="p-1.5 rounded-full bg-white/10 hover:bg-amber-gold hover:text-obsidian-950 text-neutral-300 transition-colors" title="Fechar">
+                  <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+              </div>
+
+              <!-- Body: Grid -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 my-auto py-3 items-center">
+                <div class="relative aspect-[4/3] sm:aspect-[16/11] rounded-2xl overflow-hidden border border-amber-gold/40 shadow-2xl bg-obsidian-950 flex items-center justify-center p-3 sm:p-4 max-h-56 sm:max-h-64 mx-auto w-full">
+                  <img src="${item.image}" alt="${item.name}" class="w-full h-full object-contain filter drop-shadow-[0_10px_25px_rgba(0,0,0,0.9)]">
+                </div>
+                
+                <div class="flex flex-col justify-center space-y-2 text-left">
+                  <span class="text-[10px] font-mono tracking-[0.2em] text-amber-gold uppercase">Nossa Casa Hamburgueria</span>
+                  <h3 class="font-cinzel text-lg sm:text-xl font-bold text-white leading-tight">${item.name}</h3>
+                  <p class="text-xs text-neutral-300 leading-relaxed font-sans">${item.desc}</p>
+                  
+                  <div class="pt-1">
+                    <span class="block text-[10px] font-mono text-neutral-400 uppercase">Preço Especial</span>
+                    <span class="font-cinzel text-xl sm:text-2xl font-bold text-amber-gold tracking-tight">${item.price}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Footer Actions -->
+              <div class="pt-3 border-t border-white/10 flex flex-wrap items-center gap-3">
+                <button onclick="event.stopPropagation(); orderViaWhatsApp('${item.name.replace(/'/g, "\\'")}', '${item.price}');" class="flex-1 min-w-[160px] px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-gold to-amber-dark text-obsidian-950 font-mono text-xs font-bold tracking-wider uppercase hover:shadow-[0_0_20px_rgba(212,154,66,0.4)] transition-all flex items-center justify-center gap-2">
+                  <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+                  Pedir no WhatsApp
+                </button>
+                <a href="https://www.ifood.com.br" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();" class="px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-mono text-xs font-bold tracking-wider uppercase transition-colors flex items-center gap-1.5">
+                  <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                  iFood
+                </a>
+              </div>
+            </div>
+
+          </div>
+        `).join('');
+      }
+
+      // 2. Render Grid View fallback
+      const grid = document.getElementById('menuGrid');
+      if (grid) {
+        grid.innerHTML = currentItems.map(item => `
+          <div class="glass-card rounded-2xl p-5 border border-white/10 hover:border-amber-gold/50 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1">
+            <div>
+              <div class="relative aspect-[4/3] sm:aspect-[16/11] rounded-xl overflow-hidden mb-4 bg-obsidian-950 border border-white/5 flex items-center justify-center p-2.5">
+                <img src="${item.image}" alt="${item.name}" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                
+                <div class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-full border text-[10px] font-mono font-bold tracking-wider uppercase backdrop-blur-md ${item.badgeClass}">
+                  ${item.tag}
+                </div>
+
+                ${item.popular ? `
+                  <div class="absolute top-2.5 right-2.5 px-2.5 py-1 rounded-full bg-amber-gold text-obsidian-950 text-[10px] font-mono font-extrabold tracking-wider uppercase shadow-md flex items-center gap-1">
+                    <i data-lucide="sparkles" class="w-3 h-3"></i>
+                    Destaque
+                  </div>
+                ` : ''}
+              </div>
+
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <h3 class="font-cinzel font-bold text-white text-base group-hover:text-amber-gold transition-colors leading-snug">
+                  ${item.name}
+                </h3>
+              </div>
+
+              <p class="text-neutral-400 text-xs leading-relaxed mb-4 line-clamp-3">
+                ${item.desc}
+              </p>
+            </div>
+
+            <div class="pt-4 border-t border-white/5 flex items-center justify-between gap-3">
+              <div>
+                <span class="block text-[10px] font-mono text-neutral-500 uppercase">Preço</span>
+                <span class="font-cinzel font-bold text-amber-gold text-lg">${item.price}</span>
+              </div>
+
+              <button onclick="orderViaWhatsApp('${item.name.replace(/'/g, "\\'")}', '${item.price}')" class="px-3.5 py-2 rounded-xl bg-amber-gold/15 hover:bg-amber-gold border border-amber-gold/40 text-amber-gold hover:text-obsidian-950 font-mono text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm">
+                <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i>
+                Pedir
+              </button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Reset Magnetic State
+      openIndex = null;
+      isClosing = false;
+      targetFactors = currentItems.map(() => 0);
+      curFactors = currentItems.map(() => 0);
+
+      const backdrop = document.getElementById('magneticBackdrop');
+      if (backdrop) backdrop.classList.add('pointer-events-none', 'opacity-0');
+
+      applyMagneticSizes();
+      lucide.createIcons();
+    }
+
+    function startMagneticLoop() {
+      if (magneticLoopRef) return;
+      const step = () => {
+        let moving = false;
+        for (let i = 0; i < curFactors.length; i++) {
+          const d = (targetFactors[i] ?? 0) - curFactors[i];
+          if (Math.abs(d) > 0.001) {
+            curFactors[i] += d * 0.2;
+            moving = true;
+          } else {
+            curFactors[i] = targetFactors[i] ?? 0;
+          }
+        }
+        applyMagneticSizes();
+        magneticLoopRef = moving ? requestAnimationFrame(step) : null;
+      };
+      magneticLoopRef = requestAnimationFrame(step);
+    }
+
+    function setTargetFromCursor(clientX) {
+      if (openIndex !== null) return;
+      const track = document.getElementById('magneticTrack');
+      if (!track) return;
+      const cards = track.querySelectorAll('.magnetic-card');
+      if (!cards.length) return;
+
+      const cfg = getMagneticConfig();
+      targetFactors = Array.from(cards).map(card => {
+        const rect = card.getBoundingClientRect();
+        const center = rect.left + rect.width / 2;
+        const dist = Math.abs(clientX - center);
+        const f = Math.max(0, 1 - dist / cfg.influence);
+        return f * f * (3 - 2 * f);
+      });
+
+      startMagneticLoop();
+    }
+
+    function applyMagneticSizes() {
+      const track = document.getElementById('magneticTrack');
+      if (!track) return;
+      const cards = track.querySelectorAll('.magnetic-card');
+      const cfg = getMagneticConfig();
+
+      const openEase = `width ${cfg.dur}s ${cfg.ease}, height ${cfg.dur}s ${cfg.ease}, filter ${cfg.dur}s ease, opacity ${cfg.dur}s ease`;
+      const barTransition = (openIndex !== null || isClosing) ? openEase : 'none';
+
+      cards.forEach((card, i) => {
+        card.style.transition = barTransition;
+
+        if (openIndex !== null) {
+          if (i === openIndex) {
+            card.style.width = `${cfg.openSize}px`;
+            card.style.height = `${cfg.openHeight}px`;
+            card.style.filter = 'none';
+            card.style.opacity = '1';
+            card.style.zIndex = '30';
+            card.classList.add('is-open');
+          } else {
+            card.style.width = `${cfg.collapsedWidth}px`;
+            card.style.height = `${cfg.collapsedHeight}px`;
+            card.style.filter = `blur(${cfg.blur}px)`;
+            card.style.opacity = '0.4';
+            card.style.zIndex = '2';
+            card.classList.remove('is-open');
+          }
+        } else {
+          card.classList.remove('is-open');
+          const f = curFactors[i] ?? 0;
+          const w = cfg.collapsedWidth + (cfg.hoverWidth - cfg.collapsedWidth) * f;
+          const h = cfg.collapsedHeight + (cfg.hoverHeight - cfg.collapsedHeight) * f;
+
+          card.style.width = `${w}px`;
+          card.style.height = `${h}px`;
+          card.style.filter = 'none';
+          card.style.opacity = '1';
+          card.style.zIndex = f > 0.15 ? '15' : '2';
+
+          const hoverDetails = card.querySelector('.card-hover-details');
+          if (hoverDetails) {
+            hoverDetails.style.opacity = Math.min(1, Math.max(0, (f - 0.25) / 0.5));
+          }
+        }
+      });
+    }
+
+    function handleCardClick(index, e) {
+      if (hasDragged) return;
+      if (openIndex !== null && openIndex !== index) {
+        openMagneticCard(index);
+        return;
+      }
+      openMagneticCard(index);
+    }
+
+    function openMagneticCard(index) {
+      if (openIndex === index) {
+        closeMagneticCard();
+        return;
+      }
+      openIndex = index;
+      applyMagneticSizes();
+
+      const backdrop = document.getElementById('magneticBackdrop');
+      if (backdrop) {
+        backdrop.classList.remove('pointer-events-none', 'opacity-0');
+      }
+
+      // Smoothly center the opened card in the viewport
+      const track = document.getElementById('magneticTrack');
+      const viewport = document.getElementById('magneticViewport');
+      const cards = track ? track.querySelectorAll('.magnetic-card') : [];
+      if (cards[index] && viewport) {
+        setTimeout(() => {
+          const cardRect = cards[index].getBoundingClientRect();
+          const vpRect = viewport.getBoundingClientRect();
+          const offset = (cardRect.left + cardRect.width / 2) - (vpRect.left + vpRect.width / 2);
+          viewport.scrollBy({ left: offset, behavior: 'smooth' });
+        }, 50);
+      }
+    }
+
+    function closeMagneticCard() {
+      if (openIndex === null) return;
+      openIndex = null;
+      isClosing = true;
+      targetFactors = currentItems.map(() => 0);
+      curFactors = currentItems.map(() => 0);
+
+      applyMagneticSizes();
+
+      const backdrop = document.getElementById('magneticBackdrop');
+      if (backdrop) {
+        backdrop.classList.add('pointer-events-none', 'opacity-0');
+      }
+
+      const cfg = getMagneticConfig();
+      clearTimeout(magneticCloseTimer);
+      magneticCloseTimer = setTimeout(() => {
+        isClosing = false;
+        applyMagneticSizes();
+      }, cfg.dur * 1000);
+    }
+
+    function scrollMagneticTrack(delta) {
+      const viewport = document.getElementById('magneticViewport');
+      if (viewport) {
+        viewport.scrollBy({ left: delta, behavior: 'smooth' });
+      }
+    }
+
+    function toggleMenuView() {
+      isGridView = !isGridView;
+      const stage = document.getElementById('magneticStageWrapper');
+      const grid = document.getElementById('menuGrid');
+      const btnText = document.getElementById('viewToggleText');
+      const arrows = document.getElementById('carouselNavArrows');
+
+      if (isGridView) {
+        stage.classList.add('hidden');
+        grid.classList.remove('hidden');
+        btnText.textContent = 'Ver Carrossel';
+        if (arrows) arrows.classList.add('hidden');
+      } else {
+        stage.classList.remove('hidden');
+        grid.classList.add('hidden');
+        btnText.textContent = 'Ver Grade';
+        if (arrows) arrows.classList.remove('hidden');
+        applyMagneticSizes();
+      }
+    }
+
+    function filterMenu(category, btnElement) {
+      document.querySelectorAll('.menu-tab-btn').forEach(btn => {
+        btn.classList.remove('active', 'border-amber-gold', 'bg-amber-gold', 'text-obsidian-950', 'font-bold', 'shadow-[0_0_15px_rgba(212,154,66,0.3)]');
+        btn.classList.add('border-white/10', 'bg-obsidian-950/60', 'text-neutral-300');
+      });
+
+      if (btnElement) {
+        btnElement.classList.add('active', 'border-amber-gold', 'bg-amber-gold', 'text-obsidian-950', 'font-bold', 'shadow-[0_0_15px_rgba(212,154,66,0.3)]');
+        btnElement.classList.remove('border-white/10', 'bg-obsidian-950/60', 'text-neutral-300');
+      }
+
+      renderMenu(category);
+    }
+
+    function orderViaWhatsApp(itemName, price) {
+      const message = `Olá, Nossa Casa Restaurante & Hamburgueria! Gostaria de pedir: *${itemName}* (${price}) do Cardápio de Reabertura. Meu endereço de entrega em Taboão da Serra é: `;
+      const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
+    }
+
+    function openFlyerModal() {
+      document.getElementById('flyerModal').classList.remove('hidden');
+    }
+
+    function closeFlyerModal() {
+      document.getElementById('flyerModal').classList.add('hidden');
+    }
+
+    // Setup Viewport Event Listeners (Cursor Magnetism, Drag & Wheel)
+    function setupMagneticViewportListeners() {
+      const viewport = document.getElementById('magneticViewport');
+      if (!viewport) return;
+
+      // Mouse Move Magnetism
+      viewport.addEventListener('mousemove', (e) => {
+        if (openIndex !== null) return;
+        setTargetFromCursor(e.clientX);
+      });
+
+      // Mouse Leave Magnetism Reset
+      viewport.addEventListener('mouseleave', () => {
+        if (openIndex !== null) return;
+        targetFactors = currentItems.map(() => 0);
+        startMagneticLoop();
+      });
+
+      // Drag to Pan horizontally
+      let isDown = false;
+      let startX = 0;
+      let scrollLeft = 0;
+
+      viewport.addEventListener('mousedown', (e) => {
+        if (openIndex !== null) return;
+        if (e.target.closest('button')) return;
+        isDown = true;
+        hasDragged = false;
+        startX = e.pageX - viewport.offsetLeft;
+        scrollLeft = viewport.scrollLeft;
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (isDown) {
+          isDown = false;
+          setTimeout(() => { hasDragged = false; }, 50);
+        }
+      });
+
+      viewport.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        const x = e.pageX - viewport.offsetLeft;
+        const walk = (x - startX) * 1.4;
+        if (Math.abs(walk) > 6) {
+          hasDragged = true;
+        }
+        viewport.scrollLeft = scrollLeft - walk;
+      });
+
+      // Wheel support (pan horizontally when wheeling on the carousel)
+      viewport.addEventListener('wheel', (e) => {
+        if (Math.abs(e.deltaX) < Math.abs(e.deltaY) && !e.shiftKey) {
+          viewport.scrollLeft += e.deltaY * 0.75;
+        }
+      }, { passive: true });
+
+      // Click outside open card to close
+      const stage = document.getElementById('magneticStageWrapper');
+      if (stage) {
+        stage.addEventListener('click', (e) => {
+          if (openIndex !== null && !e.target.closest('.magnetic-card.is-open')) {
+            closeMagneticCard();
+          }
+        });
+      }
+    }
+
+    // Resize handler to adjust responsive metrics
+    window.addEventListener('resize', () => {
+      applyMagneticSizes();
+    });
+
+    // Render on load
+    document.addEventListener('DOMContentLoaded', () => {
+      renderMenu('all');
+      setupMagneticViewportListeners();
+      selectSensoryBurger(0);
+      if (window.lucide) lucide.createIcons();
+    });
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      renderMenu('all');
+      setupMagneticViewportListeners();
+      selectSensoryBurger(0);
+      if (window.lucide) lucide.createIcons();
+    }
+  </script>
+</body>
+</html>
