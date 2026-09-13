@@ -2050,6 +2050,41 @@
     </div>
   </div>
 
+  <!-- MODAL: PEDIDO CONFIRMADO (Código de Entrega + Comanda + Aviso ao Motoboy) -->
+  <div id="orderSuccessModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/85 backdrop-blur-md transition-all">
+    <div class="glass-card bg-obsidian-950 rounded-2xl p-6 sm:p-8 max-w-md w-full border border-emerald-500/30 shadow-2xl relative text-center">
+      <button onclick="closeOrderSuccessModal()" class="absolute top-4 right-4 p-2 text-neutral-400 hover:text-white transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="w-12 h-12 rounded-full border border-emerald-500 text-emerald-400 flex items-center justify-center mx-auto mb-4">
+        <i data-lucide="check" class="w-6 h-6"></i>
+      </div>
+      <h3 class="font-cinzel text-xl font-bold text-white mb-2">Pedido Enviado para a Cozinha!</h3>
+      <p class="text-xs text-neutral-400 mb-5 leading-relaxed">
+        Guarde o código abaixo. Informe-o ao motoboy (ou ao balconista, na retirada) para confirmar que o pedido é seu.
+      </p>
+
+      <div class="p-4 rounded-xl bg-obsidian-900 border-2 border-amber-gold/50 mb-5">
+        <span class="block text-[10px] uppercase tracking-wider text-neutral-500 font-mono mb-1">Código de Entrega</span>
+        <span id="deliveryCodeDisplay" class="text-3xl font-black font-cinzel text-amber-gold tracking-widest">----</span>
+      </div>
+
+      <div class="space-y-2.5">
+        <button onclick="printKitchenTicket()" class="w-full py-3 px-4 rounded-xl border border-white/20 hover:border-amber-gold text-white font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition">
+          <i data-lucide="printer" class="w-4 h-4"></i>
+          Imprimir Comanda da Cozinha
+        </button>
+
+        <div id="notifyMotoboysContainer" class="space-y-2.5"></div>
+      </div>
+
+      <button onclick="closeOrderSuccessModal()" class="mt-5 px-6 py-2.5 rounded-lg border border-white/20 text-neutral-300 hover:text-white font-mono text-xs">
+        Fechar Janela
+      </button>
+    </div>
+  </div>
+
   <!-- FLOATING CART INDICATOR BAR (POPS UP WHEN CART HAS ITEMS) -->
   <div id="floatingCartBar" class="fixed left-1/2 -translate-x-1/2 z-40 w-[94%] max-w-lg hidden transition-all duration-300" style="bottom: max(5.5rem, env(safe-area-inset-bottom, 5.5rem));">
     <div onclick="openCheckoutModal()" class="cursor-pointer bg-gradient-to-r from-amber-gold to-amber-burn text-obsidian-950 rounded-2xl p-3 sm:p-3.5 shadow-[0_15px_40px_rgba(0,0,0,0.8),0_0_30px_rgba(212,154,66,0.35)] border border-amber-gold/40 flex items-center justify-between hover:scale-[1.02] transition-transform">
@@ -2127,7 +2162,7 @@
   <!-- JAVASCRIPT LOGIC -->
   <script>
     // Initialize Lucide Icons
-    lucide.createIcons();
+    if (window.lucide) lucide.createIcons();
 
     // =========================================================================
     // CINEMATIC FRAME SEQUENCE ENGINE (HIGH-PERFORMANCE OPTIMIZED ARCHITECTURE)
@@ -2625,7 +2660,7 @@
         drawer.classList.remove('opacity-0', 'pointer-events-none');
         drawer.classList.add('opacity-100', 'pointer-events-auto');
         if (icon) icon.setAttribute('data-lucide', 'x');
-        lucide.createIcons();
+        if (window.lucide) lucide.createIcons();
       }
     }
 
@@ -2636,7 +2671,7 @@
       drawer.classList.remove('opacity-100', 'pointer-events-auto');
       drawer.classList.add('opacity-0', 'pointer-events-none');
       if (icon) icon.setAttribute('data-lucide', 'menu');
-      lucide.createIcons();
+      if (window.lucide) lucide.createIcons();
     }
 
     // =========================================================================
@@ -2857,7 +2892,7 @@
       document.getElementById('reservationSuccess').classList.remove('hidden');
       const vipCodeEl = document.getElementById('vipCodeDisplay');
       if (vipCodeEl) vipCodeEl.textContent = generateVipCode();
-      lucide.createIcons();
+      if (window.lucide) lucide.createIcons();
     }
 
     // =========================================================================
@@ -3375,6 +3410,97 @@
     let currentItems = [];
     let isGridView = false;
     let CART = [];
+
+    // ===== CARDÁPIO EDITÁVEL (sem precisar chamar o desenvolvedor) =====
+    // Como configurar:
+    // 1. Crie uma Google Planilha com as colunas: id | pricenum | ifoodpricenum | tag | popular | active
+    //    "id" tem que bater com o id do item lá no MENU_DATA (ex: x_burger, x_cheddar...).
+    // 2. Arquivo > Compartilhar > Publicar na Web > formato CSV > copie o link gerado.
+    // 3. Cole o link abaixo. Deixando em branco, o cardápio usa só os valores fixos do código (como hoje).
+    const MENU_SHEET_CSV_URL = '';
+
+    function formatBRL(n) {
+      return 'R$ ' + n.toFixed(2).replace('.', ',');
+    }
+
+    function parseCSV(text) {
+      const rows = [];
+      let row = [], field = '', inQuotes = false;
+      for (let i = 0; i < text.length; i++) {
+        const c = text[i], next = text[i + 1];
+        if (inQuotes) {
+          if (c === '"' && next === '"') { field += '"'; i++; }
+          else if (c === '"') { inQuotes = false; }
+          else { field += c; }
+        } else {
+          if (c === '"') inQuotes = true;
+          else if (c === ',') { row.push(field); field = ''; }
+          else if (c === '\n' || c === '\r') {
+            if (field.length || row.length) { row.push(field); rows.push(row); row = []; field = ''; }
+            if (c === '\r' && next === '\n') i++;
+          } else { field += c; }
+        }
+      }
+      if (field.length || row.length) { row.push(field); rows.push(row); }
+      return rows;
+    }
+
+    async function loadMenuOverridesFromSheet() {
+      if (!MENU_SHEET_CSV_URL) return;
+      try {
+        const res = await fetch(MENU_SHEET_CSV_URL, { cache: 'no-store' });
+        if (!res.ok) return;
+        const rows = parseCSV(await res.text()).filter(r => r.length && r[0].trim());
+        const header = rows[0].map(h => h.trim().toLowerCase());
+        const idx = (name) => header.indexOf(name);
+        const iId = idx('id'), iPrice = idx('pricenum'), iIfood = idx('ifoodpricenum'),
+          iTag = idx('tag'), iPopular = idx('popular'), iActive = idx('active');
+
+        for (let r = 1; r < rows.length; r++) {
+          const row = rows[r];
+          const id = (row[iId] || '').trim();
+          const item = id && MENU_DATA.find(m => m.id === id);
+          if (!item) continue;
+
+          if (iPrice > -1 && row[iPrice]) {
+            const v = parseFloat(String(row[iPrice]).replace(',', '.'));
+            if (!isNaN(v)) { item.priceNum = v; item.price = formatBRL(v); }
+          }
+          if (iIfood > -1 && row[iIfood]) {
+            const v = parseFloat(String(row[iIfood]).replace(',', '.'));
+            if (!isNaN(v)) { item.ifoodPriceNum = v; item.ifoodPrice = formatBRL(v); }
+          }
+          if (item.priceNum != null && item.ifoodPriceNum != null) {
+            item.savings = formatBRL(Math.max(0, item.ifoodPriceNum - item.priceNum));
+          }
+          if (iTag > -1 && row[iTag]) item.tag = row[iTag].trim();
+          if (iPopular > -1 && row[iPopular]) item.popular = /^(true|1|sim)$/i.test(row[iPopular].trim());
+          if (iActive > -1 && row[iActive]) item.active = !/^(false|0|não|nao)$/i.test(row[iActive].trim());
+        }
+      } catch (e) {
+        console.warn('Não deu pra carregar a planilha de preços — usando o cardápio padrão do código.', e);
+      }
+    }
+
+    let _menuInitDone = false;
+    async function initMenuAndRender() {
+      if (_menuInitDone) return;
+      _menuInitDone = true;
+      await loadMenuOverridesFromSheet();
+      renderMenu('all');
+    }
+
+    // ===== MOTOBOYS CADASTRADOS NA LOJA =====
+    // Edite esta lista para adicionar/remover motoboys de confiança da loja.
+    // Cada um recebe um botão próprio no modal de "Pedido Enviado" para avisar via WhatsApp.
+    const MOTOBOYS = [
+      { name: 'Motoboy 1', phone: '5511999999991' },
+      { name: 'Motoboy 2', phone: '5511999999992' },
+    ];
+
+    function generateDeliveryCode() {
+      return String(Math.floor(1000 + Math.random() * 9000));
+    }
     let activeCustomItem = null;
     let modalQuantity = 1;
     let activeRetentionItem = null;
@@ -3384,9 +3510,10 @@
     // RENDER MENU: HORIZONTAL & GRID LAYOUT
     function renderMenu(category = 'all') {
       currentCategory = category;
+      const base = MENU_DATA.filter(item => item.active !== false);
       currentItems = category === 'all' 
-        ? MENU_DATA 
-        : MENU_DATA.filter(item => item.category === category);
+        ? base 
+        : base.filter(item => item.category === category);
 
       // 1. Render Horizontal Track
       const track = document.getElementById('magneticTrack');
@@ -3894,8 +4021,14 @@
         if (item.notes) itemsListText += `   • Obs: ${item.notes}\n`;
       });
 
+      // Delivery/pickup confirmation code (like iFood's own confirmation code)
+      const deliveryCode = generateDeliveryCode();
+      const codeInstruction = fulfillmentType === 'delivery'
+        ? `🔑 *Código de Entrega:* ${deliveryCode} — informe esse código ao motoboy(a) na hora da entrega.\n\n`
+        : `🔑 *Código de Retirada:* ${deliveryCode} — informe esse código ao balconista para retirar seu pedido.\n\n`;
+
       // Compose final message
-      const msg = `*NOVO PEDIDO • NOSSA CASA HAMBURGUERIA* 🍔\n` +
+      const msg = `*NOVO PEDIDO • OBSIDIAN BURGER* 🍔\n` +
         `━━━━━━━━━━━━━━━━━━━━\n` +
         `👤 *Cliente:* ${name}\n` +
         `📱 *WhatsApp:* ${phone || 'Não informado'}\n\n` +
@@ -3908,13 +4041,109 @@
         `${paymentText}\n\n` +
         `${addressText}\n` +
         `━━━━━━━━━━━━━━━━━━━━\n` +
+        `${codeInstruction}` +
         `_Pedido realizado pelo Cardápio Direto da Loja Oficial_`;
 
-      const waNumber = '5511999999999'; // Telefone da hamburgueria
+      const waNumber = '5500000000000'; // ⚠️ SUBSTITUA pelo WhatsApp real da loja antes de publicar
       const waUrl = `https://api.whatsapp.com/send?phone=${waNumber}&text=${encodeURIComponent(msg)}`;
+
+      // Guarda o pedido pra comanda de cozinha e aviso ao motoboy
+      window.lastOrder = {
+        name, phone, addressText, paymentText, itemsListText,
+        subtotal, finalTotal, savings, fulfillmentType, deliveryCode,
+        cartSnapshot: CART.map(i => ({ ...i, addons: [...i.addons] }))
+      };
 
       window.open(waUrl, '_blank');
       closeCheckoutModal();
+      CART = [];
+      updateCartUI();
+      showOrderSuccess();
+    }
+
+    function closeOrderSuccessModal() {
+      document.getElementById('orderSuccessModal').classList.add('hidden');
+    }
+
+    function showOrderSuccess() {
+      const o = window.lastOrder;
+      if (!o) return;
+      document.getElementById('deliveryCodeDisplay').textContent = o.deliveryCode;
+
+      const container = document.getElementById('notifyMotoboysContainer');
+      container.innerHTML = '';
+      if (o.fulfillmentType === 'delivery' && MOTOBOYS.length) {
+        MOTOBOYS.forEach(m => {
+          const btn = document.createElement('button');
+          btn.className = 'w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition';
+          btn.innerHTML = `<i data-lucide="bike" class="w-4 h-4"></i> Chamar ${m.name} no WhatsApp`;
+          btn.onclick = () => notifyMotoboy(m);
+          container.appendChild(btn);
+        });
+      }
+
+      document.getElementById('orderSuccessModal').classList.remove('hidden');
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function notifyMotoboy(motoboy) {
+      const o = window.lastOrder;
+      if (!o) return;
+      const msg = `🏍️ *Nova corrida disponível — Obsidian Burger*\n\n` +
+        `Cliente: ${o.name}\n` +
+        `${o.addressText}\n\n` +
+        `Código do pedido: ${o.deliveryCode}\n` +
+        `Confira o código com o cliente na entrega.\n\n` +
+        `Responda "ACEITO" se puder pegar essa corrida agora.`;
+      const url = `https://api.whatsapp.com/send?phone=${motoboy.phone}&text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+    }
+
+    function printKitchenTicket() {
+      const o = window.lastOrder;
+      if (!o) return;
+
+      const itemsHtml = o.cartSnapshot.map(item => `
+        <div style="margin-bottom:10px;padding-bottom:10px;border-bottom:1px dashed #000;">
+          <strong>${item.qty}x ${item.name}</strong><br>
+          ${item.doneness ? `Ponto: ${item.doneness}<br>` : ''}
+          ${item.addons.length ? `Adicionais: ${item.addons.map(a => a.name).join(', ')}<br>` : ''}
+          ${item.notes ? `Obs: ${item.notes}<br>` : ''}
+        </div>`).join('');
+
+      const addressHtml = o.fulfillmentType === 'delivery'
+        ? o.addressText.replace(/\*/g, '').replace(/\n/g, '<br>')
+        : 'RETIRADA NO BALCÃO';
+
+      const win = window.open('', '_blank', 'width=380,height=640');
+      win.document.write(`<html><head><title>Comanda ${o.deliveryCode}</title>
+        <style>
+          body{font-family:'Courier New',monospace;padding:14px;max-width:320px;color:#000;background:#fff;}
+          h2{text-align:center;margin:0 0 2px;font-size:18px;}
+          .sub{text-align:center;font-size:11px;margin-bottom:10px;}
+          .code{font-size:24px;font-weight:bold;text-align:center;border:2px solid #000;padding:10px;margin:12px 0;letter-spacing:4px;}
+          .sep{border-top:1px dashed #000;margin:10px 0;}
+          .small{font-size:11px;}
+          @media print { button{display:none;} }
+        </style></head>
+        <body>
+          <h2>OBSIDIAN BURGER</h2>
+          <p class="sub">COMANDA DA COZINHA</p>
+          <div class="sep"></div>
+          <p><strong>Cliente:</strong> ${o.name}<br><strong>Tel:</strong> ${o.phone || '-'}</p>
+          <p><strong>${o.fulfillmentType === 'delivery' ? 'ENTREGA VIA MOTOBOY' : 'RETIRADA NO BALCÃO'}</strong></p>
+          <p class="small">${addressHtml}</p>
+          <div class="sep"></div>
+          ${itemsHtml}
+          <div class="sep"></div>
+          <p class="small">${o.paymentText.replace(/\*/g, '')}</p>
+          <p><strong>Total: R$ ${o.finalTotal.toFixed(2).replace('.', ',')}</strong></p>
+          <div class="code">${o.deliveryCode}</div>
+          <p class="small" style="text-align:center;">Confira este código com o cliente antes de entregar/liberar o pedido.</p>
+          <button onclick="window.print()" style="width:100%;padding:10px;margin-top:10px;">Imprimir</button>
+        </body></html>`);
+      win.document.close();
+      win.focus();
     }
 
     // FLYER MODAL
@@ -3963,14 +4192,14 @@
 
     // INITIALIZATION ON LOAD
     document.addEventListener('DOMContentLoaded', () => {
-      renderMenu('all');
+      initMenuAndRender();
       setupHorizontalViewportListeners();
       selectSensoryBurger(0);
       if (window.lucide) lucide.createIcons();
     });
 
     if (document.readyState === 'complete' || document.readyState === 'interactive') {
-      renderMenu('all');
+      initMenuAndRender();
       setupHorizontalViewportListeners();
       selectSensoryBurger(0);
       if (window.lucide) lucide.createIcons();
