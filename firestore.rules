@@ -1,0 +1,22 @@
+rules_version = '2';
+
+// Como aplicar:
+// Console do Firebase > Firestore Database > Regras > cole este conteúdo > Publicar.
+//
+// O que essas regras fazem:
+// - Qualquer visitante do site PODE CRIAR um pedido (obrigatório pra receber pedidos sem login).
+// - NINGUÉM não-autenticado pode LER a lista de pedidos (protege nome, telefone e endereço
+//   dos clientes de ficar público — isso importa pra LGPD).
+// - Só quem faz login (painel.html) pode LER e ATUALIZAR pedidos (marcar como concluído).
+// - Ninguém pode apagar pedidos direto do navegador (mantém histórico).
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /pedidos/{orderId} {
+      allow create: if request.resource.data.keys().hasAll(['name', 'deliveryCode', 'status'])
+                    && request.resource.data.status == 'novo';
+      allow read, update: if request.auth != null;
+      allow delete: if false;
+    }
+  }
+}

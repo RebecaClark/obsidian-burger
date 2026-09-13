@@ -22,6 +22,11 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- Firebase (fila de pedidos em tempo real - ver instruções logo no início do JS principal, abaixo) -->
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+
   <style>
     /* Custom Scrollbar */
     ::-webkit-scrollbar {
@@ -2041,7 +2046,7 @@
 
       <!-- Drawer Footer Action -->
       <div class="p-4 sm:p-5 border-t border-white/10 bg-obsidian-900">
-        <button onclick="finishOrderWhatsApp()" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-mono text-xs font-bold uppercase tracking-wider shadow-[0_0_25px_rgba(16,185,129,0.4)] transition flex items-center justify-center gap-2">
+        <button onclick="finishOrder()" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-mono text-xs font-bold uppercase tracking-wider shadow-[0_0_25px_rgba(16,185,129,0.4)] transition flex items-center justify-center gap-2">
           <i data-lucide="send" class="w-4 h-4"></i>
           <span>Enviar Pedido para o WhatsApp da Cozinha 🚀</span>
         </button>
@@ -2161,6 +2166,39 @@
 
   <!-- JAVASCRIPT LOGIC -->
   <script>
+    // ===== FIREBASE: FILA DE PEDIDOS EM TEMPO REAL =====
+    // O pedido do cliente vai direto pra cá (Firestore), não mais pro WhatsApp do próprio cliente.
+    // A loja acompanha em painel.html (separado) e imprime/aciona motoboy de lá.
+    //
+    // Como configurar (uma vez só):
+    // 1. Acesse console.firebase.google.com, crie ou use um projeto existente.
+    // 2. Firestore Database > Criar banco de dados (modo produção).
+    // 3. Authentication > Sign-in method > ative "E-mail/senha" > adicione 1 usuário pra loja.
+    // 4. Configurações do Projeto > Seus apps > Web > copie o objeto de config e cole abaixo.
+    // 5. Cole as regras de segurança do arquivo firestore.rules em Firestore > Regras.
+    // Enquanto ficar com os valores de exemplo abaixo, o site cai automaticamente no modo
+    // antigo (abrir WhatsApp do cliente) — nada quebra enquanto você não configurar.
+    const firebaseConfig = {
+      apiKey: "COLE_AQUI",
+      authDomain: "SEU_PROJETO.firebaseapp.com",
+      projectId: "SEU_PROJETO",
+      storageBucket: "SEU_PROJETO.appspot.com",
+      messagingSenderId: "000000000000",
+      appId: "COLE_AQUI"
+    };
+
+    let db = null;
+    let firebaseReady = false;
+    try {
+      if (window.firebase && firebaseConfig.apiKey !== 'COLE_AQUI') {
+        firebase.initializeApp(firebaseConfig);
+        db = firebase.firestore();
+        firebaseReady = true;
+      }
+    } catch (e) {
+      console.warn('Firebase não configurado ainda — pedidos vão usar o modo de reserva (WhatsApp do cliente).', e);
+    }
+
     // Initialize Lucide Icons
     if (window.lucide) lucide.createIcons();
 
@@ -3959,7 +3997,7 @@
     }
 
     // FINALIZE & DISPATCH ORDER TO WHATSAPP
-    function finishOrderWhatsApp() {
+    async function finishOrder() {
       if (CART.length === 0) {
         alert('Adicione pelo menos um item ao seu pedido.');
         return;
@@ -4044,17 +4082,41 @@
         `${codeInstruction}` +
         `_Pedido realizado pelo Cardápio Direto da Loja Oficial_`;
 
-      const waNumber = '5500000000000'; // ⚠️ SUBSTITUA pelo WhatsApp real da loja antes de publicar
+      const waNumber = '5500000000000'; // ⚠️ SUBSTITUA pelo WhatsApp real da loja (usado só no modo de reserva)
       const waUrl = `https://api.whatsapp.com/send?phone=${waNumber}&text=${encodeURIComponent(msg)}`;
 
-      // Guarda o pedido pra comanda de cozinha e aviso ao motoboy
-      window.lastOrder = {
+      const orderData = {
         name, phone, addressText, paymentText, itemsListText,
-        subtotal, finalTotal, savings, fulfillmentType, deliveryCode,
-        cartSnapshot: CART.map(i => ({ ...i, addons: [...i.addons] }))
+        subtotal, deliveryFee, finalTotal, savings, fulfillmentType, deliveryCode,
+        status: 'novo',
+        items: CART.map(i => ({
+          name: i.name, qty: i.qty, doneness: i.doneness || null,
+          addons: i.addons.map(a => a.name), notes: i.notes || null, total: i.total
+        }))
       };
 
-      window.open(waUrl, '_blank');
+      // Guarda o pedido pra comanda de cozinha e aviso ao motoboy (tela de sucesso do cliente)
+      window.lastOrder = { ...orderData, cartSnapshot: CART.map(i => ({ ...i, addons: [...i.addons] })) };
+
+      let deliveredAutomatically = false;
+      if (firebaseReady && db) {
+        try {
+          await db.collection('pedidos').add({
+            ...orderData,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          });
+          deliveredAutomatically = true;
+        } catch (e) {
+          console.warn('Não deu pra enviar o pedido pro painel da loja — usando modo de reserva (WhatsApp).', e);
+        }
+      }
+
+      // Modo de reserva: só abre o WhatsApp do cliente se o painel automático não estiver disponível.
+      // O cliente NUNCA precisa fazer isso manualmente quando o Firebase está configurado.
+      if (!deliveredAutomatically) {
+        window.open(waUrl, '_blank');
+      }
+
       closeCheckoutModal();
       CART = [];
       updateCartUI();

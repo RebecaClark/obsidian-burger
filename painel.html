@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Painel da Loja | Obsidian Burger</title>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+
+<style>
+  :root {
+    --obsidian: #040406;
+    --panel: #0c0c11;
+    --card: #121218;
+    --gold: #d49a42;
+    --gold-glow: #f3b75d;
+    --line: rgba(255,255,255,0.1);
+    --text: #e8e6e1;
+    --muted: #8a8a92;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--obsidian);
+    color: var(--text);
+    font-family: 'Courier New', monospace;
+    min-height: 100vh;
+  }
+  #loginScreen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .login-box {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 32px;
+    max-width: 340px;
+    width: 100%;
+  }
+  .login-box h1 { font-size: 18px; color: var(--gold); margin: 0 0 4px; letter-spacing: 1px; }
+  .login-box p { font-size: 12px; color: var(--muted); margin: 0 0 20px; }
+  input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 13px;
+  }
+  input:focus { outline: none; border-color: var(--gold); }
+  button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .btn-primary {
+    width: 100%;
+    padding: 12px;
+    background: var(--gold);
+    color: #1a1200;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+  #loginError { color: #f87171; font-size: 12px; margin-top: 10px; display: none; }
+
+  #panelScreen { display: none; padding: 16px; max-width: 900px; margin: 0 auto; }
+  header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  header h1 { font-size: 16px; color: var(--gold); margin: 0; letter-spacing: 1px; }
+  #logoutBtn { background: transparent; border: 1px solid var(--line); color: var(--muted); padding: 8px 14px; border-radius: 8px; font-size: 11px; }
+
+  #emptyState { text-align: center; padding: 60px 20px; color: var(--muted); font-size: 13px; }
+
+  .order-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--gold);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  .order-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+  .order-name { font-size: 15px; font-weight: bold; color: #fff; }
+  .order-time { font-size: 10px; color: var(--muted); }
+  .order-code {
+    display: inline-block;
+    background: var(--card);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    letter-spacing: 2px;
+  }
+  .order-line { font-size: 12px; margin: 3px 0; color: var(--text); }
+  .order-sub { font-size: 11px; color: var(--muted); margin-left: 12px; }
+  .order-sep { border-top: 1px dashed var(--line); margin: 10px 0; }
+  .order-total { font-size: 14px; font-weight: bold; color: var(--gold-glow); }
+
+  .order-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .btn-action {
+    flex: 1;
+    min-width: 140px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    color: var(--text);
+  }
+  .btn-print { border-color: var(--gold); color: var(--gold); }
+  .btn-moto { background: #059669; border-color: #059669; color: #fff; }
+  .btn-done { background: transparent; color: var(--muted); }
+  .btn-done:hover { color: #fff; }
+</style>
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <div id="loginScreen">
+    <div class="login-box">
+      <h1>PAINEL DA LOJA</h1>
+      <p>Obsidian Burger — acesso restrito à equipe</p>
+      <input type="email" id="loginEmail" placeholder="E-mail" autocomplete="username">
+      <input type="password" id="loginPassword" placeholder="Senha" autocomplete="current-password">
+      <button class="btn-primary" onclick="doLogin()">Entrar</button>
+      <p id="loginError">E-mail ou senha incorretos.</p>
+    </div>
+  </div>
+
+  <!-- PAINEL -->
+  <div id="panelScreen">
+    <header>
+      <h1>🍔 PEDIDOS EM ABERTO</h1>
+      <button id="logoutBtn" onclick="doLogout()">Sair</button>
+    </header>
+    <div id="ordersContainer"></div>
+    <div id="emptyState" style="display:none;">Nenhum pedido em aberto no momento.</div>
+  </div>
+
+<script>
+  // ⚠️ Cole exatamente a mesma config usada no index.html
+  const firebaseConfig = {
+    apiKey: "COLE_AQUI",
+    authDomain: "SEU_PROJETO.firebaseapp.com",
+    projectId: "SEU_PROJETO",
+    storageBucket: "SEU_PROJETO.appspot.com",
+    messagingSenderId: "000000000000",
+    appId: "COLE_AQUI"
+  };
+
+  // Mesma lista de motoboys do index.html — mantenha as duas em sincronia.
+  const MOTOBOYS = [
+    { name: 'Motoboy 1', phone: '5511999999991' },
+    { name: 'Motoboy 2', phone: '5511999999992' },
+  ];
+
+  let db = null;
+  let unsubscribe = null;
+
+  try {
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('panelScreen').style.display = 'block';
+        startListening();
+      } else {
+        document.getElementById('loginScreen').style.display = 'flex';
+        document.getElementById('panelScreen').style.display = 'none';
+        if (unsubscribe) unsubscribe();
+      }
+    });
+  } catch (e) {
+    document.getElementById('loginError').textContent = 'Firebase não configurado ainda. Edite firebaseConfig no topo deste arquivo.';
+    document.getElementById('loginError').style.display = 'block';
+  }
+
+  function doLogin() {
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    if (!window.firebase) {
+      document.getElementById('loginError').textContent = 'Firebase não configurado ainda. Edite firebaseConfig no topo deste arquivo.';
+      document.getElementById('loginError').style.display = 'block';
+      return;
+    }
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .catch(() => {
+        document.getElementById('loginError').textContent = 'E-mail ou senha incorretos.';
+        document.getElementById('loginError').style.display = 'block';
+      });
+  }
+
+  function doLogout() {
+    if (window.firebase) firebase.auth().signOut();
+  }
+
+  function startListening() {
+    if (unsubscribe) unsubscribe();
+    unsubscribe = db.collection('pedidos')
+      .where('status', '==', 'novo')
+      .orderBy('createdAt', 'asc')
+      .onSnapshot((snap) => {
+        const container = document.getElementById('ordersContainer');
+        const empty = document.getElementById('emptyState');
+        if (snap.empty) {
+          container.innerHTML = '';
+          empty.style.display = 'block';
+          return;
+        }
+        empty.style.display = 'none';
+        container.innerHTML = snap.docs.map(doc => renderOrderCard(doc.id, doc.data())).join('');
+      }, (err) => {
+        console.error('Erro ao carregar pedidos:', err);
+      });
+  }
+
+  function renderOrderCard(id, o) {
+    const time = o.createdAt?.toDate ? o.createdAt.toDate().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : '--:--';
+    const itemsHtml = (o.items || []).map(item => `
+      <div class="order-line"><strong>${item.qty}x ${item.name}</strong></div>
+      ${item.doneness ? `<div class="order-sub">Ponto: ${item.doneness}</div>` : ''}
+      ${item.addons && item.addons.length ? `<div class="order-sub">Adicionais: ${item.addons.join(', ')}</div>` : ''}
+      ${item.notes ? `<div class="order-sub">Obs: ${item.notes}</div>` : ''}
+    `).join('');
+
+    const motoboyBtns = o.fulfillmentType === 'delivery'
+      ? MOTOBOYS.map(m => `<button class="btn-action btn-moto" onclick='notifyMotoboyPanel(${JSON.stringify(o)}, ${JSON.stringify(m)})'>📦 ${m.name}</button>`).join('')
+      : '';
+
+    return `
+      <div class="order-card">
+        <div class="order-top">
+          <div>
+            <div class="order-name">${o.name}</div>
+            <div class="order-time">Recebido às ${time} • ${o.fulfillmentType === 'delivery' ? 'ENTREGA' : 'RETIRADA'}</div>
+          </div>
+          <div class="order-code">${o.deliveryCode}</div>
+        </div>
+        <div class="order-sep"></div>
+        ${itemsHtml}
+        <div class="order-sep"></div>
+        <div class="order-line">${(o.addressText || '').replace(/\*/g, '').replace(/\n/g, '<br>')}</div>
+        <div class="order-line">${(o.paymentText || '').replace(/\*/g, '')}</div>
+        <div class="order-total">Total: R$ ${Number(o.finalTotal || 0).toFixed(2).replace('.', ',')}</div>
+        <div class="order-actions">
+          <button class="btn-action btn-print" onclick='printOrder(${JSON.stringify(o)})'>🖨️ Imprimir</button>
+          ${motoboyBtns}
+          <button class="btn-action btn-done" onclick="markDone('${id}')">✔ Concluir</button>
+        </div>
+      </div>
+    `;
+  }
+
+  function markDone(id) {
+    db.collection('pedidos').doc(id).update({ status: 'concluido' });
+  }
+
+  function notifyMotoboyPanel(o, motoboy) {
+    const msg = `🏍️ *Nova corrida disponível — Obsidian Burger*\n\n` +
+      `Cliente: ${o.name}\n${o.addressText}\n\n` +
+      `Código do pedido: ${o.deliveryCode}\nConfira o código com o cliente na entrega.\n\n` +
+      `Responda "ACEITO" se puder pegar essa corrida agora.`;
+    window.open(`https://api.whatsapp.com/send?phone=${motoboy.phone}&text=${encodeURIComponent(msg)}`, '_blank');
+  }
+
+  function printOrder(o) {
+    const itemsHtml = (o.items || []).map(item => `
+      <div style="margin-bottom:10px;padding-bottom:10px;border-bottom:1px dashed #000;">
+        <strong>${item.qty}x ${item.name}</strong><br>
+        ${item.doneness ? `Ponto: ${item.doneness}<br>` : ''}
+        ${item.addons && item.addons.length ? `Adicionais: ${item.addons.join(', ')}<br>` : ''}
+        ${item.notes ? `Obs: ${item.notes}<br>` : ''}
+      </div>`).join('');
+
+    const addressHtml = o.fulfillmentType === 'delivery'
+      ? (o.addressText || '').replace(/\*/g, '').replace(/\n/g, '<br>')
+      : 'RETIRADA NO BALCÃO';
+
+    const win = window.open('', '_blank', 'width=380,height=640');
+    win.document.write(`<html><head><title>Comanda ${o.deliveryCode}</title>
+      <style>
+        body{font-family:'Courier New',monospace;padding:14px;max-width:320px;color:#000;background:#fff;}
+        h2{text-align:center;margin:0 0 2px;font-size:18px;}
+        .sub{text-align:center;font-size:11px;margin-bottom:10px;}
+        .code{font-size:24px;font-weight:bold;text-align:center;border:2px solid #000;padding:10px;margin:12px 0;letter-spacing:4px;}
+        .sep{border-top:1px dashed #000;margin:10px 0;}
+        .small{font-size:11px;}
+        @media print { button{display:none;} }
+      </style></head>
+      <body>
+        <h2>OBSIDIAN BURGER</h2>
+        <p class="sub">COMANDA DA COZINHA</p>
+        <div class="sep"></div>
+        <p><strong>Cliente:</strong> ${o.name}<br><strong>Tel:</strong> ${o.phone || '-'}</p>
+        <p><strong>${o.fulfillmentType === 'delivery' ? 'ENTREGA VIA MOTOBOY' : 'RETIRADA NO BALCÃO'}</strong></p>
+        <p class="small">${addressHtml}</p>
+        <div class="sep"></div>
+        ${itemsHtml}
+        <div class="sep"></div>
+        <p class="small">${(o.paymentText || '').replace(/\*/g, '')}</p>
+        <p><strong>Total: R$ ${Number(o.finalTotal || 0).toFixed(2).replace('.', ',')}</strong></p>
+        <div class="code">${o.deliveryCode}</div>
+        <p class="small" style="text-align:center;">Confira este código com o cliente antes de entregar/liberar o pedido.</p>
+        <button onclick="window.print()" style="width:100%;padding:10px;margin-top:10px;">Imprimir</button>
+      </body></html>`);
+    win.document.close();
+    win.focus();
+  }
+</script>
+</body>
+</html>
