@@ -4,60 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OBSIDIAN BURGER | Exclusive Culinary Reserve</title>
-  
+  <meta name="description" content="Obsidian Burger House — hambúrgueres autorais de reserva, cardápio direto sem taxa de app e reserva VIP da experiência sensorial completa.">
+  <meta property="og:title" content="OBSIDIAN BURGER | Exclusive Culinary Reserve">
+  <meta property="og:description" content="Hambúrgueres autorais de reserva. Peça direto e economize a taxa das plataformas de delivery.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/burger_exploded_master.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
-  
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            obsidian: {
-              950: '#040406',
-              900: '#07070a',
-              850: '#0c0c11',
-              800: '#121218',
-              700: '#1b1b24',
-              600: '#282836',
-            },
-            amber: {
-              gold: '#d49a42',
-              glow: '#f3b75d',
-              dark: '#9a6b24',
-              burn: '#e07a2c'
-            }
-          },
-          fontFamily: {
-            cinzel: ['Cinzel', 'serif'],
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-            serif: ['"Playfair Display"', 'serif'],
-            mono: ['"Space Grotesk"', 'monospace']
-          },
-          animation: {
-            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-            'float': 'float 6s ease-in-out infinite',
-            'shimmer': 'shimmer 2.5s infinite linear',
-          },
-          keyframes: {
-            float: {
-              '0%, 100%': { transform: 'translateY(0px)' },
-              '50%': { transform: 'translateY(-8px)' },
-            },
-            shimmer: {
-              '0%': { backgroundPosition: '-200% 0' },
-              '100%': { backgroundPosition: '200% 0' },
-            }
-          }
-        }
-      }
-    }
-  </script>
+
+  <!-- Tailwind (compilado localmente via CLI - ver tailwind.config.js / build.sh) -->
+  <link rel="stylesheet" href="tailwind.output.css">
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -216,12 +176,6 @@
 
     <!-- Header Actions -->
     <div class="flex items-center gap-2 sm:gap-3">
-      <!-- Media Config Drawer Trigger (Pipeline inspection for director) -->
-      <button onclick="openMediaModal()" title="Configurações do Master Comercial" class="p-2 sm:p-2.5 rounded-full border border-neutral-800 hover:border-amber-gold/40 text-neutral-400 hover:text-amber-gold transition-all text-xs flex items-center gap-1.5 sm:gap-2">
-        <i data-lucide="film" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
-        <span class="hidden sm:inline font-mono text-[10px] tracking-wider uppercase text-amber-gold">4K Master</span>
-      </button>
-
       <!-- VIP Reserve CTA -->
       <button onclick="openReservationModal()" class="relative group overflow-hidden px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-amber-gold to-amber-dark text-obsidian-950 font-mono text-[10px] sm:text-xs font-bold tracking-[0.1em] sm:tracking-[0.15em] uppercase hover:shadow-[0_0_25px_rgba(212,154,66,0.4)] transition-all duration-300">
         <span class="relative z-10 flex items-center gap-1.5">
@@ -1648,76 +1602,11 @@
           O Concierge Obsidian entrará em contato via WhatsApp nas próximas 2 horas para confirmar os detalhes e harmonização de bebidas.
         </p>
         <div class="p-4 rounded-xl bg-obsidian-950 border border-amber-gold/20 font-mono text-[11px] text-amber-gold mb-6">
-          CÓDIGO VIP: <span class="font-bold text-white">#OBS-8842-2026</span>
+          CÓDIGO VIP: <span id="vipCodeDisplay" class="font-bold text-white">#OBS-----</span>
         </div>
         <button onclick="closeReservationModal()" class="px-6 py-2.5 rounded-lg border border-white/20 text-neutral-300 hover:text-white font-mono text-xs">
           Fechar Janela
         </button>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- MODAL 2: VIDEO MEDIA PIPELINE SETTINGS (FOR THE DIRECTOR) -->
-  <div id="mediaModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-all">
-    <div class="glass-card rounded-2xl p-6 sm:p-8 max-w-xl w-full border border-amber-gold/30 shadow-2xl relative">
-      
-      <button onclick="closeMediaModal()" class="absolute top-4 right-4 p-2 text-neutral-400 hover:text-white transition-colors">
-        <i data-lucide="x" class="w-5 h-5"></i>
-      </button>
-
-      <div class="flex items-center gap-3 mb-4">
-        <div class="p-2 rounded-lg bg-amber-gold/20 text-amber-gold">
-          <i data-lucide="sliders" class="w-5 h-5"></i>
-        </div>
-        <div>
-          <h3 class="font-cinzel text-xl font-bold text-white">Pipeline de Vídeo Cinema 4K</h3>
-          <p class="text-xs text-neutral-400">Controle do Master e Integração de Novos Clipes (Parte 3 - A Mordida)</p>
-        </div>
-      </div>
-
-      <div class="space-y-4 text-xs font-mono">
-        <div class="p-4 rounded-xl bg-obsidian-950 border border-white/10 space-y-2">
-          <div class="flex justify-between">
-            <span class="text-neutral-500">Vídeo Master Atual:</span>
-            <span class="text-amber-gold font-bold">obsidian_burger_master_commercial.mp4</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="text-neutral-500">Resolução & Taxa:</span>
-            <span class="text-neutral-300">3840x2160 (4K UHD) @ 30fps</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="text-neutral-500">Transição Title Card:</span>
-            <span class="text-neutral-300">Xfade Black a 17.2s com 'OBSIDIAN BURGER'</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="text-neutral-500">Versão Web 1080p:</span>
-            <span class="text-neutral-300">obsidian_burger_master_1080p.mp4</span>
-          </div>
-        </div>
-
-        <div class="p-4 rounded-xl bg-obsidian-950/70 border border-amber-gold/20">
-          <label class="block text-amber-gold font-bold mb-2 flex items-center gap-2">
-            <i data-lucide="plus-circle" class="w-4 h-4"></i>
-            Adicionar Novo Trecho (Ex: A Mordida / Final Parte 3)
-          </label>
-          <p class="text-[11px] text-neutral-400 mb-3 leading-relaxed">
-            Caso você gere uma continuação do take com a mordida a partir de <code class="text-amber-gold">hero_close_up_frame_4k.jpg</code>, basta colocar o nome do arquivo abaixo:
-          </p>
-          <div class="flex gap-2">
-            <input type="text" id="nextVideoInput" placeholder="Ex: video_mordida_parte3.mp4" class="flex-1 px-3 py-2 rounded-lg bg-obsidian-900 border border-white/20 text-white outline-none focus:border-amber-gold">
-            <button onclick="applyCustomVideoClip()" class="px-4 py-2 rounded-lg bg-amber-gold text-obsidian-950 font-bold uppercase tracking-wider hover:bg-amber-glow transition-colors">
-              Carregar
-            </button>
-          </div>
-        </div>
-
-        <div class="flex justify-between items-center pt-2">
-          <span class="text-neutral-500 text-[10px]">Renderizado com FFmpeg 8.1 / Gyan Build</span>
-          <button onclick="closeMediaModal()" class="px-5 py-2 rounded-lg border border-white/20 hover:border-amber-gold text-white">
-            Concluir
-          </button>
-        </div>
       </div>
 
     </div>
@@ -2956,31 +2845,19 @@
       document.getElementById('reservationModal').classList.add('hidden');
     }
 
+    function generateVipCode() {
+      const num = Math.floor(1000 + Math.random() * 9000);
+      const year = new Date().getFullYear();
+      return `#OBS-${num}-${year}`;
+    }
+
     function handleReservationSubmit(e) {
       e.preventDefault();
       document.getElementById('reservationForm').classList.add('hidden');
       document.getElementById('reservationSuccess').classList.remove('hidden');
+      const vipCodeEl = document.getElementById('vipCodeDisplay');
+      if (vipCodeEl) vipCodeEl.textContent = generateVipCode();
       lucide.createIcons();
-    }
-
-    // Director Media Modal Controls
-    function openMediaModal() {
-      document.getElementById('mediaModal').classList.remove('hidden');
-    }
-
-    function closeMediaModal() {
-      document.getElementById('mediaModal').classList.add('hidden');
-    }
-
-    function applyCustomVideoClip() {
-      const val = document.getElementById('nextVideoInput').value.trim();
-      if (!val) return;
-      if (theatreVideo) {
-        theatreVideo.src = val;
-        theatreVideo.play();
-      }
-      alert(`Novo clipe '${val}' carregado com sucesso no player de cinema!`);
-      closeMediaModal();
     }
 
     // =========================================================================
