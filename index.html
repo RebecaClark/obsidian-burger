@@ -2143,10 +2143,10 @@
         </button>
 
         <!-- WhatsApp Concierge Button -->
-        <a href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20um%20pedido%20VIP%20na%20Obsidian%20Burger!" target="_blank" rel="noopener noreferrer" class="hidden sm:flex px-3 sm:px-4 py-2 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white font-mono text-[10px] sm:text-xs font-bold uppercase tracking-wider items-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.35)] transition-all flex-shrink-0">
+        <button onclick="openNavWhatsApp()" class="hidden sm:flex px-3 sm:px-4 py-2 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white font-mono text-[10px] sm:text-xs font-bold uppercase tracking-wider items-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.35)] transition-all flex-shrink-0">
           <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
           <span>WhatsApp<span class="hidden sm:inline"> VIP</span></span>
-        </a>
+        </button>
 
         <!-- iFood Button (Retenção) -->
         <button onclick="openIfoodRetention(null)" class="px-3 sm:px-4 py-2 rounded-full bg-red-600 hover:bg-red-700 text-white font-mono text-[10px] sm:text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-[0_0_15px_rgba(220,38,38,0.35)] transition-all flex-shrink-0">
@@ -2186,6 +2186,15 @@
       messagingSenderId: "000000000000",
       appId: "COLE_AQUI"
     };
+
+    // ⚠️ ÚNICO lugar pra configurar o WhatsApp da loja — usado em todo o site.
+    // (Antes havia 3 números diferentes espalhados pelo código; agora é só este.)
+    const STORE_WHATSAPP = '5500000000000'; // SUBSTITUA pelo WhatsApp real da loja
+
+    function openNavWhatsApp() {
+      const msg = 'Olá, gostaria de fazer um pedido VIP na Obsidian Burger!';
+      window.open(`https://api.whatsapp.com/send?phone=${STORE_WHATSAPP}&text=${encodeURIComponent(msg)}`, '_blank');
+    }
 
     let db = null;
     let firebaseReady = false;
@@ -3102,7 +3111,7 @@
       const b = SENSORY_DATA[currentSensoryBurgerIdx];
       if (!b) return;
       const msg = `Olá! Gostaria de pedir o ${b.name} (${b.preco}) da linha de alta gastronomia Obsidian!`;
-      const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`;
+      const url = `https://api.whatsapp.com/send?phone=${STORE_WHATSAPP}&text=${encodeURIComponent(msg)}`;
       window.open(url, '_blank');
     }
 
@@ -4082,8 +4091,7 @@
         `${codeInstruction}` +
         `_Pedido realizado pelo Cardápio Direto da Loja Oficial_`;
 
-      const waNumber = '5500000000000'; // ⚠️ SUBSTITUA pelo WhatsApp real da loja (usado só no modo de reserva)
-      const waUrl = `https://api.whatsapp.com/send?phone=${waNumber}&text=${encodeURIComponent(msg)}`;
+      const waUrl = `https://api.whatsapp.com/send?phone=${STORE_WHATSAPP}&text=${encodeURIComponent(msg)}`;
 
       const orderData = {
         name, phone, addressText, paymentText, itemsListText,
