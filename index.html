@@ -317,42 +317,6 @@
           </div>
         </div>
 
-        <!-- Story State 1: The Corridor Walk (Progress 0.22 to 0.44) -->
-        <div id="storyCard1" class="story-card transition-all duration-500 opacity-0 translate-y-4 absolute top-0 left-0 right-0 sm:left-6 lg:left-16 pointer-events-none p-4 sm:p-0 rounded-2xl sm:rounded-none bg-obsidian-950/70 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none border border-amber-gold/20 sm:border-0 max-w-xl">
-          <p class="font-mono text-[10px] sm:text-xs tracking-[0.25em] sm:tracking-[0.3em] text-amber-gold uppercase mb-1.5 sm:mb-2">ATO I • A TRAVESSIA</p>
-          <h2 class="font-cinzel text-2xl sm:text-4xl lg:text-5xl font-bold text-white mb-2 sm:mb-4">
-            A MARCHA DO SALÃO
-          </h2>
-          <p class="font-serif italic text-xs sm:text-base lg:text-lg text-neutral-300 max-w-xl leading-relaxed">
-            A atmosfera intimista do restaurante. O garçom conduz o corte recém-braseado em carvão botânico, mantendo o ponto térmico ideal.
-          </p>
-        </div>
-
-        <!-- Story State 2: The Table Placement (Progress 0.48 to 0.68) -->
-        <div id="storyCard2" class="story-card transition-all duration-500 opacity-0 translate-y-4 absolute top-0 left-0 right-0 sm:left-6 lg:left-16 pointer-events-none p-4 sm:p-0 rounded-2xl sm:rounded-none bg-obsidian-950/70 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none border border-amber-gold/20 sm:border-0 max-w-xl">
-          <p class="font-mono text-[10px] sm:text-xs tracking-[0.25em] sm:tracking-[0.3em] text-amber-gold uppercase mb-1.5 sm:mb-2">ATO II • O ASSENTAMENTO</p>
-          <h2 class="font-cinzel text-2xl sm:text-4xl lg:text-5xl font-bold text-white mb-2 sm:mb-4">
-            O CONTATO COM A MADEIRA
-          </h2>
-          <p class="font-serif italic text-xs sm:text-base lg:text-lg text-neutral-300 max-w-xl leading-relaxed">
-            Sem qualquer corte ou hesitação. O prato rústico toca o carvalho maciço e o burger torna-se o centro de gravidade da cena.
-          </p>
-        </div>
-
-        <!-- Story State 3: The Hand Grip & Macro Push (Progress 0.72 to 0.88) -->
-        <div id="storyCard3" class="story-card transition-all duration-500 opacity-0 translate-y-4 absolute top-0 left-0 right-0 sm:left-6 lg:left-16 pointer-events-none p-4 sm:p-0 rounded-2xl sm:rounded-none bg-obsidian-950/70 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none border border-amber-gold/20 sm:border-0 max-w-xl">
-          <p class="font-mono text-[10px] sm:text-xs tracking-[0.25em] sm:tracking-[0.3em] text-amber-gold uppercase mb-1.5 sm:mb-2">ATO III • A ANTECIPAÇÃO</p>
-          <h2 class="font-cinzel text-2xl sm:text-4xl lg:text-5xl font-bold text-white mb-2 sm:mb-4">
-            A EMPUNHADURA & O MACRO
-          </h2>
-          <p class="font-serif italic text-xs sm:text-base lg:text-lg text-neutral-300 max-w-xl leading-relaxed">
-            As mãos envolvem o brioche aquecido. A câmera executa um push-in controlado e cinematográfico até as gotas de queijo em fusão.
-          </p>
-        </div>
-
-        <!-- Empty placeholder for storyCard4 so no HTML text collides with the final logo frame -->
-        <div id="storyCard4" class="hidden"></div>
-
       </div>
 
       <!-- BOTTOM HUD LAYER: Interactive Scrub Bar & Reversibility Indicator -->
@@ -2241,13 +2205,9 @@
     const hudBottomTime = document.getElementById('hudBottomTime');
     const heroExitOverlay = document.getElementById('heroExitOverlay');
 
-    // Story Cards
+    // Story Cards (Initial hero hook card; intermediate cards removed for clean cinematic experience)
     const storyCards = [
-      document.getElementById('storyCard0'),
-      document.getElementById('storyCard1'),
-      document.getElementById('storyCard2'),
-      document.getElementById('storyCard3'),
-      document.getElementById('storyCard4')
+      document.getElementById('storyCard0')
     ];
 
     // =========================================================================
@@ -2665,13 +2625,9 @@
     }
 
     // Story Editorial Timeline:
-    // 74% - 100%: ALL text cards hidden -> ONLY the clean, centered OBSIDIAN BURGER logo is displayed
+    // Only storyCard0 is shown at initial position (p < 0.15). During scroll, the video sequence is 100% clean and unobstructed.
     function updateStoryCards(p) {
-      setCardState(0, p >= 0.00 && p < 0.18);
-      setCardState(1, p >= 0.22 && p < 0.44);
-      setCardState(2, p >= 0.48 && p < 0.62);
-      setCardState(3, p >= 0.64 && p < 0.73);
-      setCardState(4, false); // Completely clean: no HTML text over the logo
+      setCardState(0, p >= 0.00 && p < 0.15);
     }
 
     function setCardState(index, active) {
